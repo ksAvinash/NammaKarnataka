@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_temples"
+            android:icon="@drawable/temple"
+            android:title="Temples" />
+
+        <item
+            android:id="@+id/nav_hillstations"
+            android:icon="@drawable/hillstation"
+            android:title="Hill Station" />
+
+        <item
+            android:id="@+id/nav_waterfalls"
+            android:icon="@drawable/waterfall"
+            android:title="Waterfalls" />
+
+        <item
+            android:id="@+id/nav_dams"
+            android:icon="@drawable/dam"
+            android:title="Dams" />
+
+        <item
+            android:id="@+id/nav_trekking"
+            android:icon="@drawable/trekking"
+            android:title="Trekking Places" />
+
+        <item
+            android:id="@+id/nav_beaches"
+            android:icon="@drawable/beach"
+            android:title="Beaches" />
+        <item
+            android:id="@+id/nav_feedback"
+            android:icon="@drawable/feedback"
+            android:title="Feedback" />
+
+
+    </group>
+
+
+
+</menu>
