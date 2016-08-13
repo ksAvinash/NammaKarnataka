@@ -1,7 +1,6 @@
 package avinashks.justmailtoavi.com.nammakarnataka;
 
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,9 +17,14 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import java.util.HashMap;
 
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+
+
+    SliderLayout mDemoSlider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,10 +33,10 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-        SliderLayout mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
+        mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
         final HashMap<String,Integer> file_maps = new HashMap<>();
-        file_maps.put("Stone Chariot",R.drawable.stone_chariot);
-        file_maps.put("Mysuru Palace",R.drawable.mysore_palace);
+        file_maps.put("Stone Chariot",R.drawable.vijaynagar);
+        file_maps.put("Mysuru Palace",R.drawable.mysuru_palace);
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(getApplicationContext());
@@ -55,7 +59,7 @@ public class MainActivity extends AppCompatActivity
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(6000);
+        mDemoSlider.setDuration(7000);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
