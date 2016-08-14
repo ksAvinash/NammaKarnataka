@@ -32,12 +32,22 @@
             android:id="@+id/nav_beaches"
             android:icon="@drawable/beach"
             android:title="Beaches" />
+
+
+    </group>
+
+    <group android:id="@+id/bottomPanel"
+        android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_feedback"
+            android:id="@+id/new_place"
+            android:icon="@drawable/add_new_place"
+            android:title="Add a new place"
+            />
+
+        <item
+            android:id="@+id/feedback"
             android:icon="@drawable/feedback"
-            android:title="Feedback" />
-
-
+            android:title="Provide Feedback" />
     </group>
 
 

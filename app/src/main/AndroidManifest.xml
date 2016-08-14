@@ -4,7 +4,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/appicon"
+        android:icon="@drawable/appicon2"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
@@ -12,6 +12,14 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
+            <!--</intent-filter>-->
+        </activity>
+
+
+
+        <activity android:name=".SplasherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
