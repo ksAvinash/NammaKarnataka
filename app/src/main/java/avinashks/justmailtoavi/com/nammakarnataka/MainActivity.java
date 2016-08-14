@@ -1,6 +1,7 @@
 package avinashks.justmailtoavi.com.nammakarnataka;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -11,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -28,6 +30,8 @@ public class MainActivity extends AppCompatActivity
 
 
     SliderLayout mDemoSlider;
+    FloatingActionButton fab;
+    DrawerLayout drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,13 +39,16 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+         fab = (FloatingActionButton) findViewById(R.id.fab);
+
 
         mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
         final HashMap<String,Integer> file_maps = new HashMap<>();
         file_maps.put("Hampi",R.drawable.vijaynagar);
         file_maps.put("Mysuru Palace",R.drawable.mysuru_palace);
-        file_maps.put("Jog Falls",R.drawable.jogfalls);
-        file_maps.put("Bandipur National Park",R.drawable.bandipur);
+        file_maps.put("Jog Falls",R.drawable.jog_falls);
+        file_maps.put("Wonder la",R.drawable.wonderla);
+
 
         for(String name : file_maps.keySet()){
             TextSliderView textSliderView = new TextSliderView(getApplicationContext());
@@ -65,11 +72,20 @@ public class MainActivity extends AppCompatActivity
         mDemoSlider.setDuration(6000);
 
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               drawer.openDrawer(GravityCompat.START);
+            }
+        });
+
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -111,12 +127,13 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment;
+        FragmentTransaction ft;
         int id = item.getItemId();
 
         switch (id){
             case R.id.nav_dams:
                                 fragment = new damsFragment();
-                                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                 ft = getSupportFragmentManager().beginTransaction();
                                 ft.replace(R.id.content_main,fragment);
                                 ft.commit();
                                 break;
@@ -135,6 +152,14 @@ public class MainActivity extends AppCompatActivity
 
             case R.id.nav_waterfalls:
                 break;
+
+
+            case R.id.new_place:
+                                fragment = new addNewPlace();
+                                ft = getSupportFragmentManager().beginTransaction();
+                                ft.replace(R.id.content_main,fragment);
+                                ft.commit();
+                                break;
 
 
         }
