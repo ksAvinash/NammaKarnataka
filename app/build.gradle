@@ -34,6 +34,9 @@ dependencies {
 }
 dependencies {
     compile 'com.android.support:support-v4:23.+'
+}
+dependencies {
+    compile 'com.android.support:support-v4:23.+'
     compile 'com.github.olegosipenko:pttextview:1.0.0'
 
 }

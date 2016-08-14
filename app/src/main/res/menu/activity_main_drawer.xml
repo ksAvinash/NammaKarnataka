@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="Home" />
 
         <item
             android:id="@+id/nav_temples"
@@ -11,7 +17,7 @@
         <item
             android:id="@+id/nav_hillstations"
             android:icon="@drawable/hillstation"
-            android:title="Hill Station" />
+            android:title="Hill Stations" />
 
         <item
             android:id="@+id/nav_waterfalls"
@@ -33,7 +39,6 @@
             android:icon="@drawable/beach"
             android:title="Beaches" />
 
-
     </group>
 
     <group android:id="@+id/bottomPanel"
@@ -47,7 +52,7 @@
         <item
             android:id="@+id/feedback"
             android:icon="@drawable/feedback"
-            android:title="Provide Feedback" />
+            android:title="Feedback" />
     </group>
 
 

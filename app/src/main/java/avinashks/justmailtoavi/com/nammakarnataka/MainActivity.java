@@ -1,10 +1,16 @@
 package avinashks.justmailtoavi.com.nammakarnataka;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -40,6 +46,12 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
          fab = (FloatingActionButton) findViewById(R.id.fab);
+
+
+        //check for permissions on android M
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
 
 
         mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
@@ -128,6 +140,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment;
         FragmentTransaction ft;
+        Intent intent;
         int id = item.getItemId();
 
         switch (id){
@@ -139,6 +152,10 @@ public class MainActivity extends AppCompatActivity
                                 break;
 
             case R.id.nav_temples:
+                                fragment = new templesFragment();
+                                ft = getSupportFragmentManager().beginTransaction();
+                                ft.replace(R.id.content_main,fragment);
+                                ft.commit();
                 break;
 
             case R.id.nav_beaches:
@@ -161,7 +178,17 @@ public class MainActivity extends AppCompatActivity
                                 ft.commit();
                                 break;
 
+            case R.id.feedback:
+                                intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com"));
+                                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
+                                startActivity(intent);
+                break;
 
+
+            case R.id.nav_home:
+                                intent = new Intent(MainActivity.this,MainActivity.class);
+                                startActivity(intent);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
