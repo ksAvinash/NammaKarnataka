@@ -4,6 +4,7 @@ package avinashks.justmailtoavi.com.nammakarnataka;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,6 +46,7 @@ public class templesFragment extends Fragment {
 
     private List<temples_adapter> temples_adapterList = new ArrayList<>();
 
+    static SimpleDraweeView draweeView;
 
     View view;
     Context context;
@@ -57,8 +61,7 @@ public class templesFragment extends Fragment {
         context = getActivity().getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout)view.findViewById(R.id.refresh);
 
-
-
+        Fresco.initialize(getActivity());
 
         if(!loadJsonFile()){
             temples_adapterList.add(new temples_adapter("","","","",0.0,0.0));
@@ -69,7 +72,9 @@ public class templesFragment extends Fragment {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
                 //refreshing...
-
+                if(!loadJsonFile()){
+                    temples_adapterList.clear();
+                }
                 if(isNetworkConnected()){
                     SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
                     localVersion = preferences.getInt("version", 0);
@@ -319,11 +324,10 @@ public class templesFragment extends Fragment {
             }
             temples_adapter current = temples_adapterList.get(position);
 
-            ImageView image = (ImageView)itemView.findViewById(R.id.item_templeImage);
             //Code to download image from url and paste.
-
-
-
+            Uri uri = Uri.parse(current.getImage());
+            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_templeImage);
+            draweeView.setImageURI(uri);
             //Code ends here.
             TextView t_name = (TextView)itemView.findViewById(R.id.item_templeTitle);
             t_name.setText(current.getTempleTitle());
