@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/base_image"
+    android:background="#ffffff"
     tools:context="avinashks.justmailtoavi.com.nammakarnataka.templesFragment">
 
 
@@ -21,14 +21,22 @@
             app:typeface="pt_serif_bold_italic"
             />
 
-
-        <ListView
+        <com.cjj.MaterialRefreshLayout
             android:layout_below="@+id/p1"
-            android:id="@+id/templeList"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/refresh"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            app:wave_color="@color/material_green"
+            android:layout_height="match_parent"
+            >
+                <ListView
+                    android:layout_below="@+id/refresh"
+                    android:id="@+id/templeList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-
+        </com.cjj.MaterialRefreshLayout>
 
 
 </RelativeLayout>
