@@ -3,9 +3,8 @@ package avinashks.justmailtoavi.com.nammakarnataka.adapter;
 
 public class temples_adapter {
 
-    String image,templeTitle, templeDescription,district;
-    Double latitude,longitude;
-
+    String image, templeTitle, templeDescription, district;
+    Double latitude, longitude;
 
 
     public String getDistrict() {

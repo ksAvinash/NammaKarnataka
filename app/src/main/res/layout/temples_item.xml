@@ -1,55 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:padding="4dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    android:padding="4dp">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
+
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/item_templeImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                fresco:placeholderImage="@drawable/home"
-                />
+                fresco:placeholderImage="@drawable/home" />
 
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <pttextview.widget.PTTextView
-                android:padding="10dp"
-                android:id="@+id/item_templeTitle"
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/item_templeTitle"
                 android:layout_width="wrap_content"
-                android:textSize="20sp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="temple name"
                 android:textColor="#000000"
-                android:layout_height="wrap_content"
-                app:textWeight="bold"
-                />
+                android:textSize="20sp"
+                app:textWeight="bold" />
 
 
             <TextView
-                android:text="district"
-                android:paddingLeft="20dp"
-                android:textColor="#000000"
                 android:id="@+id/item_templeDistrict"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:text="district"
+                android:textColor="#000000" />
         </LinearLayout>
 
 

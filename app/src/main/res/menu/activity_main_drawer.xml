@@ -41,20 +41,19 @@
 
     </group>
 
-    <group android:id="@+id/bottomPanel"
+    <group
+        android:id="@+id/bottomPanel"
         android:checkableBehavior="single">
         <item
             android:id="@+id/new_place"
             android:icon="@drawable/add_new_place"
-            android:title="Add a new place"
-            />
+            android:title="Add a new place" />
 
         <item
             android:id="@+id/feedback"
             android:icon="@drawable/feedback"
             android:title="Feedback" />
     </group>
-
 
 
 </menu>

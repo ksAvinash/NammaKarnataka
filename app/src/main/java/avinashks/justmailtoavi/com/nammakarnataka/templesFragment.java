@@ -52,19 +52,20 @@ public class templesFragment extends Fragment {
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
 
-        view = inflater.inflate(R.layout.fragment_temples, container , false);
+        view = inflater.inflate(R.layout.fragment_temples, container, false);
         context = getActivity().getApplicationContext();
-        materialRefreshLayout = (MaterialRefreshLayout)view.findViewById(R.id.refresh);
+        materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
 
         Fresco.initialize(getActivity());
 
-        if(!loadJsonFile()){
-            temples_adapterList.add(new temples_adapter("","","","",0.0,0.0));
+        if (!loadJsonFile()) {
+            temples_adapterList.add(new temples_adapter("", "", "", "", 0.0, 0.0));
             displayList();
         }
 
@@ -72,15 +73,15 @@ public class templesFragment extends Fragment {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
                 //refreshing...
-                if(!loadJsonFile()){
+                if (!loadJsonFile()) {
                     temples_adapterList.clear();
                 }
-                if(isNetworkConnected()){
+                if (isNetworkConnected()) {
                     SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
                     localVersion = preferences.getInt("version", 0);
                     new TempleVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfVmZfMHR5NVJuLTA/temple_version.json");
-                }else {
-                    Toast.makeText(getActivity(),"No Internet Connection!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
                     materialRefreshLayout.finishRefresh();
                 }
             }
@@ -116,7 +117,6 @@ public class templesFragment extends Fragment {
         }
 
 
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -134,11 +134,10 @@ public class templesFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            if (localVersion != serverVersion){
+            if (localVersion != serverVersion) {
                 new templeFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfVmZfMHR5NVJuLTA/temple.json");
-            }
-            else{
-                Toast.makeText(getActivity(),"Temple List is up to date!",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getActivity(), "Temple List is up to date!", Toast.LENGTH_SHORT).show();
                 materialRefreshLayout.finishRefresh();
             }
 
@@ -176,16 +175,16 @@ public class templesFragment extends Fragment {
                 JSONObject parent = new JSONObject(ret);
                 JSONArray eventJson = parent.getJSONArray("temple_list");
 
-                for (int i = 0;i<eventJson.length();i++){
+                for (int i = 0; i < eventJson.length(); i++) {
                     JSONObject child = eventJson.getJSONObject(i);
-                    temples_adapterList.add(new temples_adapter(child.getString("temple_image"),child.getString("temple_name"),child.getString("temple_description"),child.getString("temple_district"),child.getDouble("latitude"),child.getDouble("longitude")));
+                    temples_adapterList.add(new temples_adapter(child.getString("temple_image"), child.getString("temple_name"), child.getString("temple_description"), child.getString("temple_district"), child.getDouble("latitude"), child.getDouble("longitude")));
                 }
                 displayList();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -255,9 +254,9 @@ public class templesFragment extends Fragment {
 
                 JSONObject parent = new JSONObject(s);
                 JSONArray eventJson = parent.getJSONArray("temple_list");
-                for (int i = 0;i<eventJson.length();i++){
+                for (int i = 0; i < eventJson.length(); i++) {
                     JSONObject child = eventJson.getJSONObject(i);
-                    temples_adapterList.add(new temples_adapter(child.getString("temple_image"),child.getString("temple_name"),child.getString("temple_description"),child.getString("temple_district"),child.getDouble("latitude"),child.getDouble("longitude")));
+                    temples_adapterList.add(new temples_adapter(child.getString("temple_image"), child.getString("temple_name"), child.getString("temple_description"), child.getString("temple_district"), child.getDouble("latitude"), child.getDouble("longitude")));
                 }
                 materialRefreshLayout.finishRefresh();
                 displayList();
@@ -269,45 +268,14 @@ public class templesFragment extends Fragment {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void displayList() {
         ArrayAdapter<temples_adapter> adapter = new myTempleListAdapterClass();
-        ListView list = (ListView)view.findViewById(R.id.templeList);
+        ListView list = (ListView) view.findViewById(R.id.templeList);
         list.setAdapter(adapter);
     }
 
 
-    public class myTempleListAdapterClass extends ArrayAdapter<temples_adapter>{
+    public class myTempleListAdapterClass extends ArrayAdapter<temples_adapter> {
 
         myTempleListAdapterClass() {
             super(context, R.layout.temples_item, temples_adapterList);
@@ -329,10 +297,10 @@ public class templesFragment extends Fragment {
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_templeImage);
             draweeView.setImageURI(uri);
             //Code ends here.
-            TextView t_name = (TextView)itemView.findViewById(R.id.item_templeTitle);
+            TextView t_name = (TextView) itemView.findViewById(R.id.item_templeTitle);
             t_name.setText(current.getTempleTitle());
 
-            TextView t_dist = (TextView)itemView.findViewById(R.id.item_templeDistrict);
+            TextView t_dist = (TextView) itemView.findViewById(R.id.item_templeDistrict);
             t_dist.setText(current.getDistrict());
 
             return itemView;

@@ -28,16 +28,14 @@ import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import java.util.HashMap;
 
 
-
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-
 
 
     SliderLayout mDemoSlider;
     FloatingActionButton fab;
     DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-         fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
 
 
         //check for permissions on android M
@@ -55,14 +53,14 @@ public class MainActivity extends AppCompatActivity
 
 
         mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
-        final HashMap<String,Integer> file_maps = new HashMap<>();
-        file_maps.put("Hampi",R.drawable.vijaynagar);
-        file_maps.put("Mysuru Palace",R.drawable.mysuru_palace);
-        file_maps.put("Jog Falls",R.drawable.jog_falls);
-        file_maps.put("Wonder la",R.drawable.wonderla);
+        final HashMap<String, Integer> file_maps = new HashMap<>();
+        file_maps.put("Hampi", R.drawable.vijaynagar);
+        file_maps.put("Mysuru Palace", R.drawable.mysuru_palace);
+        file_maps.put("Jog Falls", R.drawable.jog_falls);
+        file_maps.put("Wonder la", R.drawable.wonderla);
 
 
-        for(String name : file_maps.keySet()){
+        for (String name : file_maps.keySet()) {
             TextSliderView textSliderView = new TextSliderView(getApplicationContext());
             // initialize a SliderLayout
             textSliderView
@@ -73,7 +71,7 @@ public class MainActivity extends AppCompatActivity
             //add your extra information
             textSliderView.bundle(new Bundle());
             textSliderView.getBundle()
-                    .putString("extra",name);
+                    .putString("extra", name);
 
             mDemoSlider.addSlider(textSliderView);
         }
@@ -84,7 +82,7 @@ public class MainActivity extends AppCompatActivity
         mDemoSlider.setDuration(6000);
 
 
-         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
@@ -94,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               drawer.openDrawer(GravityCompat.START);
+                drawer.openDrawer(GravityCompat.START);
             }
         });
 
@@ -143,19 +141,19 @@ public class MainActivity extends AppCompatActivity
         Intent intent;
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.nav_dams:
-                                fragment = new damsFragment();
-                                 ft = getSupportFragmentManager().beginTransaction();
-                                ft.replace(R.id.content_main,fragment);
-                                ft.commit();
-                                break;
+                fragment = new damsFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.commit();
+                break;
 
             case R.id.nav_temples:
-                                fragment = new templesFragment();
-                                ft = getSupportFragmentManager().beginTransaction();
-                                ft.replace(R.id.content_main,fragment);
-                                ft.commit();
+                fragment = new templesFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.commit();
                 break;
 
             case R.id.nav_beaches:
@@ -172,27 +170,29 @@ public class MainActivity extends AppCompatActivity
 
 
             case R.id.new_place:
-                                fragment = new addNewPlace();
-                                ft = getSupportFragmentManager().beginTransaction();
-                                ft.replace(R.id.content_main,fragment);
-                                ft.commit();
-                                break;
+                fragment = new addNewPlace();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.commit();
+                break;
 
             case R.id.feedback:
-                                intent = new Intent (Intent.ACTION_VIEW , Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com"));
-                                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
-                                startActivity(intent);
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com"));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
+                startActivity(intent);
                 break;
 
 
             case R.id.nav_home:
-                                intent = new Intent(MainActivity.this,MainActivity.class);
-                                startActivity(intent);
+                intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
                 break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        if (drawer != null) {
+            drawer.closeDrawer(GravityCompat.START);
+        }
         return true;
     }
 }
