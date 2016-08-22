@@ -24,6 +24,7 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.pushbots.push.Pushbots;
 
 import java.util.HashMap;
 
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Pushbots.sharedInstance().init(getBaseContext());
+        Pushbots.sharedInstance().setCustomHandler(customHandler.class);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
