@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="avinashks.justmailtoavi.com.nammakarnataka">
+    package="smartAmigos.smartAmigos.com.nammakarnataka">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name="smartAmigos.smartAmigos.com.nammakarnataka.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <!--<intent-filter>-->
@@ -21,7 +21,7 @@
         </activity>
 
 
-        <activity android:name=".SplasherActivity">
+        <activity android:name="smartAmigos.smartAmigos.com.nammakarnataka.SplasherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

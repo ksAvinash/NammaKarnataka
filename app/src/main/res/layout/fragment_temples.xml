@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
-    tools:context="avinashks.justmailtoavi.com.nammakarnataka.templesFragment">
+    tools:context="smartAmigos.smartAmigos.com.nammakarnataka.templesFragment">
 
 
     <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"

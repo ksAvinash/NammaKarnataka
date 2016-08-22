@@ -1,4 +1,4 @@
-package avinashks.justmailtoavi.com.nammakarnataka;
+package smartAmigos.smartAmigos.com.nammakarnataka;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

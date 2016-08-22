@@ -1,4 +1,4 @@
-package avinashks.justmailtoavi.com.nammakarnataka;
+package smartAmigos.smartAmigos.com.nammakarnataka;
 
 import android.Manifest;
 import android.content.Intent;
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.feedback:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "smartAmigos@gmail.com, gauthamkumar.0414@gmail.com"));
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
                 startActivity(intent);
                 break;

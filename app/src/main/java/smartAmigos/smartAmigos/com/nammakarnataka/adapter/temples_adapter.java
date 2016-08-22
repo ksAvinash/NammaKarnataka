@@ -1,4 +1,4 @@
-package avinashks.justmailtoavi.com.nammakarnataka.adapter;
+package smartAmigos.smartAmigos.com.nammakarnataka.adapter;
 
 
 public class temples_adapter {

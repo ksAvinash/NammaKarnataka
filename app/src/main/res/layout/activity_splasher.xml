@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="avinashks.justmailtoavi.com.nammakarnataka.SplasherActivity">
+    tools:context="smartAmigos.smartAmigos.com.nammakarnataka.SplasherActivity">
 
 
     <pttextview.widget.PTTextView
