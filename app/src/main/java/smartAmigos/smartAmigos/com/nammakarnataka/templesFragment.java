@@ -78,7 +78,7 @@ public class templesFragment extends Fragment {
                 if (isNetworkConnected()) {
                     SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
                     localVersion = preferences.getInt("version", 0);
-                    new TempleVersion().execute("https://googledrive.com/host/0B4MrAIPM8gwfVmZfMHR5NVJuLTA/temple_version.json");
+                    new TempleVersion().execute("http://nammakarnataka.net23.net/temples/temple_version.json");
                 } else {
                     Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
                     materialRefreshLayout.finishRefresh();
@@ -134,7 +134,7 @@ public class templesFragment extends Fragment {
                 e.printStackTrace();
             }
             if (localVersion != serverVersion) {
-                new templeFile().execute("https://googledrive.com/host/0B4MrAIPM8gwfVmZfMHR5NVJuLTA/temple.json");
+                new templeFile().execute("http://nammakarnataka.net23.net/temples/temple.json");
             } else {
                 Toast.makeText(getActivity(), "Temple List is up to date!", Toast.LENGTH_SHORT).show();
                 materialRefreshLayout.finishRefresh();
@@ -147,7 +147,7 @@ public class templesFragment extends Fragment {
     private boolean loadJsonFile() {
         String ret = null;
         BufferedReader reader = null;
-        File file = new File("/data/data/avinashks.smartAmigos.com.nammakarnataka/temple.json");
+        File file = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/temple.json");
         if (file.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(file);
@@ -198,7 +198,7 @@ public class templesFragment extends Fragment {
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/avinashks.smartAmigos.com.nammakarnataka/temple.json");
+            File path = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/temple.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 
