@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(6000);
+        mDemoSlider.setDuration(3000);
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
