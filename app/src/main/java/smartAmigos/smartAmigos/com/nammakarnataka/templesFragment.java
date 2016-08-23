@@ -147,7 +147,7 @@ public class templesFragment extends Fragment {
     private boolean loadJsonFile() {
         String ret = null;
         BufferedReader reader = null;
-        File file = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/temple.json");
+        File file = new File("/data/data/smartAmigos.com.nammakarnataka/temple.json");
         if (file.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(file);
@@ -198,7 +198,7 @@ public class templesFragment extends Fragment {
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/temple.json");
+            File path = new File("/data/data/smartAmigos.com.nammakarnataka/temple.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 
