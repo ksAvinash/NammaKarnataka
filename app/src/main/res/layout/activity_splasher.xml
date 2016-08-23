@@ -3,13 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/wall1"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="smartAmigos.smartAmigos.com.nammakarnataka.SplasherActivity">
+    <pttextview.widget.PTTextView
 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:id="@+id/tv"
+    android:text="Namma Karnataka"
+    android:textColor="#ffffff"
+    android:textSize="40sp"
+    app:textWeight="bold" android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+
+    />
 
     <pttextview.widget.PTTextView
 
@@ -18,13 +33,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="NAMMA KARNATAKA"
-        android:textColor="#000000"
-        android:textSize="30sp"
+        android:id="@+id/tvs"
+        android:text="One State.Many Worlds"
+        android:textColor="#ffffff"
+        android:textSize="20sp"
         app:textWeight="bold"
-        app:typeface="pt_serif_bold_italic"
-
+        android:layout_below="@+id/tv"
         />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AVLoadingIndicatorView"
+        android:visibility="visible"
+        app:indicatorName="LineScalePulseOutIndicator"
+        app:indicatorColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvs"
+
+    />
+
+
 
 
 </RelativeLayout>

@@ -19,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -32,7 +33,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    TextView t;
     SliderLayout mDemoSlider;
     FloatingActionButton fab;
     DrawerLayout drawer;
@@ -43,6 +44,14 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        /*
+
+     t=(TextView)view.findViewById(R.id.tv);
+
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Kaushan.otf");
+        t.setTypeface(myFont);
+         */
 
         Pushbots.sharedInstance().init(getBaseContext());
         Pushbots.sharedInstance().setCustomHandler(customHandler.class);
@@ -60,7 +69,7 @@ public class MainActivity extends AppCompatActivity
         final HashMap<String, Integer> file_maps = new HashMap<>();
         file_maps.put("Hampi", R.drawable.vijaynagar);
         file_maps.put("Mysuru Palace", R.drawable.mysuru_palace);
-        file_maps.put("Jog Falls", R.drawable.jog_falls);
+        file_maps.put("Jog Falls", R.drawable.jogfallss);
         file_maps.put("Wonder la", R.drawable.wonderla);
 
 

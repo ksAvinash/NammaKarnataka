@@ -38,4 +38,5 @@ dependencies {
     compile 'com.android.support:support-v4:23.+'
     compile 'com.github.olegosipenko:pttextview:1.0.0'
     compile 'com.pushbots:pushbots-lib:2.0.13@aar'
+    compile 'com.wang.avi:library:2.1.3'
 }

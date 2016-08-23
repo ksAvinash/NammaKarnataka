@@ -29,7 +29,9 @@
         </activity>
 
 
-        <activity android:name="smartAmigos.smartAmigos.com.nammakarnataka.SplasherActivity">
+        <activity android:name="smartAmigos.smartAmigos.com.nammakarnataka.SplasherActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
