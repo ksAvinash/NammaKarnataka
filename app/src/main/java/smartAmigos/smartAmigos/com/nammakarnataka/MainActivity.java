@@ -1,7 +1,10 @@
 package smartAmigos.smartAmigos.com.nammakarnataka;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,11 +17,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
@@ -37,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     SliderLayout mDemoSlider;
     FloatingActionButton fab;
     DrawerLayout drawer;
+    private String nameInput = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,39 @@ public class MainActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
+        final SharedPreferences sharedPreferences = getSharedPreferences("FeedbackSettings", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        int nameSet = sharedPreferences.getInt("nameSet", -1);
+        if (nameSet < 1) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Enter your Name : " );
+
+            // Set up the input
+            final EditText input = new EditText(this);
+            // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            builder.setView(input);
+
+            // Set up the buttons
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    nameInput = input.getText().toString();
+                    editor.putString("userName", nameInput);
+                    editor.putInt("nameSet", 1);
+                    editor.commit();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
+
+            builder.show();
+        }
 
         mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
         final HashMap<String, Integer> file_maps = new HashMap<>();
@@ -146,7 +187,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+    @SuppressWarnings("StatementWithEmptyBody" )
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment;
@@ -190,8 +231,8 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.feedback:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com"));
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com" ));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback" );
                 startActivity(intent);
                 break;
 
