@@ -32,7 +32,7 @@
         <ListView
             android:id="@+id/templeList"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/refresh" />
 
     </com.cjj.MaterialRefreshLayout>

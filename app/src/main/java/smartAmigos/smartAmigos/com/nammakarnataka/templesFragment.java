@@ -62,19 +62,16 @@ public class templesFragment extends Fragment {
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
 
         Fresco.initialize(getActivity());
+        loadJsonFile();
 
-        if (!loadJsonFile()) {
-            temples_adapterList.add(new temples_adapter("", "", "", "", 0.0, 0.0));
-            displayList();
+        if(isNetworkConnected()){
+            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
 
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
-                //refreshing...
-                if (!loadJsonFile()) {
-                    temples_adapterList.clear();
-                }
+
                 if (isNetworkConnected()) {
                     SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
                     localVersion = preferences.getInt("version", 0);
@@ -144,7 +141,7 @@ public class templesFragment extends Fragment {
     }
 
 
-    private boolean loadJsonFile() {
+    private void loadJsonFile() {
         String ret = null;
         BufferedReader reader = null;
         File file = new File("/data/data/smartAmigos.com.nammakarnataka/temple.json");
@@ -182,9 +179,6 @@ public class templesFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -249,6 +243,7 @@ public class templesFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            temples_adapterList.clear();
             try {
 
                 JSONObject parent = new JSONObject(s);
