@@ -211,6 +211,10 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_beaches:
+                fragment = new beachesFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.commit();
                 break;
 
             case R.id.nav_hillstations:
