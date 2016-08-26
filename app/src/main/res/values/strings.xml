@@ -14,4 +14,12 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="facebook_app_id">1767746470176241</string>
+    <string name="place">PLACE</string>
+    <string name="description">DESCRIPTION</string>
+    <string name="location">LOCATION</string>
+    <string name="season">BEST SEASON</string>
+    <string name="nearby">NEARBY PLACES</string>
+    <string name="transport">TRANSPORT</string>
+    <string name="additional">ADDITIONAL INFORMATION</string>
+    <string name="comments">COMMENTS</string>
 </resources>
