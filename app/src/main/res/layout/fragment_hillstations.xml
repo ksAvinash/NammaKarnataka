@@ -9,12 +9,12 @@
     <pttextview.widget.PTTextView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/q1"
+        android:id="@+id/r1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:padding="15dp"
-        android:text="Dams"
+        android:text="Hillstations"
         android:textColor="#000000"
         android:textSize="25sp"
         app:textWeight="bold"
@@ -26,11 +26,11 @@
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/q1"
+        android:layout_below="@+id/r1"
         app:wave_color="@color/material_green">
 
         <ListView
-            android:id="@+id/damList"
+            android:id="@+id/hillstationsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/refresh" />

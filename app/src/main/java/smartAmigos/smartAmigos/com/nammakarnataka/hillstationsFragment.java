@@ -37,12 +37,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartAmigos.smartAmigos.com.nammakarnataka.adapter.dams_adapter;
-
-public class damsFragment extends Fragment {
+import smartAmigos.smartAmigos.com.nammakarnataka.adapter.hillstations_adapter;
 
 
-    private List<dams_adapter> dams_adapterList = new ArrayList<>();
+public class hillstationsFragment extends Fragment {
+
+    private List<hillstations_adapter> hillstations_adapterList = new ArrayList<>();
 
     static SimpleDraweeView draweeView;
 
@@ -51,14 +51,15 @@ public class damsFragment extends Fragment {
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_dams, container, false);
+        // Inflate the layout for this fragment
 
+        view = inflater.inflate(R.layout.fragment_hillstations, container, false);
         context = getActivity().getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
-
 
         Fresco.initialize(getActivity());
         loadJsonFile();
@@ -72,9 +73,9 @@ public class damsFragment extends Fragment {
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
 
                 if (isNetworkConnected()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("dams_version", Context.MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences("hillstations_version", Context.MODE_PRIVATE);
                     localVersion = preferences.getInt("version", 0);
-                    new damVersion().execute("http://nammakarnataka.net23.net/dams/dams_version.json");
+                    new HillstationVersion().execute("http://nammakarnataka.net23.net/hillstations/hillstations_version.json");
                 } else {
                     Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
                     materialRefreshLayout.finishRefresh();
@@ -84,15 +85,15 @@ public class damsFragment extends Fragment {
         });
 
 
+
         return view;
+
     }
-
-
 
     private void loadJsonFile() {
         String ret = null;
         BufferedReader reader = null;
-        File file = new File("/data/data/smartAmigos.com.nammakarnataka/dams.json");
+        File file = new File("/data/data/smartAmigos.com.nammakarnataka/hillstations.json");
         if (file.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(file);
@@ -117,11 +118,11 @@ public class damsFragment extends Fragment {
 
             try {
                 JSONObject parent = new JSONObject(ret);
-                JSONArray eventJson = parent.getJSONArray("dam_list");
+                JSONArray eventJson = parent.getJSONArray("hillstations_list");
 
                 for (int i = 0; i < eventJson.length(); i++) {
                     JSONObject child = eventJson.getJSONObject(i);
-                    dams_adapterList.add(new dams_adapter(child.getString("dam_image"), child.getString("dam_name"), child.getString("dam_description"), child.getString("dam_district"), child.getDouble("latitude"), child.getDouble("longitude")));
+                    hillstations_adapterList.add(new hillstations_adapter(child.getString("hillstations_image"), child.getString("hillstations_name"), child.getString("hillstations_description"), child.getString("hillstations_district"), child.getDouble("latitude"), child.getDouble("longitude")));
                 }
                 displayList();
             } catch (JSONException e) {
@@ -130,63 +131,15 @@ public class damsFragment extends Fragment {
         }
     }
 
-
-
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
 
-
-
-
-    private void displayList() {
-        ArrayAdapter<dams_adapter> adapter = new myDamListAdapterClass();
-        ListView list = (ListView) view.findViewById(R.id.damList);
-        list.setAdapter(adapter);
-    }
-
-
-
-
-    public class myDamListAdapterClass extends ArrayAdapter<dams_adapter> {
-
-        myDamListAdapterClass() {
-            super(context, R.layout.dams_item, dams_adapterList);
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            if (itemView == null) {
-                LayoutInflater inflater = LayoutInflater.from(getActivity());
-                itemView = inflater.inflate(R.layout.dams_item, parent, false);
-
-            }
-            dams_adapter current = dams_adapterList.get(position);
-
-            //Code to download image from url and paste.
-            Uri uri = Uri.parse(current.getImage());
-            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_damImage);
-            draweeView.setImageURI(uri);
-            //Code ends here.
-            TextView t_name = (TextView) itemView.findViewById(R.id.item_damTitle);
-            t_name.setText(current.getDamTitle());
-
-            TextView t_dist = (TextView) itemView.findViewById(R.id.item_damDistrict);
-            t_dist.setText(current.getDistrict());
-
-            return itemView;
-        }
-
-    }
-
-
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/smartAmigos.com.nammakarnataka/dams.json");
+            File path = new File("/data/data/smartAmigos.com.nammakarnataka/hillstations.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 
@@ -203,21 +156,50 @@ public class damsFragment extends Fragment {
     }
 
 
+    private void displayList() {
+        ArrayAdapter<hillstations_adapter> adapter = new myHillstationsListAdapterClass();
+        ListView list = (ListView) view.findViewById(R.id.hillstationsList);
+        list.setAdapter(adapter);
+    }
+
+
+    public class myHillstationsListAdapterClass extends ArrayAdapter<hillstations_adapter> {
+
+        myHillstationsListAdapterClass() {
+            super(context, R.layout.hillstations_item, hillstations_adapterList);
+        }
+
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View itemView = convertView;
+            if (itemView == null) {
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
+                itemView = inflater.inflate(R.layout.hillstations_item, parent, false);
+
+            }
+            hillstations_adapter current = hillstations_adapterList.get(position);
+
+            //Code to download image from url and paste.
+            Uri uri = Uri.parse(current.getImage());
+            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_hillstationsImage);
+            draweeView.setImageURI(uri);
+            //Code ends here.
+            TextView t_name = (TextView) itemView.findViewById(R.id.item_hillstationsTitle);
+            t_name.setText(current.getHillstationsTitle());
+
+            TextView t_dist = (TextView) itemView.findViewById(R.id.item_hillstationsDistrict);
+            t_dist.setText(current.getDistrict());
+
+            return itemView;
+        }
+
+    }
 
 
 
 
-
-
-
-    //Async tasks
-
-
-
-
-
-
-    public class damVersion extends AsyncTask<String, String, String> {
+    public class HillstationVersion extends AsyncTask<String, String, String> {
         HttpURLConnection connection;
         BufferedReader reader;
 
@@ -239,16 +221,18 @@ public class damsFragment extends Fragment {
             }
             return null;
         }
+
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             try {
                 JSONObject parent = new JSONObject(s);
-                JSONObject news_version = parent.getJSONObject("dam_version");
+                JSONObject news_version = parent.getJSONObject("hillstations_version");
 
                 serverVersion = news_version.getInt("version");
 
-                SharedPreferences preferences = getActivity().getSharedPreferences("dams_version", Context.MODE_PRIVATE);
+                SharedPreferences preferences = getActivity().getSharedPreferences("hillstations_version", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
                 editor.putInt("version", serverVersion);
                 editor.apply();
@@ -257,9 +241,9 @@ public class damsFragment extends Fragment {
                 e.printStackTrace();
             }
             if (localVersion != serverVersion) {
-                new damFile().execute("http://nammakarnataka.net23.net/dams/dams.json");
+                new hillstationFile().execute("http://nammakarnataka.net23.net/hillstations/hillstations.json");
             } else {
-                Toast.makeText(getActivity(), "Dams List is up to date!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Hillstations List is up to date!", Toast.LENGTH_SHORT).show();
                 materialRefreshLayout.finishRefresh();
             }
 
@@ -268,7 +252,8 @@ public class damsFragment extends Fragment {
 
 
 
-    public class damFile extends AsyncTask<String, String, String> {
+
+    public class hillstationFile extends AsyncTask<String, String, String> {
 
         HttpURLConnection connection;
         BufferedReader reader;
@@ -277,6 +262,7 @@ public class damsFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
         }
+
         @Override
         protected String doInBackground(String... params) {
             try {
@@ -297,17 +283,18 @@ public class damsFragment extends Fragment {
             }
             return null;
         }
+
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            dams_adapterList.clear();
+            hillstations_adapterList.clear();
             try {
 
                 JSONObject parent = new JSONObject(s);
-                JSONArray eventJson = parent.getJSONArray("dam_list");
+                JSONArray eventJson = parent.getJSONArray("hillstations_list");
                 for (int i = 0; i < eventJson.length(); i++) {
                     JSONObject child = eventJson.getJSONObject(i);
-                    dams_adapterList.add(new dams_adapter(child.getString("dam_image"), child.getString("dam_name"), child.getString("dam_description"), child.getString("dam_district"), child.getDouble("latitude"), child.getDouble("longitude")));
+                    hillstations_adapterList.add(new hillstations_adapter(child.getString("hillstations_image"), child.getString("hillstations_name"), child.getString("hillstations_description"), child.getString("hillstations_district"), child.getDouble("latitude"), child.getDouble("longitude")));
                 }
                 materialRefreshLayout.finishRefresh();
                 displayList();
@@ -317,5 +304,4 @@ public class damsFragment extends Fragment {
 
         }
     }
-
 }

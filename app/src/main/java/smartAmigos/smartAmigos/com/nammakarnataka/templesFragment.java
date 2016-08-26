@@ -300,6 +300,8 @@ public class templesFragment extends Fragment {
             return itemView;
         }
 
-
     }
+
+
+
 }
