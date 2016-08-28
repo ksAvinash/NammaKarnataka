@@ -5,7 +5,7 @@
     <color name="colorAccent">#aed581</color>
 
     <color name="black_overlay">#66000000</color>
-    <color name="dark_grey">#757575</color>
+    <color name="dark_grey">#DFDFDF</color>
     <color name="colorWhite">#FFFFFF</color>
-    <color name="orangeText">#FF4500</color>
+    <color name="orangeText">#FF6765</color>
 </resources>

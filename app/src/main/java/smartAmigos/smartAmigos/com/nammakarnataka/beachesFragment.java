@@ -53,7 +53,7 @@ public class beachesFragment extends Fragment {
 
         comment_submit = (Button)view.findViewById(R.id.submitcomment);
 
-        final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("FeedbackSettings", Context.MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         try {
             user_Name.setText(sharedPreferences.getString("userName", null));

@@ -72,13 +72,13 @@ public class MainActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
-        final SharedPreferences sharedPreferences = getSharedPreferences("FeedbackSettings", Context.MODE_PRIVATE);
+        final SharedPreferences sharedPreferences = getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        int nameSet = sharedPreferences.getInt("nameSet", -1);
-        if (nameSet < 1) {
+        boolean nameSet = sharedPreferences.getBoolean("nameSet", false);
+        if (!nameSet) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Enter your Name : " );
+            builder.setTitle("Enter your Name : ");
 
             // Set up the input
             final EditText input = new EditText(this);
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity
                 public void onClick(DialogInterface dialog, int which) {
                     nameInput = input.getText().toString();
                     editor.putString("userName", nameInput);
-                    editor.putInt("nameSet", 1);
+                    editor.putBoolean("nameSet", true);
                     editor.commit();
                 }
             });
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody" )
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         Fragment fragment;
@@ -243,8 +243,8 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.feedback:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com" ));
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback" );
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com"));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
                 startActivity(intent);
                 break;
 

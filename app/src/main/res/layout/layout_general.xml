@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#CCFFE5"
+    android:background="#F2F2F2"
     tools:ignore="RtlHardcoded">
 
     <android.support.v4.widget.NestedScrollView
@@ -45,19 +45,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="@string/place"
                         android:textColor="@color/orangeText"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <View style="@style/Divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
+                        android:padding="5dp"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -79,19 +77,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="@string/description"
                         android:textColor="@color/orangeText"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <View style="@style/Divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
+                        android:padding="5dp"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -113,19 +109,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="@string/location"
                         android:textColor="@color/orangeText"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <View style="@style/Divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
+                        android:padding="5dp"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -147,19 +141,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="@string/season"
                         android:textColor="@color/orangeText"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <View style="@style/Divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
+                        android:padding="5dp"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -181,19 +173,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="@string/nearby"
                         android:textColor="@color/orangeText"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <View style="@style/Divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
+                        android:padding="5dp"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -215,19 +205,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="@string/transport"
                         android:textColor="@color/orangeText"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <View style="@style/Divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
+                        android:padding="5dp"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -249,19 +237,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="@string/additional"
                         android:textColor="@color/orangeText"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <View style="@style/Divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
+                        android:padding="5dp"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -283,19 +269,17 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="2dp"
-                        android:padding="2dp"
+                        android:padding="5dp"
                         android:text="@string/comments"
                         android:textColor="@color/orangeText"
-                        android:textSize="20sp" />
+                        android:textSize="18sp" />
 
                     <View style="@style/Divider" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_marginTop="3dp"
+                        android:padding="5dp"
                         android:textColor="@color/colorWhite" />
                 </LinearLayout>
 
