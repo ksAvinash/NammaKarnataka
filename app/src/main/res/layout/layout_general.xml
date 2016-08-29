@@ -53,10 +53,13 @@
                     <View style="@style/Divider" />
 
                     <TextView
+                        android:id="@+id/place_textView"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:padding="5dp"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/defTextColor" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -85,10 +88,13 @@
                     <View style="@style/Divider" />
 
                     <TextView
+                        android:id="@+id/description_textView"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:padding="5dp"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/defTextColor" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -117,10 +123,13 @@
                     <View style="@style/Divider" />
 
                     <TextView
+                        android:id="@+id/location_textView"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:padding="5dp"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/defTextColor" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -149,10 +158,13 @@
                     <View style="@style/Divider" />
 
                     <TextView
+                        android:id="@+id/lat_longtextView"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:padding="5dp"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/defTextColor" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -182,9 +194,11 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:padding="5dp"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/defTextColor" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -214,9 +228,11 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:padding="5dp"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/defTextColor" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -246,9 +262,11 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:padding="5dp"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/defTextColor" />
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
@@ -278,9 +296,11 @@
 
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
                         android:padding="5dp"
-                        android:textColor="@color/colorWhite" />
+                        android:textColor="@color/defTextColor" />
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>

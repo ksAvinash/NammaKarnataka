@@ -8,4 +8,5 @@
     <color name="dark_grey">#DFDFDF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="orangeText">#FF6765</color>
+    <color name="defTextColor">#000000</color>
 </resources>

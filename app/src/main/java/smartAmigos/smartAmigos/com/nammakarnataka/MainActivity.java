@@ -21,7 +21,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -200,6 +199,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new damsFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -207,6 +207,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new templesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -214,6 +215,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new beachesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -221,13 +223,15 @@ public class MainActivity extends AppCompatActivity
                 fragment = new hillstationsFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
             case R.id.nav_trekking:
-                fragment = new treksFragment();
+                fragment = new hillstationsFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -239,6 +243,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new addNewPlace();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
                 ft.commit();
                 break;
 

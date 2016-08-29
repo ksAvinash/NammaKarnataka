@@ -66,7 +66,7 @@ public class templesFragment extends Fragment {
         Fresco.initialize(getActivity());
         loadJsonFile();
 
-        if(isNetworkConnected()){
+        if (isNetworkConnected()) {
             Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
 
@@ -271,10 +271,44 @@ public class templesFragment extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Fragment fragment = new treksFragment();
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_main, fragment);
-                ft.commit();
+                String ret = null;
+                BufferedReader reader = null;
+                File file = new File("/data/data/smartAmigos.com.nammakarnataka/temple.json");
+                if (file.exists()) {
+                    try {
+                        FileInputStream fis = new FileInputStream(file);
+                        reader = new BufferedReader(new InputStreamReader(fis));
+                        StringBuilder builder = new StringBuilder();
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            builder.append(line);
+                        }
+                        ret = builder.toString();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (reader != null)
+                            try {
+                                reader.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                    }
+
+                    try {
+                        JSONObject root = new JSONObject(ret);
+                        JSONArray eventJson = root.getJSONArray("temple_list");
+                            JSONObject child = eventJson.getJSONObject(position);
+                        Fragment fragment = new placeDisplayFragment(child);
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_main, fragment);
+                        ft.addToBackStack(null);
+                        ft.commit();
+                        } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
