@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:id="@+id/tvs"
-        android:text="One State.Many Worlds"
+        android:text="One State. Many Worlds."
         android:textColor="#ffffff"
         android:textSize="20sp"
         app:textWeight="bold"
