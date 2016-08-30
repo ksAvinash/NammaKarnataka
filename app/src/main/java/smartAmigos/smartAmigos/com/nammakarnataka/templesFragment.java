@@ -252,7 +252,8 @@ public class templesFragment extends Fragment {
                 JSONArray eventJson = parent.getJSONArray("temple_list");
                 for (int i = 0; i < eventJson.length(); i++) {
                     JSONObject child = eventJson.getJSONObject(i);
-                    temples_adapterList.add(new temples_adapter(child.getString("temple_image"), child.getString("temple_name"), child.getString("temple_description"), child.getString("temple_district"), child.getDouble("latitude"), child.getDouble("longitude")));
+                    temples_adapterList.add(new temples_adapter(child.getString("temple_image"), child.getString("temple_name"), child.getString("temple_description"),
+                            child.getString("temple_district"), child.getDouble("latitude"), child.getDouble("longitude")));
                 }
                 materialRefreshLayout.finishRefresh();
                 displayList();
@@ -299,20 +300,19 @@ public class templesFragment extends Fragment {
                     try {
                         JSONObject root = new JSONObject(ret);
                         JSONArray eventJson = root.getJSONArray("temple_list");
-                            JSONObject child = eventJson.getJSONObject(position);
+                        JSONObject child = eventJson.getJSONObject(position);
                         Fragment fragment = new placeDisplayFragment(child);
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_main, fragment);
                         ft.addToBackStack(null);
                         ft.commit();
-                        } catch (JSONException e) {
+                    } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 }
             }
         });
     }
-
 
     public class myTempleListAdapterClass extends ArrayAdapter<temples_adapter> {
 

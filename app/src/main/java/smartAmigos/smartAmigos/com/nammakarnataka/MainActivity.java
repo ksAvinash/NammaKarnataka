@@ -240,15 +240,14 @@ public class MainActivity extends AppCompatActivity
 
 
             case R.id.new_place:
-                fragment = new addNewPlace();
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_main, fragment);
-                ft.addToBackStack(null);
-                ft.commit();
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com, charanshetty25595@gmail.com"));
+                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Place Request");
+                intent.putExtra(Intent.EXTRA_TEXT,"Place Name : \n\n District : \n\nCategory : \n\nAny details of the place ?");
+                startActivity(intent);
                 break;
 
             case R.id.feedback:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com"));
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com, charanshetty25595@gmail.com"));
                 intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
                 startActivity(intent);
                 break;

@@ -158,7 +158,7 @@
                     <View style="@style/Divider" />
 
                     <TextView
-                        android:id="@+id/lat_longtextView"
+                        android:id="@+id/season_textView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="4dp"
@@ -304,6 +304,16 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
+
+            <Button
+                android:id="@+id/gmapButton"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/rounded_button"
+                android:text="@string/view_on_maps"
+                android:textColor="@color/colorWhite" />
 
             <android.support.v4.widget.Space
                 android:layout_width="match_parent"

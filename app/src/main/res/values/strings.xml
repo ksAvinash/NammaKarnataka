@@ -22,4 +22,5 @@
     <string name="transport">TRANSPORT</string>
     <string name="additional">ADDITIONAL INFORMATION</string>
     <string name="comments">COMMENTS</string>
+    <string name="view_on_maps">VIEW ON MAPS</string>
 </resources>
