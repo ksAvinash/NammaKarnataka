@@ -232,6 +232,11 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_waterfalls:
+                fragment = new waterfallsFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
 
 
