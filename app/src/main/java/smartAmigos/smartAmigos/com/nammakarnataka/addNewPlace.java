@@ -1,8 +1,15 @@
 package smartAmigos.smartAmigos.com.nammakarnataka;
 
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +19,17 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 
 public class addNewPlace extends Fragment {
@@ -70,6 +88,9 @@ public class addNewPlace extends Fragment {
                     case 6:
                         spinner_response.setText("BEACHES");
                         break;
+                    default:
+                        spinner_response.setText("--");
+                        break;
                 }
             }
 
@@ -80,7 +101,93 @@ public class addNewPlace extends Fragment {
         });
 
         submit_newplace = (Button) view.findViewById(R.id.submit_newplace);
+
+        submit_newplace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(place_input.getText().toString())) {
+                    place_input.setError("Mandatory");
+                }
+                else if (TextUtils.isEmpty(location_input.getText().toString())) {
+                    place_input.setError("Mandatory");
+                } else {
+                    PostDataTask postDataTask = new PostDataTask();
+                    postDataTask.execute(URL, place_input.getText().toString(), location_input.getText().toString(), spinner_response.getText().toString(),
+                            nearby_input.getText().toString(), season_input.getText().toString(), addinfo_input.getText().toString());
+                }
+            }
+        });
         return view;
+    }
+
+    private class PostDataTask extends AsyncTask<String, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(String... uploadData) {
+            Boolean result = true;
+            String url = uploadData[0];
+            String place = uploadData[1];
+            String location = uploadData[2];
+            String category = uploadData[3];
+            String nearby = uploadData[4];
+            String season = uploadData[5];
+            String additional = uploadData[6];
+            String postBody = "";
+
+            try {
+                //all values must be URL encoded to make sure that special characters like & | ",etc.
+                //do not cause problems
+                postBody = PLACE_KEY + "=" + URLEncoder.encode(place, "UTF-8") +
+                        "&" + LOCATION_KEY + "=" + URLEncoder.encode(location, "UTF-8") +
+                        "&" + CATEGORY_KEY + "=" + URLEncoder.encode(category, "UTF-8") +
+                        "&" + NEARBY_KEY + "=" + URLEncoder.encode(nearby, "UTF-8") +
+                        "&" + SEASON_KEY + "=" + URLEncoder.encode(season, "UTF-8") +
+                        "&" + INFO_KEY + "=" + URLEncoder.encode(additional, "UTF-8");
+                Log.i("postBody", postBody);
+            } catch (UnsupportedEncodingException ex) {
+                result = false;
+            } catch (NullPointerException e) {
+                result = false;
+            }
+
+            try {
+                //Create OkHttpClient for sending request
+                OkHttpClient client = new OkHttpClient();
+                //Create the request body with the help of Media Type
+                RequestBody body = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"), postBody);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(body)
+                        .build();
+                //Send the request
+                Response response = client.newCall(request).execute();
+            } catch (IOException exception) {
+                result = false;
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            //Print Success or failure message accordingly
+            if (result) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Thank You!");
+                builder.setMessage("Thank you for your support.\n We have recieved your request to add a new place.\n We will process the details and add the place in our app.\n Keep supporting us.");
+                builder.setCancelable(true);
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        startActivity(intent);
+                    }
+                });
+                builder.show();
+            } else {
+                Toast.makeText(getContext(), "There was some error in sending message. No Internet Connection!.", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 
 }
