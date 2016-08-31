@@ -199,7 +199,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new damsFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
-                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -207,7 +206,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new templesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
-                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -215,7 +213,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new beachesFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
-                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -223,7 +220,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new hillstationsFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
-                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -235,7 +231,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new waterfallsFragment();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
-                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
@@ -248,7 +243,6 @@ public class MainActivity extends AppCompatActivity
                 fragment = new addNewPlace();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
-                ft.addToBackStack(null);
                 ft.commit();
                 break;
 
