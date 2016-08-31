@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +14,7 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
-/**
- * Created by CHARAN on 8/26/2016.
- */
+
 public class placeDisplayFragment extends Fragment {
     JSONObject child;
     private TextView place_textView, description_textView, location_textView;

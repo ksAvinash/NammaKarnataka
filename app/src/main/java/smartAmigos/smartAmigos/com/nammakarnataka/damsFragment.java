@@ -117,15 +117,15 @@ public class damsFragment extends Fragment {
 
             try {
                 JSONObject parent = new JSONObject(ret);
-                JSONArray items = parent.getJSONArray("dam_list");
+                JSONArray items = parent.getJSONArray("list");
                 for (int i=0;i<items.length();i++){
                     JSONObject child = items.getJSONObject(i);
-                    JSONArray images = child.getJSONArray("dam_image");
+                    JSONArray images = child.getJSONArray("image");
                     String [] imagesArray = new String[25];
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    dams_adapterList.add(new generic_adapter(imagesArray, child.getString("dam_name"), child.getString("dam_description"), child.getString("dam_district"), child.getString("dam_bestSeason"),child.getString("dam_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    dams_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
                     displayList();
                 }
             } catch (JSONException e) {
@@ -249,13 +249,7 @@ public class damsFragment extends Fragment {
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONObject news_version = parent.getJSONObject("dam_version");
-
                 serverVersion = news_version.getInt("version");
-
-                SharedPreferences preferences = getActivity().getSharedPreferences("dams_version", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("version", serverVersion);
-                editor.apply();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -305,17 +299,24 @@ public class damsFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             dams_adapterList.clear();
+
+
+            SharedPreferences preferences = getActivity().getSharedPreferences("dams_version", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("version", serverVersion);
+            editor.apply();
+
             try {
                 JSONObject parent = new JSONObject(s);
-                JSONArray items = parent.getJSONArray("dam_list");
+                JSONArray items = parent.getJSONArray("list");
                 for (int i=0;i<items.length();i++){
                     JSONObject child = items.getJSONObject(i);
-                    JSONArray images = child.getJSONArray("dam_image");
+                    JSONArray images = child.getJSONArray("image");
                     String [] imagesArray = new String[25];
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    dams_adapterList.add(new generic_adapter(imagesArray, child.getString("dam_name"), child.getString("dam_description"), child.getString("dam_district"), child.getString("dam_bestSeason"),child.getString("dam_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    dams_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
                     materialRefreshLayout.finishRefresh();
                     displayList();
                 }

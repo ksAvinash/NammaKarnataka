@@ -118,15 +118,15 @@ public class hillstationsFragment extends Fragment {
 
             try {
                 JSONObject parent = new JSONObject(ret);
-                JSONArray items = parent.getJSONArray("hillstations_list");
+                JSONArray items = parent.getJSONArray("list");
                 for (int i=0;i<items.length();i++){
                     JSONObject child = items.getJSONObject(i);
-                    JSONArray images = child.getJSONArray("hillstations_image");
+                    JSONArray images = child.getJSONArray("image");
                     String [] imagesArray = new String[25];
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("hillstations_name"), child.getString("hillstations_description"), child.getString("hillstations_district"), child.getString("hillstations_bestSeason"),child.getString("hillstations_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
                     displayList();
                 }
             } catch (JSONException e) {
@@ -230,16 +230,12 @@ public class hillstationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
+
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONObject news_version = parent.getJSONObject("hillstations_version");
-
                 serverVersion = news_version.getInt("version");
-
-                SharedPreferences preferences = getActivity().getSharedPreferences("hillstations_version", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putInt("version", serverVersion);
-                editor.apply();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -292,17 +288,24 @@ public class hillstationsFragment extends Fragment {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             hillstations_adapterList.clear();
+
+
+            SharedPreferences preferences = getActivity().getSharedPreferences("hillstations_version", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("version", serverVersion);
+            editor.apply();
+
             try {
                 JSONObject parent = new JSONObject(s);
-                JSONArray items = parent.getJSONArray("hillstations_list");
+                JSONArray items = parent.getJSONArray("list");
                 for (int i=0;i<items.length();i++){
                     JSONObject child = items.getJSONObject(i);
-                    JSONArray images = child.getJSONArray("hillstations_image");
+                    JSONArray images = child.getJSONArray("image");
                     String [] imagesArray = new String[25];
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("hillstations_name"), child.getString("hillstations_description"), child.getString("hillstations_district"), child.getString("hillstations_bestSeason"),child.getString("hillstations_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
                     materialRefreshLayout.finishRefresh();
                     displayList();
                 }

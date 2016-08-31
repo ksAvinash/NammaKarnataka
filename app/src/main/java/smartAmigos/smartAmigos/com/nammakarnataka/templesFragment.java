@@ -168,15 +168,15 @@ public class templesFragment extends Fragment {
 
             try {
                 JSONObject parent = new JSONObject(ret);
-                JSONArray items = parent.getJSONArray("temple_list");
+                JSONArray items = parent.getJSONArray("list");
                 for (int i=0;i<items.length();i++){
                     JSONObject child = items.getJSONObject(i);
-                    JSONArray images = child.getJSONArray("temple_image");
+                    JSONArray images = child.getJSONArray("image");
                     String [] imagesArray = new String[25];
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    temples_adapterList.add(new generic_adapter(imagesArray, child.getString("temple_name"), child.getString("temple_description"), child.getString("temple_district"), child.getString("temple_bestSeason"),child.getString("temple_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    temples_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
                     displayList();
                 }
             } catch (JSONException e) {
@@ -257,15 +257,15 @@ public class templesFragment extends Fragment {
 
             try {
                 JSONObject parent = new JSONObject(s);
-                JSONArray items = parent.getJSONArray("temple_list");
+                JSONArray items = parent.getJSONArray("list");
                 for (int i=0;i<items.length();i++){
                     JSONObject child = items.getJSONObject(i);
-                    JSONArray images = child.getJSONArray("temple_image");
+                    JSONArray images = child.getJSONArray("image");
                     String [] imagesArray = new String[25];
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    temples_adapterList.add(new generic_adapter(imagesArray, child.getString("temple_name"), child.getString("temple_description"), child.getString("temple_district"), child.getString("temple_bestSeason"),child.getString("temple_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    temples_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
                     materialRefreshLayout.finishRefresh();
                     displayList();
                 }
@@ -315,7 +315,7 @@ public class templesFragment extends Fragment {
 
                     try {
                         JSONObject root = new JSONObject(ret);
-                        JSONArray eventJson = root.getJSONArray("temple_list");
+                        JSONArray eventJson = root.getJSONArray("list");
                         JSONObject child = eventJson.getJSONObject(position);
                         Fragment fragment = new placeDisplayFragment(child);
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
