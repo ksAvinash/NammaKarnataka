@@ -15,9 +15,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -41,7 +51,7 @@ public class beachesFragment extends Fragment {
 
     Button comment_submit;
 
-    String comment;
+    String comment,name;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -70,10 +80,9 @@ public class beachesFragment extends Fragment {
                         return;
                     }
                     comment = comment_box.getText().toString();
+                    name = user_Name.getText().toString();
                     Log.i("Comment : ", comment);
-
-                    PostDataTask postDataTask = new PostDataTask();
-                    postDataTask.execute(URL, user_Name.getText().toString(), comment_box.getText().toString());
+                    new Send().execute(name, comment, "Category", "Place");
                 }
             });
         } catch (Exception e) {
@@ -83,49 +92,46 @@ public class beachesFragment extends Fragment {
         return view;
     }
 
-    private class PostDataTask extends AsyncTask<String, Void, Boolean> {
+    class Send extends AsyncTask<String, Void, Boolean> {
 
-        @Override
         protected Boolean doInBackground(String... uploadData) {
-            Boolean result = true;
-            String url = uploadData[0];
-            String name = uploadData[1];
-            String posting_comment = uploadData[2];
-            String postBody = "";
+            boolean result = false;
+            String Name = uploadData[0];
+            String Comment = uploadData[1];
+            String Category = uploadData[2];
+            String Place = uploadData[3];
+
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://charan.net23.net/phpcode.php");
 
             try {
-                //all values must be URL encoded to make sure that special characters like & | ",etc.
-                //do not cause problems
-                postBody = NAME_KEY + "=" + URLEncoder.encode(name, "UTF-8") +
-                        "&" + COMMENT_KEY + "=" + URLEncoder.encode(posting_comment, "UTF-8");
-                Log.i("postBody", postBody);
-            } catch (UnsupportedEncodingException ex) {
-                result = false;
-            } catch (NullPointerException e) {
-                result = false;
-            }
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("Name", Name));
+                nameValuePairs.add(new BasicNameValuePair("Comment", Comment));
+                nameValuePairs.add(new BasicNameValuePair("Category", Category));
+                nameValuePairs.add(new BasicNameValuePair("Place", Place));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-            try {
-                //Create OkHttpClient for sending request
-                OkHttpClient client = new OkHttpClient();
-                //Create the request body with the help of Media Type
-                RequestBody body = RequestBody.create(MediaType.parse("application/x-www-form-urlencoded; charset=utf-8"), postBody);
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                //Send the request
-                Response response = client.newCall(request).execute();
-            } catch (IOException exception) {
-                result = false;
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                String responseStr = response.toString();
+                if(responseStr.length()>0){
+                    result = true;
+                }
+
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
             }
             return result;
+
         }
 
-        @Override
         protected void onPostExecute(Boolean result) {
-            //Print Success or failure message accordingly
-            Toast.makeText(getContext(), result ? "Uploaded to Drive!" : "There was some error in sending message. No Internet Connection!.", Toast.LENGTH_LONG).show();
+            if(result){
+                Toast.makeText(getContext(),"Comment has been recorded",Toast.LENGTH_LONG).show();
+            }
         }
     }
 
