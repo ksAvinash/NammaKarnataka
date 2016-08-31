@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,7 +24,8 @@ public class placeDisplayFragment extends Fragment {
     JSONObject child;
     private TextView place_textView, description_textView, location_textView;
     private Button gmapButton;
-    private double latitude,longitude;
+    private double latitude, longitude;
+
     public placeDisplayFragment() {
     }
 
@@ -39,12 +42,12 @@ public class placeDisplayFragment extends Fragment {
         description_textView = (TextView) view.findViewById(R.id.description_textView);
         location_textView = (TextView) view.findViewById(R.id.location_textView);
 
-        gmapButton = (Button)view.findViewById(R.id.gmapButton);
+        gmapButton = (Button) view.findViewById(R.id.gmapButton);
 
         try {
             place_textView.setText(child.getString("temple_name"));
             description_textView.setText(child.getString("temple_description"));
-            location_textView.setText(child.getString("temple_district")+"  ( "+String.valueOf(child.getDouble("latitude"))+" , "+String.valueOf(child.getDouble("longitude"))+" )");
+            location_textView.setText(child.getString("temple_district") + "  ( " + String.valueOf(child.getDouble("latitude")) + " , " + String.valueOf(child.getDouble("longitude")) + " )");
         } catch (Exception e) {
 
         }
@@ -58,8 +61,8 @@ public class placeDisplayFragment extends Fragment {
                     startActivity(
                             new Intent(
                                     android.content.Intent.ACTION_VIEW,
-                                    Uri.parse("geo:"+latitude+","+longitude+"?q=("+child.getString("temple_name")+")@"+latitude+","+longitude)));
-                }catch (Exception e){
+                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + child.getString("temple_name") + ")@" + latitude + "," + longitude)));
+                } catch (Exception e) {
 
                 }
             }
