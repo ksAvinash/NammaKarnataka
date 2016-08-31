@@ -8,9 +8,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -164,6 +166,52 @@ public class hillstationsFragment extends Fragment {
         ArrayAdapter<generic_adapter> adapter = new myHillstationsListAdapterClass();
         ListView list = (ListView) view.findViewById(R.id.hillstationsList);
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String ret = null;
+                BufferedReader reader = null;
+                File file = new File("/data/data/smartAmigos.com.nammakarnataka/hillstations.json");
+                if (file.exists()) {
+
+
+                    try {
+                        FileInputStream fis = new FileInputStream(file);
+                        reader = new BufferedReader(new InputStreamReader(fis));
+                        StringBuilder builder = new StringBuilder();
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            builder.append(line);
+                        }
+                        ret = builder.toString();
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (reader != null)
+                            try {
+                                reader.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                    }
+
+                    try {
+                        JSONObject root = new JSONObject(ret);
+                        JSONArray eventJson = root.getJSONArray("list");
+                        JSONObject child = eventJson.getJSONObject(position);
+                        Fragment fragment = new placeDisplayFragment(child);
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_main, fragment);
+                        ft.addToBackStack(null);
+                        ft.commit();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
     }
 
 

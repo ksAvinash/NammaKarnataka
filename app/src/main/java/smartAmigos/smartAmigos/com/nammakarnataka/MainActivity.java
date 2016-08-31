@@ -228,11 +228,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_trekking:
-                fragment = new hillstationsFragment();
-                ft = getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_main, fragment);
-                ft.addToBackStack(null);
-                ft.commit();
+
                 break;
 
             case R.id.nav_waterfalls:

@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 public class placeDisplayFragment extends Fragment {
     JSONObject child;
-    private TextView place_textView, description_textView, location_textView;
+    private TextView place_textView, description_textView, location_textView,season_textView,additionalInformation;
     private Button gmapButton;
     private double latitude,longitude;
     public placeDisplayFragment() {
@@ -35,13 +35,17 @@ public class placeDisplayFragment extends Fragment {
         place_textView = (TextView) view.findViewById(R.id.place_textView);
         description_textView = (TextView) view.findViewById(R.id.description_textView);
         location_textView = (TextView) view.findViewById(R.id.location_textView);
+        season_textView = (TextView) view.findViewById(R.id.season_textView);
+        additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
 
         gmapButton = (Button)view.findViewById(R.id.gmapButton);
 
         try {
-            place_textView.setText(child.getString("temple_name"));
-            description_textView.setText(child.getString("temple_description"));
-            location_textView.setText(child.getString("temple_district")+"  ( "+String.valueOf(child.getDouble("latitude"))+" , "+String.valueOf(child.getDouble("longitude"))+" )");
+            place_textView.setText(child.getString("name"));
+            description_textView.setText(child.getString("description"));
+            location_textView.setText(child.getString("district")+"  ( "+String.valueOf(child.getDouble("latitude"))+" , "+String.valueOf(child.getDouble("longitude"))+" )");
+            season_textView.setText(child.getString("bestSeason"));
+            additionalInformation.setText(child.getString("additionalInformation"));
         } catch (Exception e) {
 
         }
@@ -55,7 +59,7 @@ public class placeDisplayFragment extends Fragment {
                     startActivity(
                             new Intent(
                                     android.content.Intent.ACTION_VIEW,
-                                    Uri.parse("geo:"+latitude+","+longitude+"?q=("+child.getString("temple_name")+")@"+latitude+","+longitude)));
+                                    Uri.parse("geo:"+latitude+","+longitude+"?q=("+child.getString("name")+")@"+latitude+","+longitude)));
                 }catch (Exception e){
 
                 }
