@@ -89,7 +89,6 @@ public class addNewPlace extends Fragment {
                         spinner_response.setText("BEACHES");
                         break;
                     default:
-                        spinner_response.setText("--");
                         break;
                 }
             }
@@ -107,6 +106,9 @@ public class addNewPlace extends Fragment {
             public void onClick(View v) {
                 if (TextUtils.isEmpty(place_input.getText().toString())) {
                     place_input.setError("Mandatory");
+                }
+                else if(TextUtils.isEmpty(spinner_response.getText().toString())){
+                    ((TextView)category_spinner.getSelectedView()).setError("Category needed");
                 }
                 else if (TextUtils.isEmpty(location_input.getText().toString())) {
                     place_input.setError("Mandatory");
@@ -173,7 +175,7 @@ public class addNewPlace extends Fragment {
             if (result) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Thank You!");
-                builder.setMessage("Thank you for your support.\n We have recieved your request to add a new place.\n We will process the details and add the place in our app.\n Keep supporting us.");
+                builder.setMessage("Thank you for your support.\n We have recieved your request to add a new place.\n We shall process your request and update the contents.");
                 builder.setCancelable(true);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
