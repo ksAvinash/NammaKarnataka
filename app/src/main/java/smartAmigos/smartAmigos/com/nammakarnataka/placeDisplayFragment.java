@@ -38,6 +38,7 @@ public class placeDisplayFragment extends Fragment {
         season_textView = (TextView) view.findViewById(R.id.season_textView);
         additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
 
+        
         gmapButton = (Button)view.findViewById(R.id.gmapButton);
 
         try {
