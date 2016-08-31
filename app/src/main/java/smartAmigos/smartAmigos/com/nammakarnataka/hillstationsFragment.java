@@ -37,12 +37,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartAmigos.smartAmigos.com.nammakarnataka.adapter.hillstations_adapter;
+import smartAmigos.smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
 
 public class hillstationsFragment extends Fragment {
 
-    private List<hillstations_adapter> hillstations_adapterList = new ArrayList<>();
+    private List<generic_adapter> hillstations_adapterList = new ArrayList<>();
 
     static SimpleDraweeView draweeView;
 
@@ -118,13 +118,17 @@ public class hillstationsFragment extends Fragment {
 
             try {
                 JSONObject parent = new JSONObject(ret);
-                JSONArray eventJson = parent.getJSONArray("hillstations_list");
-
-                for (int i = 0; i < eventJson.length(); i++) {
-                    JSONObject child = eventJson.getJSONObject(i);
-                    hillstations_adapterList.add(new hillstations_adapter(child.getString("hillstations_image"), child.getString("hillstations_name"), child.getString("hillstations_description"), child.getString("hillstations_district"), child.getDouble("latitude"), child.getDouble("longitude")));
+                JSONArray items = parent.getJSONArray("hillstations_list");
+                for (int i=0;i<items.length();i++){
+                    JSONObject child = items.getJSONObject(i);
+                    JSONArray images = child.getJSONArray("hillstations_image");
+                    String [] imagesArray = new String[25];
+                    for(int j=0;j<images.length();j++){
+                        imagesArray[j] = images.getString(j);
+                    }
+                    hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("hillstations_name"), child.getString("hillstations_description"), child.getString("hillstations_district"), child.getString("hillstations_bestSeason"),child.getString("hillstations_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    displayList();
                 }
-                displayList();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -157,13 +161,13 @@ public class hillstationsFragment extends Fragment {
 
 
     private void displayList() {
-        ArrayAdapter<hillstations_adapter> adapter = new myHillstationsListAdapterClass();
+        ArrayAdapter<generic_adapter> adapter = new myHillstationsListAdapterClass();
         ListView list = (ListView) view.findViewById(R.id.hillstationsList);
         list.setAdapter(adapter);
     }
 
 
-    public class myHillstationsListAdapterClass extends ArrayAdapter<hillstations_adapter> {
+    public class myHillstationsListAdapterClass extends ArrayAdapter<generic_adapter> {
 
         myHillstationsListAdapterClass() {
             super(context, R.layout.hillstations_item, hillstations_adapterList);
@@ -178,15 +182,15 @@ public class hillstationsFragment extends Fragment {
                 itemView = inflater.inflate(R.layout.hillstations_item, parent, false);
 
             }
-            hillstations_adapter current = hillstations_adapterList.get(position);
+            generic_adapter current = hillstations_adapterList.get(position);
 
             //Code to download image from url and paste.
-            Uri uri = Uri.parse(current.getImage());
+            Uri uri = Uri.parse(current.getImage()[0]);
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_hillstationsImage);
             draweeView.setImageURI(uri);
             //Code ends here.
             TextView t_name = (TextView) itemView.findViewById(R.id.item_hillstationsTitle);
-            t_name.setText(current.getHillstationsTitle());
+            t_name.setText(current.getTitle());
 
             TextView t_dist = (TextView) itemView.findViewById(R.id.item_hillstationsDistrict);
             t_dist.setText(current.getDistrict());
@@ -289,16 +293,20 @@ public class hillstationsFragment extends Fragment {
             super.onPostExecute(s);
             hillstations_adapterList.clear();
             try {
-
                 JSONObject parent = new JSONObject(s);
-                JSONArray eventJson = parent.getJSONArray("hillstations_list");
-                for (int i = 0; i < eventJson.length(); i++) {
-                    JSONObject child = eventJson.getJSONObject(i);
-                    hillstations_adapterList.add(new hillstations_adapter(child.getString("hillstations_image"), child.getString("hillstations_name"), child.getString("hillstations_description"), child.getString("hillstations_district"), child.getDouble("latitude"), child.getDouble("longitude")));
+                JSONArray items = parent.getJSONArray("hillstations_list");
+                for (int i=0;i<items.length();i++){
+                    JSONObject child = items.getJSONObject(i);
+                    JSONArray images = child.getJSONArray("hillstations_image");
+                    String [] imagesArray = new String[25];
+                    for(int j=0;j<images.length();j++){
+                        imagesArray[j] = images.getString(j);
+                    }
+                    hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("hillstations_name"), child.getString("hillstations_description"), child.getString("hillstations_district"), child.getString("hillstations_bestSeason"),child.getString("hillstations_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    materialRefreshLayout.finishRefresh();
+                    displayList();
                 }
-                materialRefreshLayout.finishRefresh();
-                displayList();
-            } catch (JSONException e) {
+            }  catch (JSONException e) {
                 e.printStackTrace();
             }
 

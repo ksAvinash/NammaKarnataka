@@ -37,12 +37,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartAmigos.smartAmigos.com.nammakarnataka.adapter.dams_adapter;
+import smartAmigos.smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
 public class damsFragment extends Fragment {
 
 
-    private List<dams_adapter> dams_adapterList = new ArrayList<>();
+    private List<generic_adapter> dams_adapterList = new ArrayList<>();
 
     static SimpleDraweeView draweeView;
 
@@ -117,13 +117,17 @@ public class damsFragment extends Fragment {
 
             try {
                 JSONObject parent = new JSONObject(ret);
-                JSONArray eventJson = parent.getJSONArray("dam_list");
-
-                for (int i = 0; i < eventJson.length(); i++) {
-                    JSONObject child = eventJson.getJSONObject(i);
-                    dams_adapterList.add(new dams_adapter(child.getString("dam_image"), child.getString("dam_name"), child.getString("dam_description"), child.getString("dam_district"), child.getDouble("latitude"), child.getDouble("longitude")));
+                JSONArray items = parent.getJSONArray("dam_list");
+                for (int i=0;i<items.length();i++){
+                    JSONObject child = items.getJSONObject(i);
+                    JSONArray images = child.getJSONArray("dam_image");
+                    String [] imagesArray = new String[25];
+                    for(int j=0;j<images.length();j++){
+                        imagesArray[j] = images.getString(j);
+                    }
+                    dams_adapterList.add(new generic_adapter(imagesArray, child.getString("dam_name"), child.getString("dam_description"), child.getString("dam_district"), child.getString("dam_bestSeason"),child.getString("dam_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    displayList();
                 }
-                displayList();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -141,7 +145,7 @@ public class damsFragment extends Fragment {
 
 
     private void displayList() {
-        ArrayAdapter<dams_adapter> adapter = new myDamListAdapterClass();
+        ArrayAdapter<generic_adapter> adapter = new myDamListAdapterClass();
         ListView list = (ListView) view.findViewById(R.id.damList);
         list.setAdapter(adapter);
     }
@@ -149,7 +153,7 @@ public class damsFragment extends Fragment {
 
 
 
-    public class myDamListAdapterClass extends ArrayAdapter<dams_adapter> {
+    public class myDamListAdapterClass extends ArrayAdapter<generic_adapter> {
 
         myDamListAdapterClass() {
             super(context, R.layout.dams_item, dams_adapterList);
@@ -164,15 +168,15 @@ public class damsFragment extends Fragment {
                 itemView = inflater.inflate(R.layout.dams_item, parent, false);
 
             }
-            dams_adapter current = dams_adapterList.get(position);
+            generic_adapter current = dams_adapterList.get(position);
 
             //Code to download image from url and paste.
-            Uri uri = Uri.parse(current.getImage());
+            Uri uri = Uri.parse(current.getImage()[0]);
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_damImage);
             draweeView.setImageURI(uri);
             //Code ends here.
             TextView t_name = (TextView) itemView.findViewById(R.id.item_damTitle);
-            t_name.setText(current.getDamTitle());
+            t_name.setText(current.getTitle());
 
             TextView t_dist = (TextView) itemView.findViewById(R.id.item_damDistrict);
             t_dist.setText(current.getDistrict());
@@ -302,16 +306,20 @@ public class damsFragment extends Fragment {
             super.onPostExecute(s);
             dams_adapterList.clear();
             try {
-
                 JSONObject parent = new JSONObject(s);
-                JSONArray eventJson = parent.getJSONArray("dam_list");
-                for (int i = 0; i < eventJson.length(); i++) {
-                    JSONObject child = eventJson.getJSONObject(i);
-                    dams_adapterList.add(new dams_adapter(child.getString("dam_image"), child.getString("dam_name"), child.getString("dam_description"), child.getString("dam_district"), child.getDouble("latitude"), child.getDouble("longitude")));
+                JSONArray items = parent.getJSONArray("dam_list");
+                for (int i=0;i<items.length();i++){
+                    JSONObject child = items.getJSONObject(i);
+                    JSONArray images = child.getJSONArray("dam_image");
+                    String [] imagesArray = new String[25];
+                    for(int j=0;j<images.length();j++){
+                        imagesArray[j] = images.getString(j);
+                    }
+                    dams_adapterList.add(new generic_adapter(imagesArray, child.getString("dam_name"), child.getString("dam_description"), child.getString("dam_district"), child.getString("dam_bestSeason"),child.getString("dam_additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    materialRefreshLayout.finishRefresh();
+                    displayList();
                 }
-                materialRefreshLayout.finishRefresh();
-                displayList();
-            } catch (JSONException e) {
+            }catch (JSONException e) {
                 e.printStackTrace();
             }
 
