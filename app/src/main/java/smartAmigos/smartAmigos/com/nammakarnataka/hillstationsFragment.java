@@ -335,6 +335,7 @@ public class hillstationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+
             hillstations_adapterList.clear();
 
 
