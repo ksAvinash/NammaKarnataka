@@ -310,8 +310,8 @@
                 android:id="@+id/gmapButton"
                 android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/rounded_button"
                 android:text="@string/view_on_maps"
                 android:textColor="@color/colorWhite" />
