@@ -52,6 +52,7 @@ public class damsFragment extends Fragment {
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
+    ListView list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +61,7 @@ public class damsFragment extends Fragment {
 
         context = getActivity().getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+        list = (ListView) view.findViewById(R.id.damList);
 
 
         Fresco.initialize(getActivity());
@@ -149,7 +151,6 @@ public class damsFragment extends Fragment {
 
     private void displayList() {
         ArrayAdapter<generic_adapter> adapter = new myDamListAdapterClass();
-        ListView list = (ListView) view.findViewById(R.id.damList);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -52,7 +52,7 @@ public class hillstationsFragment extends Fragment {
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
-
+    ListView list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +62,7 @@ public class hillstationsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_hillstations, container, false);
         context = getActivity().getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+        list = (ListView) view.findViewById(R.id.hillstationsList);
 
         Fresco.initialize(getActivity());
         loadJsonFile();
@@ -165,7 +166,6 @@ public class hillstationsFragment extends Fragment {
 
     private void displayList() {
         ArrayAdapter<generic_adapter> adapter = new myHillstationsListAdapterClass();
-        ListView list = (ListView) view.findViewById(R.id.hillstationsList);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -53,6 +53,7 @@ public class templesFragment extends Fragment {
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
+    ListView list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +63,8 @@ public class templesFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_temples, container, false);
         context = getActivity().getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+        list = (ListView) view.findViewById(R.id.templeList);
+
 
         Fresco.initialize(getActivity());
         loadJsonFile();
@@ -249,7 +252,6 @@ public class templesFragment extends Fragment {
             super.onPostExecute(s);
             temples_adapterList.clear();
 
-
             SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("version", serverVersion);
@@ -282,7 +284,7 @@ public class templesFragment extends Fragment {
 
     private void displayList() {
         ArrayAdapter<generic_adapter> adapter = new myTempleListAdapterClass();
-        ListView list = (ListView) view.findViewById(R.id.templeList);
+
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

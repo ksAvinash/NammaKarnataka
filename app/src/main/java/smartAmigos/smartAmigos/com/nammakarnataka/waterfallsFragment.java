@@ -50,6 +50,7 @@ public class waterfallsFragment extends Fragment {
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
+    ListView list;
     public waterfallsFragment() {
         // Required empty public constructor
     }
@@ -64,6 +65,8 @@ public class waterfallsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_waterfalls, container, false);
         context = getActivity().getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+        list = (ListView) view.findViewById(R.id.waterfallsList);
+
 
         Fresco.initialize(getActivity());
         loadJsonFile();
@@ -162,7 +165,6 @@ public class waterfallsFragment extends Fragment {
 
     private void displayList() {
         ArrayAdapter<generic_adapter> adapter = new myWaterfallsListAdapterClass();
-        ListView list = (ListView) view.findViewById(R.id.waterfallsList);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
