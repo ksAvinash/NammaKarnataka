@@ -140,6 +140,7 @@ public class templesFragment extends Fragment {
 
 
     private void loadJsonFile() {
+        temples_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
         File file = new File("/data/data/smartAmigos.com.nammakarnataka/temple.json");

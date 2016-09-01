@@ -93,6 +93,7 @@ public class hillstationsFragment extends Fragment {
     }
 
     private void loadJsonFile() {
+        hillstations_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
         File file = new File("/data/data/smartAmigos.com.nammakarnataka/hillstations.json");

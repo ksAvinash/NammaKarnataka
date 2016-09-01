@@ -92,6 +92,7 @@ public class damsFragment extends Fragment {
 
 
     private void loadJsonFile() {
+        dams_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
         File file = new File("/data/data/smartAmigos.com.nammakarnataka/dams.json");

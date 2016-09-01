@@ -112,6 +112,7 @@ public class waterfallsFragment extends Fragment {
 
 
     private void loadJsonFile() {
+        waterfalls_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
         File file = new File("/data/data/smartAmigos.com.nammakarnataka/waterfalls.json");
