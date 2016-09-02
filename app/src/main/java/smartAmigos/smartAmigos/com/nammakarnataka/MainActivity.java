@@ -52,15 +52,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*
-
-     t=(TextView)view.findViewById(R.id.tv);
-
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(),"fonts/Kaushan.otf");
-        t.setTypeface(myFont);
-         */
-
-        Pushbots.sharedInstance().init(getBaseContext());
+        Pushbots.sharedInstance().init(getApplicationContext());
         Pushbots.sharedInstance().setCustomHandler(customHandler.class);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
