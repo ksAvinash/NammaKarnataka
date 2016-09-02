@@ -15,9 +15,8 @@
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_weight="1"
             android:text="Add a place that you wish to see in this app. Details of the place will be processed and added to the category to which it belongs"
             android:textSize="18sp" />
 
@@ -154,23 +153,32 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/submit_newplace"
                 android:layout_width="0dp"
-                android:layout_weight="0.75"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_weight="0.75"
                 android:background="@drawable/rounded_button"
                 android:text="SUBMIT"
-                android:textSize="18sp"
                 android:textColor="@color/colorWhite"
-                android:id="@+id/submit_newplace" />
+                android:textSize="18sp" />
 
             <TextView
+                android:id="@+id/spinner_response"
                 android:layout_width="0dp"
-                android:layout_weight="0.5"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhite"
-                android:id="@+id/spinner_response"/>
+                android:layout_weight="0.5"
+                android:textColor="@color/colorWhite" />
         </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar1"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"
+            android:progressTint="@color/colorBlue" />
 
     </LinearLayout>
 

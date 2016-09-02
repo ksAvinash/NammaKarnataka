@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,6 +48,7 @@ public class addNewPlace extends Fragment {
     Spinner category_spinner;
     Button submit_newplace;
     TextView spinner_response;
+    private ProgressBar spinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,6 +61,10 @@ public class addNewPlace extends Fragment {
         addinfo_input = (EditText) view.findViewById(R.id.addinfo_input);
 
         spinner_response = (TextView) view.findViewById(R.id.spinner_response);
+
+        spinner = (ProgressBar) view.findViewById(R.id.progressBar1);
+        spinner.getIndeterminateDrawable().setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.MULTIPLY);
+        spinner.setVisibility(View.GONE);
 
         category_spinner = (Spinner) view.findViewById(R.id.category_input);
         ArrayAdapter<CharSequence> event_adapter = ArrayAdapter.createFromResource(getContext(),
@@ -104,14 +110,17 @@ public class addNewPlace extends Fragment {
         submit_newplace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spinner.setVisibility(View.VISIBLE);
                 if (TextUtils.isEmpty(place_input.getText().toString())) {
                     place_input.setError("Mandatory");
+                    spinner.setVisibility(View.GONE);
                 }
-                else if(TextUtils.isEmpty(spinner_response.getText().toString())){
-                    ((TextView)category_spinner.getSelectedView()).setError("Category needed");
-                }
-                else if (TextUtils.isEmpty(location_input.getText().toString())) {
-                    place_input.setError("Mandatory");
+                if (TextUtils.isEmpty(spinner_response.getText().toString())) {
+                    ((TextView) category_spinner.getSelectedView()).setError("Category needed");
+                    spinner.setVisibility(View.GONE);
+                } else if (TextUtils.isEmpty(location_input.getText().toString())) {
+                    location_input.setError("Mandatory");
+                    spinner.setVisibility(View.GONE);
                 } else {
                     PostDataTask postDataTask = new PostDataTask();
                     postDataTask.execute(URL, place_input.getText().toString(), location_input.getText().toString(), spinner_response.getText().toString(),
@@ -119,6 +128,7 @@ public class addNewPlace extends Fragment {
                 }
             }
         });
+
         return view;
     }
 
@@ -173,6 +183,7 @@ public class addNewPlace extends Fragment {
         protected void onPostExecute(Boolean result) {
             //Print Success or failure message accordingly
             if (result) {
+                spinner.setVisibility(View.GONE);
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Thank You!");
                 builder.setMessage("Thank you for your support.\n We have recieved your request to add a new place.\n We shall process your request and update the contents.");
@@ -187,6 +198,7 @@ public class addNewPlace extends Fragment {
                 });
                 builder.show();
             } else {
+                spinner.setVisibility(View.GONE);
                 Toast.makeText(getContext(), "There was some error in sending message. No Internet Connection!.", Toast.LENGTH_LONG).show();
             }
         }

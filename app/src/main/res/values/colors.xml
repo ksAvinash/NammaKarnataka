@@ -9,4 +9,5 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="orangeText">#FF6765</color>
     <color name="defTextColor">#000000</color>
+    <color name="colorBlue">#3949ab</color>
 </resources>
