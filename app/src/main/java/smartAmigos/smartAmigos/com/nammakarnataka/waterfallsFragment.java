@@ -200,7 +200,7 @@ public class waterfallsFragment extends Fragment {
                         JSONObject root = new JSONObject(ret);
                         JSONArray eventJson = root.getJSONArray("list");
                         JSONObject child = eventJson.getJSONObject(position);
-                        Fragment fragment = new placeDisplayFragment(child);
+                        Fragment fragment = new placeDisplayFragment(child,"WATERFALL");
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_main, fragment);
                         ft.addToBackStack(null);
