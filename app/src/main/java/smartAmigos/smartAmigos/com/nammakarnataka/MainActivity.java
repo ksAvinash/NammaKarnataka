@@ -247,10 +247,17 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.feedback:
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com, charanshetty25595@gmail.com"));
-                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
+                intent = new Intent(MainActivity.this, feedbacks.class);
                 startActivity(intent);
+                //fragment = new feedback();
+               // ft = getSupportFragmentManager().beginTransaction();
+                //ft.replace(R.id.content_main, fragment);
+                //ft.commit();
                 break;
+               // intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com, charanshetty25595@gmail.com"));
+               // intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
+                //startActivity(intent);
+               // break;
 
 
             case R.id.nav_home:
