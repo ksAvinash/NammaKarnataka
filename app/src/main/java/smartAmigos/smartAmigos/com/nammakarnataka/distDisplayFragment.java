@@ -60,7 +60,7 @@ public class distDisplayFragment extends Fragment {
 
 
         Fresco.initialize(getActivity());
-
+        district_specific_adapterList.clear();
         try {
             current_dist.setText(child.getString("name"));
             JSONArray places = child.getJSONArray("places");
