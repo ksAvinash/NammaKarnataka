@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/wall1"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:theme="@style/AppTheme.NoActionBar"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="smartAmigos.smartAmigos.com.nammakarnataka.feedbacks">
+
+    <android.support.v7.widget.CardView
+    android:id="@+id/dialog_3"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_margin="5dp"
+        android:paddingBottom="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Give Us a 5"
+            android:textAllCaps="true"
+            android:gravity="center" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/dialog_4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/dialog_3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Feedback"
+                android:textAllCaps="true"
+                android:gravity="center" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold"
+        android:textColor="#ffffff"
+        android:textAlignment="center"
+        android:text="\t\t\t\tRequest To our Users
+        \nAll the Revenue generated through ads will be solely used for Development of Kannada Language Related Applications.
+        \n\t\tKeep Supporting:)"
+        android:gravity="center"
+        android:id="@+id/textView11"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/dialog_4"
+        android:layout_alignParentLeft="true"
+        android:paddingTop="20dp">
+    </TextView>
+
+
+</RelativeLayout>
