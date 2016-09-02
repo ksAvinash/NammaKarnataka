@@ -26,6 +26,8 @@
         app:textWeight="bold"
         app:typeface="pt_serif_bold_italic" />
 
+
+
     <com.cjj.MaterialRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"

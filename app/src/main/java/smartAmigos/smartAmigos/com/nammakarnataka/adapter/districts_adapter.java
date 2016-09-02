@@ -10,6 +10,7 @@ public class districts_adapter {
 
     public String getDistrict() {
 
+
         return district;
     }
 

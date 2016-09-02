@@ -43,6 +43,8 @@ public class distDisplayFragment extends Fragment {
         this.child = child;
     }
 
+
+
     public distDisplayFragment(){}
 
 
