@@ -64,7 +64,12 @@
 
         <service android:name="com.pushbots.push.GCMIntentService" />
 
-        <activity android:name=".feedbacks"></activity>
+        <activity android:name=".feedbacks" />
+        <activity
+            android:name=".MyLocation"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="My location" />
+
     </application>
 
 </manifest>
