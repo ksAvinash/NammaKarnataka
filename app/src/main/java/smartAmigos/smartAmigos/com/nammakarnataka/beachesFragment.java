@@ -2,6 +2,7 @@ package smartAmigos.smartAmigos.com.nammakarnataka;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,9 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -22,36 +25,32 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * Created by CHARAN on 8/25/2016.
  */
 public class beachesFragment extends Fragment {
-    public static final String URL = "https://docs.google.com/forms/d/e/1FAIpQLSdEGmepf4osIp9zZYleR2q4WdOEK58-_G8lmufA5sf-6b1EZg/formResponse";
-//    public static final MediaType FORM_DATA_TYPE
-//            = MediaType.parse("application/x-www-form-urlencoded; charset=utf-8");
-
-    public static final String NAME_KEY = "entry_1327858735";
-    public static final String COMMENT_KEY = "entry_466021146";
-
     EditText comment_box;
-    TextView user_Name;
+    public TextView user_Name;
 
     Button comment_submit;
 
-    String comment,name;
+    String comment, name;
+
+    LinearLayout comments_layout;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,6 +60,7 @@ public class beachesFragment extends Fragment {
         comment_box = (EditText) view.findViewById(R.id.comment_box);
         user_Name = (TextView) view.findViewById(R.id.user_name);
 
+        comments_layout = (LinearLayout)view.findViewById(R.id.commets_layout);
         comment_submit = (Button) view.findViewById(R.id.submitcomment);
 
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
@@ -69,6 +69,14 @@ public class beachesFragment extends Fragment {
             user_Name.setText(sharedPreferences.getString("userName", null));
         } catch (Exception e) {
             Log.e("Error :", "Name settings error");
+        }
+
+        try {
+            GetDataTask getDataTask = new GetDataTask();
+            URL url = new URL("http://charan.net23.net/getdata.php");
+            getDataTask.execute(url);
+        }catch (Exception e){
+            Toast.makeText(getContext(),"Something wrong in fetching",Toast.LENGTH_LONG).show();
         }
 
         try {
@@ -83,6 +91,12 @@ public class beachesFragment extends Fragment {
                     name = user_Name.getText().toString();
                     Log.i("Comment : ", comment);
                     new Send().execute(name, comment, "Category", "Place");
+                    try {
+                        comments_layout.removeAllViews();
+                        new GetDataTask().execute(new URL("http://charan.net23.net/getdata.php"));
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
         } catch (Exception e) {
@@ -117,7 +131,7 @@ public class beachesFragment extends Fragment {
                 // Execute HTTP Post Request
                 HttpResponse response = httpclient.execute(httppost);
                 String responseStr = response.toString();
-                if(responseStr.length()>0){
+                if (responseStr.length() > 0) {
                     result = true;
                 }
 
@@ -129,11 +143,74 @@ public class beachesFragment extends Fragment {
         }
 
         protected void onPostExecute(Boolean result) {
-            if(result){
-                Toast.makeText(getContext(),"Comment has been recorded",Toast.LENGTH_LONG).show();
+            if (result) {
+                Toast.makeText(getContext(), "Comment has been recorded", Toast.LENGTH_LONG).show();
             }
         }
     }
 
+
+    public class GetDataTask extends AsyncTask<URL, Void, String> {
+        private HttpURLConnection urlConnection;
+
+        @Override
+        protected String doInBackground(URL... params) {
+
+            StringBuilder builder = new StringBuilder();
+            String result = "";
+            try {
+                URL url = params[0];
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setConnectTimeout(20 * 1000);
+                urlConnection.setReadTimeout(20 * 1000);
+                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                String response;
+                while ((response = reader.readLine()) != null) {
+                    builder.append(response+"\n");
+                    Log.i("Response",response.toString());
+                    result = builder.toString();
+                } in.close();
+            } catch (Exception e) {
+
+            }
+            return result;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            // super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            try {
+                JSONArray jArray = new JSONArray(result);
+
+                for (int i = 0; i < jArray.length(); i++) {
+                    JSONObject json = jArray.getJSONObject(i);
+                    String Name = json.getString("Name");
+                    String Comment = json.getString("Comment");
+                    TextView nameTextView = new TextView(getContext());
+                    nameTextView.setTextColor(Color.parseColor("#3949ab"));
+                    nameTextView.setBackgroundColor(Color.parseColor("#DFDFDF"));
+                    nameTextView.setText(Name);
+                    nameTextView.setPadding(2,2,2,2);
+                    comments_layout.addView(nameTextView);
+
+                    TextView commentTextView = new TextView(getContext());
+                    commentTextView.setTextColor(Color.BLACK);
+                    commentTextView.setBackgroundColor(Color.parseColor("#DFDFDF"));
+                    commentTextView.setText(Comment);
+                    commentTextView.setPadding(5,2,2,2);
+                    comments_layout.addView(commentTextView);
+
+                }
+            }catch (Exception e){
+
+            }
+        }
+    }
 
 }
