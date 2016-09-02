@@ -24,8 +24,6 @@
                 android:id="@+id/layout_slider"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
                 android:background="@color/black_overlay"/>
 
             <android.support.v7.widget.CardView

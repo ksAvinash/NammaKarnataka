@@ -1,0 +1,122 @@
+{
+	"list":
+	[
+		{
+			"image":[
+									"http://nammakarnataka.net23.net/waterfalls/JogFalls.jpg"
+								],
+			"name":"JogFalls",
+			"description":"Jog Falls orGerosoppa Falls o is the 2nd highest waterfall in India located near Sagara taluk in the state of Karnataka.It is a segmented waterfall which, depending on rain and season, becomes a plunge waterfall. The falls are a major tourist attraction and is ranked 13th in the world by the waterfall database. They are also known as the Gersoppa Falls or Jogada Gundi",
+			"district":"shivamoga",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":14.2294,
+			"longitude":74.8125
+		},
+		
+		{
+			"image":["http://nammakarnataka.net23.net/waterfalls/ShivanasamudraFalls.jpg"],
+			"name":"ShivanasamudraFalls",
+			"description":"The Shivanasamudra Falls is on the Kaveri River after the river has wound its way through the rocks and ravines of the Deccan Plateau and drops off to form waterfalls.The island town of Shivanasamudra divides the river into twin waterfalls. This creates the fourth largest island in the rivers course. A group of ancient temples are located here and there likely was a village.",
+			"district":"Mandya",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":2.294,
+			"longitude":77.168
+		},
+
+		{
+			"image":["http://nammakarnataka.net23.net/waterfalls/mekedatu.jpg"],
+			"name":"Mekedatu",
+			"description":"Mekedatu is a location along Kaveri in Kanakapura Taluk. Sangama is the place where Arkavati merges with Kaveri.From this point, about 3.5 kilometers downstream, the river Kaveri flows through a deep and narrow gorge. Mekedatu means 'goat's leap' in Kannada.A lot of tourists visit this place, a high number of people drown in the river, either when swimming or slipping off the cliff. It is a very dangerous place.",
+			"district":"Chamarajanagara",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":12.2576,
+			"longitude":77.4458
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/waterfalls/AbbeyFalls.jpg"],
+			"name":"AbbeyFalls",
+			"description":"The waterfall is located between private coffee plantations with stocky coffee bushes and spice estates with trees entwined with pepper vines. A hanging bridge constructed just opposite the falls.",
+			"district":"Kodagu",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":12.4577,
+			"longitude":75.7165
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/waterfalls/HebbeFalls.jpg"],
+			"name":"HebbeFalls",
+			"description":"Hebbe Falls is situated about 10 km away from the famous hill station Kemmangundi. This waterfalls are inside a coffee estate and can be reached either by walk or four-wheeler. Hebbe Falls gushes down from a height of 551 ft in two stages to form Dodda Hebbe (Big Falls) and Chikka Hebbe (Small Falls.)",
+			"district":"Chikkamagaluru",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.5416,
+			"longitude":75.7252
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/waterfalls/GokakFalls.jpg"],
+			"name":"GokakFalls",
+			"description":"The Gokak Falls is a waterfall located on the Ghataprabha River. After a long winding course, the Ghataprabha river takes a leap of 52 metres (171 ft) over the sand-stone cliff amidst a picturesque gorge of the rugged valley, resembling Niagara Falls on a smaller scale. The waterfall is horse shoe shaped at the crest, with a flood breadth of 177 metres ",
+			"district":"Belgavi",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":16.1592,
+			"longitude":74.8156
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/waterfalls/HogenikalFalls.jpg"],
+			"name":"HogenikalFalls",
+			"description":"It is sometimes referred to as the Niagara of India. With its fame for medicinal baths and hide boat rides, it is a major tourist attraction. Carbonatite rocks in this site are considered to be the oldest of its kind in South Asia and one of the oldest in the world",
+			"district":"Dharmapuri",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":12.1183,
+			"longitude":77.7781
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/waterfalls/Dudhsagar.jpg"],
+			"name":"Dudhsagar",
+			"description":"Dudhsagar Falls (literally Sea of Milk ) is a four-tiered waterfall located on the Mandovi River in the border of the Indian states of Karnataka and Goa. It is 60 km from Panaji by road and is located on the Madgaon-Belgaum rail route about 46 km east of Madgaon and 80 km south of Belgaum. Dudhsagar Falls is amongst India's tallest waterfalls with a height of 310 m(1017 feet) and an average width of 30 metres (100 feet).",
+			"district":"Karwar",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":15.3144,
+			"longitude":74.3143
+		},
+			{
+			"image":["http://nammakarnataka.net23.net/waterfalls/BarkanaFalls.jpg"],
+			"name":"BarkanaFalls",
+			"description":"Barkana Falls is one of the ten highest waterfalls in India. The waterfall is located in Balehalli forest area, at a distance of about 7 km from the Agumbe village in Shimoga district of Karnataka. The waterfall has a height of about 850 ft. It is located at a height of about 259 metres above sea level. It originates from the Seeta River that flows through this region.",
+			"district":"shivamoga",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.4881,
+			"longitude":75.0935
+		},
+			
+		{
+			"image":["http://nammakarnataka.net23.net/waterfalls/KunchikalFalls.jpg"],
+			"name":"KunchikalFalls",
+			"description":"Kunchikal Falls, also called Kunchikal Abbe, is located near Masthikatte-Hulikal bordering Udupi-Shimoga districts of state of Karnataka. Kunchikal falls is formed by Varahi river.",
+			"district":"shivamoga",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.6971,
+			"longitude":75.0194
+		},
+		
+			{
+			"image":["http://nammakarnataka.net23.net/waterfalls/ChunchiFalls.jpg"],
+			"name":"ChunchiFalls",
+			"description":"It is 80 kms from Bangalore on the way to mekedatu.With own vehicle these places are ideal outing spots. ",
+			"district":"Bangalore Rural",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":14.2294,
+			"longitude":77.4458
+		}
+	
+	]
+}

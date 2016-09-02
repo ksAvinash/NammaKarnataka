@@ -1,0 +1,102 @@
+{
+	"list":
+	[
+		{
+			"image":[
+						"http://nammakarnataka.net23.net/dams/alamatti_dam.jpg"
+						],
+			"name":	"Alamatti Dam",
+			"description":	"The Almatti Dam (Kannada:ಆಲಮಟ್ಟಿ ಅಣೆಕಟ್ಟು) is a hydroelectric project on the Krishna River in North Karnataka, India which was completed in July 2005. The target annual electric output of the dam is 560 MU. The Almatti Dam is the main reservoir of the Upper Krishna Irrigation Project.",
+			"district":		"Bijapur",
+			"bestSeason":"rainy(june-sept)",
+			"additionalInformation": "GG",
+			"latitude":	16.331,
+			"longitude":	75.888
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/dams/bhadra.jpg"
+						],
+			"name":	"Bhadra Dam",
+			"description":	"The Bhadra Dam, (Kannada language: ಭಧ್ರಾ ಆಣೇಕಟ್ಟು), which has created the Bhadra Reservoir (ಭದ್ರಾ ಜಲಾಶಯ), is located on the Bhadra River (Kannada: ಭದ್ರಾ ನದಿ) a tributary of Tungabhadra River in Chikkamagaluru district in Tarikere Taluk. The benefits derived from the reservoir storage are irrigation with gross irrigation potential of 162,818 hectares,hydro power generation of 39.2 MW, located on the right and left bank main canals, drinking water supply and industrial use.",
+			"district":	"Chikkamagaluru",
+			"bestSeason":"rainy(june-sept)",
+			"additionalInformation": "GG",
+			"latitude":		13.7011,
+			"longitude":	75.6367
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/dams/harangi_resorvoir.jpg"
+						],
+			"name":"Harangi Reservoir",
+			"description":"The Harangi Reservoir is located near Hudgur village, Somwarpet taluk in Kodagu district in the Indian state of Karnataka.The reservoir is formed by a masonry dam built across the river Harangi, a tributary of the Kaveri.The dam is located about 9 km away from the heart of Kushalnagar town.",
+			"district":"Kodagu",
+			"bestSeason":"rainy(june-sept)",
+			"additionalInformation": "GG",
+			"latitude":12.4917,
+			"longitude":75.9056
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/dams/krs.jpg"
+						],
+			"name":"Krishna Raja Sagara",
+			"description":" It is also popularly known as KRS, is the name of both a lake and the dam that creates it. It is located close to the settlement of Krishnarajasagara. The dam is across Kaveri River, in Mandya. There is an ornamental garden attached to the dam, called Brindavan Gardens.",
+			"district":"mysuru",
+			"bestSeason":"rainy(june-sept)",
+			"additionalInformation": "GG",
+			"latitude":12.4161,
+			"longitude": 76.5739
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/dams/linganmakki.jpg"
+						],
+			"name":"Linganamakki Dam",
+			"description":"The Linganamakki dam(Kannada: ಲಿಂಗನಮಕ್ಕಿ ಅಣೆಕಟ್ಟು) was constructed by the Karnataka State Government in 1964. Located in the Sagara taluk, the dam has a length of 2.4 km, stretching across the Sharavathi river. It is located about 6 km from Jog Falls.",
+			"district":"shivamoga",
+			"bestSeason":"rainy(june-sept)",
+			"additionalInformation": "GG",
+			"latitude":14.175587,
+			"longitude":74.84627
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/dams/supa_dam.jpg"
+						],
+			"name":"Supa Dam",
+			"description":"Supa Dam is built across Kalinadi (Kannada) or Kali river in state of Karnataka in India. The dam is situated in Joida taluk of Uttara Kannada district. The power house at the foot of the dam has two electricity generators of fifty megawatt each. The electricity generated is supplied to different parts of Karnataka. ",
+			"district":"Uttara Kannada",
+			"bestSeason":"rainy(june-sept)",
+			"additionalInformation": "GG",
+			"latitude":15.2765,
+			"longitude":74.5278
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/dams/tb_dam.jpg"
+						],
+			"name":"Tungabhadra Dam",
+			"description":"The dam is near the town of Hospet,It is a multipurpose dam serving irrigation, electricity generation, flood control, etc. This is a joint project of erstwhile Hyderabad state and erstwhile Madras Presidency when the construction was started; later it became a joint project of Karnataka and Andhra Pradesh after its completion in 1953.",
+			"district":"Bellary",
+			"bestSeason":"rainy(june-sept)",
+			"additionalInformation": "GG",
+			"latitude":15.2636,
+			"longitude":76.3338
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/dams/vani_vilas_sagar.jpg"
+						],
+			"name":"Vani Vilasa Sagara",
+			"description":"Vani Vilasa Sagara, popularly known as Mari Kanive (Kannada: ಮಾರಿ ಕಣಿವೆ) is a dam near Hiriyur Taluk, Chitradurga District. It is the oldest dam in the state.The dam was built by the Mysore Maharajas pre-independence across the river Vedavathi.",
+			"district":"Chitradurga",
+			"bestSeason":"rainy(june-sept)",
+			"additionalInformation": "GG",
+			"latitude":13.8882,
+			"longitude":76.4893
+		}
+	]	
+}
+		

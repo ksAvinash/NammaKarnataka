@@ -39,6 +39,11 @@
             android:icon="@drawable/beach"
             android:title="Beaches" />
 
+        <item
+            android:id="@+id/nav_myLocation"
+            android:icon="@drawable/my_location"
+            android:title="My Location" />
+
     </group>
 
     <group

@@ -33,4 +33,5 @@
         <item>Treking places</item>
         <item>Beaches</item>
     </string-array>
+    <string name="title_activity_my_location">MyLocation</string>
 </resources>

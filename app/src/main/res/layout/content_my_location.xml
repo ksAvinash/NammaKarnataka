@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/content_my_location"
+    android:background="#ffffff"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="smartAmigos.smartAmigos.com.nammakarnataka.MyLocation"
+    tools:showIn="@layout/activity_my_location">
+
+
+
+    <pttextview.widget.PTTextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/xt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:text="Districts"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        app:textWeight="bold"
+        app:typeface="pt_serif_bold_italic" />
+
+    <com.cjj.MaterialRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/xt"
+        app:wave_color="@color/material_green">
+
+        <ListView
+            android:id="@+id/districtList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/refresh" />
+
+    </com.cjj.MaterialRefreshLayout>
+
+</RelativeLayout>
+
+
+
+
+
+
+
+

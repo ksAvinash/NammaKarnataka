@@ -1,0 +1,118 @@
+{
+	"list":
+	[
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/nandi.jpg"],
+			"name":"Nandi Hills",
+			"description":"One of the most popular hill stations in Karnataka is the legendary Nandi Hills – a Hilltop with an ancient fortress. Besides being picturesque and serene, it is popular amongst bikers who enjoy the ride to the top of the hill and the thrill of the zig-zag roads while riding down. Trekkers often take up the challenge of hiking up to Nandi Hills.",
+			"district":"Doddaballapura",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.3702,
+			"longitude": 77.6835
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/coorg.jpg"],
+			"name":"Coorg",
+			"description":"Coorg is a scenic & soothing hill station in Karnataka. Besides the lush green slopes, nestled on the hills of Coorg, is the quaint Namdroling Tibetan settlement. Coorg is the perfect recipe to destress.Places of interest: Abbey falls, go rafting in the river Barapole and quad biking, visit Iruppu Falls",
+			"district":"Coorg",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":12.3375,
+			"longitude":75.8069
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/chikmagaluru.jpg"],
+			"name":"Chikmagalur",
+			"description":"Located at the foot of the Mullayanagiri Range, Chikmagalur is a full of hills and gorgeous views. Cycle on the winding roads, trek up to the summit, Camp under the stars. Chikmagalur will make you want to give up your day job and retire.Places of interest: Sringeri Mutt, Trek up Mullayanagiri mountain, Kudremukh Peak, Hanuman Gundi Falls",
+			"district":"Chikmagalur",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.3153,
+			"longitude":75.7754
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/agumbe.jpg"],
+			"name":"Agumbe",
+			"description":" Agumbe is the Cherrapunji of South India is 45 kms from Udupi. The picturesque hill station in Karnataka is famous for its adjoining rainforest & verdant slopes. Places of interest: Check out the various species of reptiles, birds and animals in the rainforest. Koodlu Theertha Falls, Jogigundi Falls",
+			"district":"shivamoga",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.5027,
+			"longitude":75.0903
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/biligiri.jpg"],
+			"name":"Biligiri Hills",
+			"description":"Biligiri Hills is 120 kms from Mysore. The forests at Biligiri are teeming with wildlife and are a nature lover’s delight.Places of interest: Visit the Dzogchen monastery, Himavad Gopalaswamy Betta, Biligiri Ranganath Hills",
+			"district":"Chamarajanagar",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":11.9956,
+			"longitude":77.1428
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/kemangundi.jpg"],
+			"name":"Kemmanagundi",
+			"description":"185 kms from Mangalore City, Kemmanagundi is a popular hill stations amongst the students down south. It forms a part of the Chikamagalur district & is an ideal summer retreat to beat the heat and stress.Places of interest: The Z point at Kemmanagundi is worth a visit, The Bhada Wildlife sanctuary has a very well maintained forest, Trek to the top.",
+			"district":"Chikamagalur",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.3153,
+			"longitude":75.7754
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/gangamoola.jpg"],
+			"name":"Gangamoola",
+			"description":"Gangamoola is a hidden picturesque hill station in Karnataka. Enveloped by dense forests and it is the origin point of the three rivers Tungabhadra and Netravathi.Places of interest: temple of Goddess Bhagavathi and a 1.8 m Varaha image inside a cave. Gangamoola cannot be visited during the monsoons.",
+			"district":"Chikamagalur",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.3153,
+			"longitude":75.7754
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/kundadri.jpg"],
+			"name":"Kundadri Hills",
+			"description":"Kundadri is a huge monolithic rock 3000 feet above sea level. The view from the top is a sight to behold. Kundadri is the perfect place to unwind and let go of all stress.",
+			"district":"shivamoga",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.5575,
+			"longitude":75.1703
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/yana.jpg"],
+			"name":"Yana",
+			"description":"25 Kms from Kumta, Yana is amongst the most mesmerizing hill stations in Karnataka. Surrounded by lush green forests and slopes, Yana is best known for its caves and rock formations. It is a treat for nature lovers and hiking enthusiasts.",
+			"district":"Uttara Kannada",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":14.5897,
+			"longitude":74.56625
+		},
+	
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/kodachadri.jpg"],
+			"name":"Kodachadri",
+			"description":"Kodachadri is wonderful for trekkers. The scenery is breathtaking and the climb will give you an adrenaline rush. Embrace nature at its best in the serene, less crowded hills of Kodachadri.",
+			"district":"shivamoga",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":13.8623,
+			"longitude":74.8752
+		},
+		{
+			"image":["http://nammakarnataka.net23.net/hillstations/gopalswamy.jpg"],
+			"name":"Gopalaswamy Betta",
+			"description":"Himavad Gopalaswamy Betta, is a hill located in the Chamarajanagar district.It is also the highest peak in the Bandipur National Park. It lies in the core area of the Bandipur National Park and is frequented by wild life including elephants. Dense fog predominates and covers the hills round the year and thus gets the prefix Himavadand the temple of Venugopalaswamy (Lord Krishna) gives the full name of Himavad Gopalaswamy Betta.",
+			"district":"Chamarajanagar",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":12.97,
+			"longitude":77.56
+		}
+	
+
+	]
+}

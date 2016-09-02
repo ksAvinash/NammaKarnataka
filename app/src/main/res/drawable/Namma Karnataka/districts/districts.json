@@ -1,0 +1,61 @@
+{
+	"list":
+	[
+		{
+			"name":"Bellary",
+			"places":
+					[
+						{
+							"image":[
+										"http://nammakarnataka.net23.net/temples/virupaksha.jpg"
+									],
+							"name":"Hampi",
+							"description":"Hampi is an ancient village in the south Indian state of Karnataka. It’s dotted with numerous ruined temple complexes from the Vijayanagara Empire. On the south bank of the River Tungabhadra is the 7th-century Hindu Virupaksha Temple, near the revived Hampi Bazaar. A carved stone chariot stands in front of the huge Vittala Temple site. Southeast of Hampi, Daroji Bear Sanctuary is home to the Indian sloth bear.",	
+							"bestSeason":"any time",
+							"additionalInformation": "GG",
+							"latitude":15.335162,
+							"longitude":76.458763
+						},
+						{
+							"image":[
+										"http://nammakarnataka.net23.net/dams/tb_dam.jpg"
+									],
+							"name":"Tungabhadra Dam",
+							"description":"The Tungabhadra Dam is constructed across the Tungabhadra River, a tributary of the Krishna River. The dam is near the town of Hospet in Karnataka. It is a multipurpose dam serving irrigation, electricity generation, flood control, etc",
+							"bestSeason":"any time",
+							"additionalInformation": "GG",
+							"latitude":15.335162,
+							"longitude":76.458763
+						}
+					]
+		},
+		{
+			"name":"Bangalore",
+			"places":
+					[
+						{
+							"image":[
+										"http://nammakarnataka.net23.net/temples/krs.jpg"
+									],
+							"name":"Lal Bagh",
+							"description":"Lalbagh or Lalbagh Botanical Gardens, meaning The Red Garden in English, is a well known botanical garden in southern Bengaluru, India",
+							"bestSeason":"any time",
+							"additionalInformation": "GG",
+							"latitude":15.335162,
+							"longitude":76.458763
+						},	
+						{
+							"image":[
+										"http://nammakarnataka.net23.net/temples/vani_vilas_sagar.jpg"
+									],
+							"name":"Vidhana Soudha",
+							"description":"The Vidhana Soudha located in Bengaluru, is the seat of the state legislature of Karnataka. It is an imposing building, constructed in a style sometimes described as Mysore Neo-Dravidian, and incorporates elements of Indo-Saracenic and Dravidian styles. The construction was completed in 1956.",
+							"bestSeason":"any time",
+							"additionalInformation": "GG",
+							"latitude":15.335162,
+							"longitude":76.458763
+						}
+					]
+		}
+	]
+}

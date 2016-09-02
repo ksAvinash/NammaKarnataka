@@ -131,8 +131,8 @@ public class hillstationsFragment extends Fragment {
                         imagesArray[j] = images.getString(j);
                     }
                     hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
-                    displayList();
                 }
+                displayList();
             } catch (JSONException e) {
                 e.printStackTrace();
             }

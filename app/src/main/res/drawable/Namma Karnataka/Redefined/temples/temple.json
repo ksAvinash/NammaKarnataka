@@ -1,0 +1,124 @@
+{
+	"list":
+	[
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/virupaksha.jpg",
+							""
+							],
+			"name":"Virupaksha Temple",
+			"description":"Virupaksha Temple known as the Pampavathi temple, it is an ancient temple situated in the Hampi Bazaar. It predates the founding of the Vijayanagara empire. The temple has a 160-foot (49 m) high tower at its entrance. Apart from Shiva, the temple complex also contains shrines of the erotica statues Bhuvaneshwari and Pampa.",
+			"district":"Bellary dist",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":15.335162,
+			"longitude":76.458763
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/Dharmastala.jpg",
+							""
+							],
+			"name":"Dharmasthala Manjunatha",
+			"description":"Dharmasthala is an Indian temple town on the banks of the Nethravathi River in the Belthangadi taluk of the Dakshina Kannada district in Karnataka. The town is known for its Dharmasthala Temple which houses the shrine of Shiva, Manjunatha, Ammanavaru, Chandranath and the Dharma Daivas namely Kalarahu, Kalarkayi, Kumaraswamy and Kanyakumari. Lakshadeepa, the festival of lights, is the annual festival of Dharmasthala in November–December.On an average the flow of pilgrims is about 10,000 people a day.",
+			"district":"Dakshina Kannada",
+			"bestSeason":"any time",
+			"additionalInformation": "GG",
+			"latitude":12.949341,
+			"longitude":75.379110
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/sringeri.jpg",
+							""
+							],
+			"name":"Sringeri",
+			"description":"It is the site of the first maṭha (Sringeri Sharada Peeta) established by Adi Shankara,Hindu theologian and exponent of the Advaita Vedanta philosophy, in the 8th century. It is located on the banks of the river Tungā and also a historical Temple (1200 years).",
+			"district":"chikmagaluru dist",
+			"bestSeason":"",
+			"additionalInformation": "",
+			"latitude":13.42,
+			"longitude":75.25
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/Gokarnatheshwara.jpg",
+							""
+							],
+			"name":"Gokarnanatheshwara",
+			"description":"It is known as Kudroli Sri Gokarnanatha Kshetra, is in the Kudroli area of Mangalore in Karnataka, India. It was consecrated by Narayana Guru. It is dedicated to Gokarnanatha, a form of Lord Shiva. ",
+			"district":"Mangalore dist",
+			"bestSeason":"",
+			"additionalInformation": "",
+			"latitude":2.8760,
+			"longitude":74.8314
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/kukke.jpg",
+							""
+							],
+			"name":"Kukke Subramanya",
+			"description":"Here Kartikeya is worshipped as Subramanya, lord of all serpents. The epics relate that the divine serpent Vasuki and other serpents found refuge under Subramanya when threatened by the Garuda.",
+			"district":"Dakshina Kannada",
+			"bestSeason":"",
+			"additionalInformation": "",
+			"latitude":12.66,
+			"longitude":75.61
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/sigandooru.jpg",
+							""
+							],
+			"name":"Sigandooru Chowdeshwari",
+			"description":"sigandooru was cut off from Sagar once reservoir on Sharavathi River was constructed. 2 barges, which carry transport vehicles, tourists, pilgrims and local people provide connectivity across the water.",
+			"district":"shivamogga dist",
+			"bestSeason":"",
+			"additionalInformation": "",
+			"latitude":14.07611,
+			"longitude":74.87222
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/pattadakal.jpg",
+							""
+							],
+			"name":"Pattadakal",
+			"description":"Pattadakal is an UNESCO inscribed World Heritage site. It is located on the left bank of the Malaprabha River in Bagalkot district. It is 22 km from Badami, and about 10 km from Aihole, both of which are well known for Chalukya monuments. The Pre-Chalukya historical and Archaeological site Bachinagudda is also near Pattadakal.",
+			"district":"Bagalkot dist",
+			"bestSeason":"",
+			"additionalInformation": "",
+			"latitude":15.9484,
+			"longitude":75.8159
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/aihole.jpg",
+							""
+							],
+			"name":"Aihole",
+			"description":"Aihole is a village having a historic temple complex in the Bagalkot district of Karnataka. It is known for Chalukyan architecture, with about 125 stone temples dating from 5th century , and is a popular tourist spot in north Karnataka. It lies to the east of Pattadakal, along the Malaprabha River, while Badami is to the west of both. With its collection of architectural structures, Aihoḷe temple complex is on the pending list of UNESCO World heritage sites.",
+			"district":"Bagalkot dist",
+			"bestSeason":"",
+			"additionalInformation": "",
+			"latitude":16.0198, 
+			"longitude":75.8810
+		},
+		{
+			"image":[
+							"http://nammakarnataka.net23.net/temples/KudalaSangama.jpg",
+							""
+							],
+			"name":"kudalasangama",
+			"description":"It is an important center of pilgrimage for people of the Lingayat faith. It is located about 15 km  from the Almatti Dam in Bagalkot district. The Krishna and Malaprabha River rivers merge here and flow east towards Srisaila (another pilgrim center) Andhra Pradesh. The Aikya Mantapa or the holy Samādhi of Basavanna, the founder of the Lingayat faith along with Linga, which is believed to be self-born (Swayambhu), is here.",
+			"district":	"Bagalkot dist",
+			"bestSeason":"",
+			"additionalInformation": "",
+			"latitude":16.2030,
+			"longitude":76.0599
+		}
+
+
+	]
+}

@@ -257,6 +257,12 @@ public class MainActivity extends AppCompatActivity
                 intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
+
+
+            case R.id.nav_myLocation:
+                intent = new Intent(MainActivity.this,MyLocation.class);
+                startActivity(intent);
+                break;
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
