@@ -40,7 +40,13 @@ public class feedbacks extends AppCompatActivity {
                 .setPositive("Give us 5", new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(MaterialDialog dialog, DialogAction which) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/")));
+                        final String appPackageName = getPackageName();
+                        try {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                        }
+
                     }
                 })
                 .setNegative("Not now", new MaterialDialog.SingleButtonCallback() {
