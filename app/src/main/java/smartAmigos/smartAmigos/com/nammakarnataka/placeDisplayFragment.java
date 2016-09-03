@@ -158,22 +158,6 @@ public class placeDisplayFragment extends Fragment {
 
 
 //        //code for multiple images loading starts
-//        HashMap<Integer,String> url_maps = new HashMap<>();
-//
-//        try {
-//            JSONArray imagesArray = child.getJSONArray("image");
-//
-//            for (int i=0;i<imagesArray.length();i++){
-//                url_maps.put(i,imagesArray.getString(i));
-//
-//
-//
-//            }
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
 
 
         TextSliderView textSliderView;
@@ -200,7 +184,7 @@ public class placeDisplayFragment extends Fragment {
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.RotateDown);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(4000);
+        mDemoSlider.setDuration(6000);
 
         //Code for multiple images loading ends
 

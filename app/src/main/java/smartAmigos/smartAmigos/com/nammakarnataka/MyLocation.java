@@ -1,6 +1,7 @@
 package smartAmigos.smartAmigos.com.nammakarnataka;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
@@ -61,7 +62,9 @@ public class MyLocation extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              finish();
+                Intent intent = new Intent(MyLocation.this,MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
 
