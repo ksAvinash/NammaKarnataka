@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,16 +45,17 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class placeDisplayFragment extends Fragment {
     JSONObject child;
-    private TextView place_textView, description_textView, location_textView,season_textView,additionalInformation;
-    private Button gmapButton,submit_comment;
-    public String category,comment,user_name,place_name;
+    private TextView place_textView, description_textView, location_textView, season_textView, additionalInformation;
+    private Button gmapButton, submit_comment;
+    public String category, comment, user_name, place_name;
     public EditText comment_input;
-    private double latitude,longitude;
+    private double latitude, longitude;
     private LinearLayout comment_layout;
+    private CardView comment_CardView;
 
     @SuppressLint("ValidFragment")
     public placeDisplayFragment(JSONObject child, String category) {
-        this.child= child;
+        this.child = child;
         this.category = category;
     }
 
@@ -74,17 +76,17 @@ public class placeDisplayFragment extends Fragment {
 
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
 
-        comment_input = (EditText)view.findViewById(R.id.comment_input);
-        comment_layout = (LinearLayout)view.findViewById(R.id.comment_layout);
-        
-        gmapButton = (Button)view.findViewById(R.id.gmapButton);
-        submit_comment = (Button)view.findViewById(R.id.submit_comment);
+        comment_input = (EditText) view.findViewById(R.id.comment_input);
+        comment_layout = (LinearLayout) view.findViewById(R.id.comment_layout);
+        comment_CardView = (CardView) view.findViewById(R.id.comment_CardView);
+        gmapButton = (Button) view.findViewById(R.id.gmapButton);
+        submit_comment = (Button) view.findViewById(R.id.submit_comment);
         submit_comment.setBackgroundColor(Color.TRANSPARENT);
 
         try {
             place_textView.setText(child.getString("name"));
             description_textView.setText(child.getString("description"));
-            location_textView.setText(child.getString("district")+"  ( "+String.valueOf(child.getDouble("latitude"))+" , "+String.valueOf(child.getDouble("longitude"))+" )");
+            location_textView.setText(child.getString("district") + "  ( " + String.valueOf(child.getDouble("latitude")) + " , " + String.valueOf(child.getDouble("longitude")) + " )");
             season_textView.setText(child.getString("bestSeason"));
             additionalInformation.setText(child.getString("additionalInformation"));
         } catch (Exception e) {
@@ -95,45 +97,48 @@ public class placeDisplayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    if(TextUtils.isEmpty(comment_input.getText().toString())){
+                    if (TextUtils.isEmpty(comment_input.getText().toString())) {
                         Toast.makeText(getActivity(), "Please enter a comment", Toast.LENGTH_LONG).show();
                         return;
                     }
                     comment = comment_input.getText().toString();
-                    user_name = sharedPreferences.getString("userName",null);
+                    user_name = sharedPreferences.getString("userName", null);
                     place_name = child.getString("name");
-                    new Send().execute(user_name,comment,category,place_name);
+                    new Send().execute(user_name, comment, category, place_name);
                     comment_layout.removeAllViews();
-                    new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Category="+category+"&&Place="+child.getString("name")));
-                }catch (Exception e){
+                    new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Place=" + child.getString("name")));
+                } catch (Exception e) {
 
                 }
             }
         });
 
-        gmapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    latitude = child.getDouble("latitude");
-                    longitude = child.getDouble("longitude");
-                    startActivity(
-                            new Intent(
-                                    android.content.Intent.ACTION_VIEW,
-                                    Uri.parse("geo:"+latitude+","+longitude+"?q=("+child.getString("name")+")@"+latitude+","+longitude)));
-                }catch (Exception e){
+        if (category.equals("TEMPLES")) {
+            comment_CardView.setVisibility(View.GONE);
+        } else {
+            gmapButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        latitude = child.getDouble("latitude");
+                        longitude = child.getDouble("longitude");
+                        startActivity(
+                                new Intent(
+                                        android.content.Intent.ACTION_VIEW,
+                                        Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + child.getString("name") + ")@" + latitude + "," + longitude)));
+                    } catch (Exception e) {
 
+                    }
                 }
+            });
+
+
+            try {
+                new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Category=" + category + "&&Place=" + child.getString("name")));
+            } catch (Exception e) {
+                Log.e("Fetch", "Rod at fetch");
             }
-        });
-
-
-        try {
-            new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Category="+category+"&&Place="+child.getString("name")));
-        }catch (Exception e){
-            Log.e("Fetch","Rod at fetch");
         }
-
         return view;
     }
 
@@ -200,10 +205,11 @@ public class placeDisplayFragment extends Fragment {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 String response;
                 while ((response = reader.readLine()) != null) {
-                    builder.append(response+"\n");
+                    builder.append(response + "\n");
 //                    Log.i("Response",response.toString());
                     result = builder.toString();
-                } in.close();
+                }
+                in.close();
             } catch (Exception e) {
 
             }
@@ -229,18 +235,18 @@ public class placeDisplayFragment extends Fragment {
                     nameTextView.setTextColor(Color.parseColor("#3949ab"));
                     nameTextView.setBackgroundColor(Color.parseColor("#DFDFDF"));
                     nameTextView.setText(Name);
-                    nameTextView.setPadding(2,2,2,2);
+                    nameTextView.setPadding(2, 2, 2, 2);
                     comment_layout.addView(nameTextView);
 
                     TextView commentTextView = new TextView(getContext());
                     commentTextView.setTextColor(Color.BLACK);
                     commentTextView.setBackgroundColor(Color.parseColor("#DFDFDF"));
                     commentTextView.setText(Comment);
-                    commentTextView.setPadding(10,2,2,2);
+                    commentTextView.setPadding(10, 2, 2, 2);
                     comment_layout.addView(commentTextView);
 
                 }
-            }catch (Exception e){
+            } catch (Exception e) {
 
             }
         }

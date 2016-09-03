@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -34,7 +33,7 @@ public class feedbacks extends AppCompatActivity {
         final MaterialStyledDialog dialogHeader_3 = new MaterialStyledDialog(context)
                 // .setHeaderDrawable(R.drawable.header)
                 .setHeaderColor(R.color.colorBlue)
-                .setIcon(R.drawable.icon2)
+                .setIcon(R.drawable.feedback_icon)
                 .withDialogAnimation(true)
                 .setTitle("Awesome!")
                 .setDescription("Glad to see you Like Namma Karnataka!\nKeep Supporting Us!")
@@ -55,7 +54,7 @@ public class feedbacks extends AppCompatActivity {
         final MaterialStyledDialog dialogHeader_4 = new MaterialStyledDialog(context)
                 // .setHeaderDrawable(R.drawable.header)
                 .setHeaderColor(R.color.colorBlue)
-                .setIcon(R.drawable.icon2)
+                .setIcon(R.drawable.feedback_icon)
                 .withDialogAnimation(true)
                 //  .setTitle("Your Feedback")
                 .setDescription("What Can we Improve?Your feedback is always welcome.")
