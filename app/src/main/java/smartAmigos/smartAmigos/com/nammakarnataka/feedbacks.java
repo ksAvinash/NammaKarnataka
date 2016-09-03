@@ -17,18 +17,19 @@ import com.github.javiersantos.materialstyleddialogs.MaterialStyledDialog;
 public class feedbacks extends AppCompatActivity {
 
     private Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        android.support.v7.app.ActionBar AB=getSupportActionBar();
+        android.support.v7.app.ActionBar AB = getSupportActionBar();
         AB.hide();
         //requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_feedbacks);
-        this.context=this;
-        LayoutInflater inflater = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View customView = inflater.inflate(R.layout.activity_feedbacks,null);
+        this.context = this;
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View customView = inflater.inflate(R.layout.activity_feedbacks, null);
 
         final MaterialStyledDialog dialogHeader_3 = new MaterialStyledDialog(context)
                 // .setHeaderDrawable(R.drawable.header)
@@ -42,9 +43,9 @@ public class feedbacks extends AppCompatActivity {
                     public void onClick(MaterialDialog dialog, DialogAction which) {
                         final String appPackageName = getPackageName();
                         try {
-                            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("market://details?id="+appPackageName)));
-                        }catch (android.content.ActivityNotFoundException anfe){
-                            startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id="+appPackageName)));
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                        } catch (android.content.ActivityNotFoundException anfe) {
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
                         }
                     }
                 })

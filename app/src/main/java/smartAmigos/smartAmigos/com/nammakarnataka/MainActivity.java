@@ -99,9 +99,10 @@ public class MainActivity extends AppCompatActivity
 
         mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
         final HashMap<String, Integer> file_maps = new HashMap<>();
+        //Positively do not change any images
         file_maps.put("Hampi", R.drawable.hampi);
-        file_maps.put("Bijapur", R.drawable.bijapur);
-        file_maps.put("Bangal Fort", R.drawable.bangalorefort);
+        file_maps.put("Jog Falls", R.drawable.jogfallss);
+        file_maps.put("Mysore Palace", R.drawable.mysuru_palace);
         file_maps.put("Wonder la", R.drawable.wonderla);
 
 
