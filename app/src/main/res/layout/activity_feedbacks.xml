@@ -30,7 +30,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Give Us a 5"
+            android:text="Give US a 5"
             android:textAllCaps="true"
             android:textColor="#e74c3c"
             android:gravity="center" />
