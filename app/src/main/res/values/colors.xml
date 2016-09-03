@@ -5,7 +5,7 @@
     <color name="colorAccent">#aed581</color>
 
     <!--Positively do not change anything that follows - Charan-->
-    <color name="black_overlay">#66000000</color>
+    <!--color name="black_overlay">#66000000</color-->
     <color name="dark_grey">#DFDFDF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="orangeText">#FF6765</color>

@@ -132,6 +132,8 @@ public class addNewPlace extends Fragment {
         return view;
     }
 
+
+
     private class PostDataTask extends AsyncTask<String, Void, Boolean> {
 
         @Override

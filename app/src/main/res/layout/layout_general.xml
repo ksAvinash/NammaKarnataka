@@ -23,8 +23,7 @@
             <com.daimajia.slider.library.SliderLayout
                 android:id="@+id/layout_slider"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@color/black_overlay" />
+                android:layout_height="200dp" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -281,12 +280,12 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/comment_CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="10dp"
-                android:id="@+id/comment_CardView"
                 android:elevation="4dp"
                 app:cardBackgroundColor="@color/colorWhite">
 
