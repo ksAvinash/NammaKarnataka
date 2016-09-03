@@ -93,7 +93,7 @@ public class distDisplayFragment extends Fragment {
                 JSONObject child;
                 try {
                     child = par.getJSONObject(position);
-                    Fragment fragment = new placeDisplayFragment(child,"");
+                    Fragment fragment = new placeDisplayFragment(child,"DISTRICT");
                     FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.content_my_location, fragment);
                     ft.addToBackStack(null);

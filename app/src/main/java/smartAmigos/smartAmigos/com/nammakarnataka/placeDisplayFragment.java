@@ -106,7 +106,8 @@ public class placeDisplayFragment extends Fragment {
                     place_name = child.getString("name");
                     new Send().execute(user_name, comment, category, place_name);
                     comment_layout.removeAllViews();
-                    new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Place=" + child.getString("name")));
+                    place_name = place_name.replaceAll(" ","\\%20");
+                    new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Place=" + place_name));
                 } catch (Exception e) {
 
                 }
@@ -134,7 +135,9 @@ public class placeDisplayFragment extends Fragment {
 
 
             try {
-                new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Category=" + category + "&&Place=" + child.getString("name")));
+                place_name = child.getString("name");
+                place_name = place_name.replaceAll(" ", "\\%20");
+                new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Place=" + place_name));
             } catch (Exception e) {
                 Log.e("Fetch", "Rod at fetch");
             }
@@ -198,6 +201,7 @@ public class placeDisplayFragment extends Fragment {
             String result = "";
             try {
                 URL url = params[0];
+                Log.i("URL :",url.toString());
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setConnectTimeout(20 * 1000);
                 urlConnection.setReadTimeout(20 * 1000);
