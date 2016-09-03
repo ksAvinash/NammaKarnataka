@@ -181,8 +181,9 @@ public class templesFragment extends Fragment {
                         imagesArray[j] = images.getString(j);
                     }
                     temples_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
-                    displayList();
+
                 }
+                displayList(items);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -269,9 +270,10 @@ public class templesFragment extends Fragment {
                         imagesArray[j] = images.getString(j);
                     }
                     temples_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
-                    materialRefreshLayout.finishRefresh();
-                    displayList();
+
                 }
+                materialRefreshLayout.finishRefresh();
+                displayList(items);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -282,44 +284,16 @@ public class templesFragment extends Fragment {
 
 
 
-    private void displayList() {
+    private void displayList(final JSONArray par) {
         ArrayAdapter<generic_adapter> adapter = new myTempleListAdapterClass();
 
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String ret = null;
-                BufferedReader reader = null;
-                File file = new File("/data/data/smartAmigos.com.nammakarnataka/temple.json");
-                if (file.exists()) {
-
 
                     try {
-                        FileInputStream fis = new FileInputStream(file);
-                        reader = new BufferedReader(new InputStreamReader(fis));
-                        StringBuilder builder = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            builder.append(line);
-                        }
-                        ret = builder.toString();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        if (reader != null)
-                            try {
-                                reader.close();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                    }
-
-                    try {
-                        JSONObject root = new JSONObject(ret);
-                        JSONArray eventJson = root.getJSONArray("list");
-                        JSONObject child = eventJson.getJSONObject(position);
+                        JSONObject child = par.getJSONObject(position);
                         Fragment fragment = new placeDisplayFragment(child,"TEMPLES");
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_main, fragment);
@@ -328,10 +302,6 @@ public class templesFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
-
-                }
             }
         });
     }
@@ -339,7 +309,7 @@ public class templesFragment extends Fragment {
     public class myTempleListAdapterClass extends ArrayAdapter<generic_adapter> {
 
         myTempleListAdapterClass() {
-            super(context, R.layout.temples_item, temples_adapterList);
+            super(context, R.layout.hillstations_item, temples_adapterList);
         }
 
 
@@ -348,20 +318,20 @@ public class templesFragment extends Fragment {
             View itemView = convertView;
             if (itemView == null) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
-                itemView = inflater.inflate(R.layout.temples_item, parent, false);
+                itemView = inflater.inflate(R.layout.hillstations_item, parent, false);
 
             }
             generic_adapter current = temples_adapterList.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage()[0]);
-            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_templeImage);
+            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_hillstationsImage);
             draweeView.setImageURI(uri);
             //Code ends here.
-            TextView t_name = (TextView) itemView.findViewById(R.id.item_templeTitle);
+            TextView t_name = (TextView) itemView.findViewById(R.id.item_hillstationsTitle);
             t_name.setText(current.getTitle());
 
-            TextView t_dist = (TextView) itemView.findViewById(R.id.item_templeDistrict);
+            TextView t_dist = (TextView) itemView.findViewById(R.id.item_hillstationsDistrict);
             t_dist.setText(current.getDistrict());
 
             return itemView;
