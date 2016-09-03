@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity
         final HashMap<String, Integer> file_maps = new HashMap<>();
         file_maps.put("Hampi", R.drawable.hampi);
         file_maps.put("Bijapur", R.drawable.bijapur);
-        file_maps.put("Bangaloree Fort", R.drawable.bangalorefort);
+        file_maps.put("Bangaloreee Fort", R.drawable.bangalorefort);
         file_maps.put("Wonder la", R.drawable.wonderla);
 
 
