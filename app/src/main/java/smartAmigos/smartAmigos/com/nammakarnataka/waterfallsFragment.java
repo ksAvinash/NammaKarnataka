@@ -216,7 +216,7 @@ public class waterfallsFragment extends Fragment {
     public class myWaterfallsListAdapterClass extends ArrayAdapter<generic_adapter> {
 
         myWaterfallsListAdapterClass() {
-            super(context, R.layout.waterfalls_item, waterfalls_adapterList);
+            super(context, R.layout.hillstations_item, waterfalls_adapterList);
         }
 
 
@@ -225,20 +225,20 @@ public class waterfallsFragment extends Fragment {
             View itemView = convertView;
             if (itemView == null) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
-                itemView = inflater.inflate(R.layout.waterfalls_item, parent, false);
+                itemView = inflater.inflate(R.layout.hillstations_item, parent, false);
 
             }
             generic_adapter current = waterfalls_adapterList.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage()[0]);
-            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_waterfallsImage);
+            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_hillstationsImage);
             draweeView.setImageURI(uri);
             //Code ends here.
-            TextView t_name = (TextView) itemView.findViewById(R.id.item_waterfallsTitle);
+            TextView t_name = (TextView) itemView.findViewById(R.id.item_hillstationsTitle);
             t_name.setText(current.getTitle());
 
-            TextView t_dist = (TextView) itemView.findViewById(R.id.item_waterfallsDistrict);
+            TextView t_dist = (TextView) itemView.findViewById(R.id.item_hillstationsDistrict);
             t_dist.setText(current.getDistrict());
 
             return itemView;
