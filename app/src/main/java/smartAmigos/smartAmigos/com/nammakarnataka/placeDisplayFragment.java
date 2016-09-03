@@ -18,9 +18,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -30,6 +37,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -39,6 +47,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -52,6 +61,7 @@ public class placeDisplayFragment extends Fragment {
     private double latitude, longitude;
     private LinearLayout comment_layout;
     private CardView comment_CardView;
+    SliderLayout mDemoSlider;
 
     @SuppressLint("ValidFragment")
     public placeDisplayFragment(JSONObject child, String category) {
@@ -73,8 +83,11 @@ public class placeDisplayFragment extends Fragment {
         location_textView = (TextView) view.findViewById(R.id.location_textView);
         season_textView = (TextView) view.findViewById(R.id.season_textView);
         additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
+        mDemoSlider = (SliderLayout)view.findViewById(R.id.layout_slider_images);
+
 
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
+
 
         comment_input = (EditText) view.findViewById(R.id.comment_input);
         comment_layout = (LinearLayout) view.findViewById(R.id.comment_layout);
@@ -141,6 +154,40 @@ public class placeDisplayFragment extends Fragment {
                 Log.e("Fetch", "Rod at fetch");
             }
         }
+
+
+
+        //code for multiple images loading starts
+
+//        Fresco.initialize(getActivity());
+//        try {
+//            JSONArray images = child.getJSONArray("image");
+//            for (int i=0;i<images.length();i++){
+//
+//                TextSliderView textSliderView = new TextSliderView(getActivity().getApplicationContext());
+//                // initialize a SliderLayout
+//                textSliderView
+//                        .image()
+//                        .setScaleType(BaseSliderView.ScaleType.Fit);
+//
+//                mDemoSlider.addSlider(textSliderView);
+//            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//
+//        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+//        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+//        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+//        mDemoSlider.setDuration(4000);
+
+        //Code for multiple images loading ends
+
+
+
+
+
+
         return view;
     }
 
