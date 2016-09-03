@@ -27,7 +27,6 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.facebook.drawee.backends.pipeline.Fresco;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -47,7 +46,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -63,6 +61,8 @@ public class placeDisplayFragment extends Fragment {
     private CardView comment_CardView;
     SliderLayout mDemoSlider;
 
+
+    JSONArray images;
     @SuppressLint("ValidFragment")
     public placeDisplayFragment(JSONObject child, String category) {
         this.child = child;
@@ -83,7 +83,7 @@ public class placeDisplayFragment extends Fragment {
         location_textView = (TextView) view.findViewById(R.id.location_textView);
         season_textView = (TextView) view.findViewById(R.id.season_textView);
         additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
-        mDemoSlider = (SliderLayout)view.findViewById(R.id.layout_slider_images);
+        mDemoSlider = (SliderLayout)view.findViewById(R.id.layout_images);
 
 
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
@@ -157,29 +157,50 @@ public class placeDisplayFragment extends Fragment {
 
 
 
-        //code for multiple images loading starts
-
-//        Fresco.initialize(getActivity());
+//        //code for multiple images loading starts
+//        HashMap<Integer,String> url_maps = new HashMap<>();
+//
 //        try {
-//            JSONArray images = child.getJSONArray("image");
-//            for (int i=0;i<images.length();i++){
+//            JSONArray imagesArray = child.getJSONArray("image");
 //
-//                TextSliderView textSliderView = new TextSliderView(getActivity().getApplicationContext());
-//                // initialize a SliderLayout
-//                textSliderView
-//                        .image()
-//                        .setScaleType(BaseSliderView.ScaleType.Fit);
+//            for (int i=0;i<imagesArray.length();i++){
+//                url_maps.put(i,imagesArray.getString(i));
 //
-//                mDemoSlider.addSlider(textSliderView);
+//
+//
 //            }
+//
 //        } catch (JSONException e) {
 //            e.printStackTrace();
 //        }
-//
-//        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
-//        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-//        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-//        mDemoSlider.setDuration(4000);
+
+
+
+        TextSliderView textSliderView;
+
+        String [] imagesArray = new String[25];
+        try {
+            images = child.getJSONArray("image");
+            for (int i=0;i<images.length();i++){
+                imagesArray[i] = images.getString(i);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        for(int i=0;i<images.length();i++){
+            textSliderView = new TextSliderView(getContext());
+            textSliderView
+                    .image(imagesArray[i])
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+            mDemoSlider.addSlider(textSliderView);
+        }
+
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.RotateDown);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setDuration(4000);
 
         //Code for multiple images loading ends
 
