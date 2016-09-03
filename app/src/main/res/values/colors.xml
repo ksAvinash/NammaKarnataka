@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#616161</color>
     <color name="colorAccent">#795548</color>
 
+    <!--Positively do not change anything that follows - Charan-->
     <color name="black_overlay">#66000000</color>
     <color name="dark_grey">#DFDFDF</color>
     <color name="colorWhite">#FFFFFF</color>
