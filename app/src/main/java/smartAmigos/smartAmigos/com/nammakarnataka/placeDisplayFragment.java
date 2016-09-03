@@ -106,8 +106,24 @@ public class placeDisplayFragment extends Fragment {
                     place_name = child.getString("name");
                     new Send().execute(user_name, comment, category, place_name);
                     comment_layout.removeAllViews();
-                    place_name = place_name.replaceAll(" ","\\%20");
+                    place_name = place_name.replaceAll(" ", "\\%20");
                     new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Place=" + place_name));
+                } catch (Exception e) {
+
+                }
+            }
+        });
+
+        gmapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    latitude = child.getDouble("latitude");
+                    longitude = child.getDouble("longitude");
+                    startActivity(
+                            new Intent(
+                                    android.content.Intent.ACTION_VIEW,
+                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + child.getString("name") + ")@" + latitude + "," + longitude)));
                 } catch (Exception e) {
 
                 }
@@ -117,23 +133,6 @@ public class placeDisplayFragment extends Fragment {
         if (category.equals("TEMPLES")) {
             comment_CardView.setVisibility(View.GONE);
         } else {
-            gmapButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        latitude = child.getDouble("latitude");
-                        longitude = child.getDouble("longitude");
-                        startActivity(
-                                new Intent(
-                                        android.content.Intent.ACTION_VIEW,
-                                        Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + child.getString("name") + ")@" + latitude + "," + longitude)));
-                    } catch (Exception e) {
-
-                    }
-                }
-            });
-
-
             try {
                 place_name = child.getString("name");
                 place_name = place_name.replaceAll(" ", "\\%20");
@@ -201,7 +200,7 @@ public class placeDisplayFragment extends Fragment {
             String result = "";
             try {
                 URL url = params[0];
-                Log.i("URL :",url.toString());
+                Log.i("URL :", url.toString());
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setConnectTimeout(20 * 1000);
                 urlConnection.setReadTimeout(20 * 1000);
@@ -235,20 +234,29 @@ public class placeDisplayFragment extends Fragment {
                     JSONObject json = jArray.getJSONObject(i);
                     String Name = json.getString("Name");
                     String Comment = json.getString("Comment");
+
                     TextView nameTextView = new TextView(getContext());
                     nameTextView.setTextColor(Color.parseColor("#3949ab"));
-                    nameTextView.setBackgroundColor(Color.parseColor("#DFDFDF"));
+                    nameTextView.setBackgroundColor(Color.WHITE);
                     nameTextView.setText(Name);
                     nameTextView.setPadding(2, 2, 2, 2);
                     comment_layout.addView(nameTextView);
 
                     TextView commentTextView = new TextView(getContext());
+                    LinearLayout.LayoutParams commentlayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    commentlayoutParams.setMargins(35, 2, 2, 2);
+                    commentTextView.setLayoutParams(commentlayoutParams);
                     commentTextView.setTextColor(Color.BLACK);
-                    commentTextView.setBackgroundColor(Color.parseColor("#DFDFDF"));
+                    commentTextView.setBackgroundColor(Color.WHITE);
                     commentTextView.setText(Comment);
-                    commentTextView.setPadding(10, 2, 2, 2);
+//                    commentTextView.setPadding(10, 2, 2, 2);
                     comment_layout.addView(commentTextView);
 
+                    TextView blankTextView = new TextView(getContext());
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    layoutParams.setMargins(0, 5, 0, 0);
+                    blankTextView.setLayoutParams(layoutParams);
+                    comment_layout.addView(blankTextView);
                 }
             } catch (Exception e) {
 
