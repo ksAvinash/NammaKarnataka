@@ -78,10 +78,14 @@ public class templesFragment extends Fragment {
 
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
-                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
-            }
-            else
+                SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
+                localVersion = preferences.getInt("version", 0);
+                new TempleVersion().execute("http://nammakarnataka.net23.net/temples/temple_version.json");
+            } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
+            }
+        }else if (isNetworkConnected()) {
+            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
 
 
