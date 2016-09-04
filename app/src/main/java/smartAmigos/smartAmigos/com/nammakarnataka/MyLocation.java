@@ -1,8 +1,6 @@
 package smartAmigos.smartAmigos.com.nammakarnataka;
 
-import android.*;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
@@ -312,7 +310,6 @@ public class MyLocation extends AppCompatActivity {
             }
         });
     }
-
 
 
     public class myDistListAdapterClass extends ArrayAdapter<districts_adapter> {
