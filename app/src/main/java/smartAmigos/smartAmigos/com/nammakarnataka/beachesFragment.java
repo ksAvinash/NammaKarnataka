@@ -80,11 +80,16 @@ public class beachesFragment extends Fragment {
         Fresco.initialize(getActivity());
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
-                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
-            }
-            else
+                SharedPreferences preferences = getActivity().getSharedPreferences("beaches_version", Context.MODE_PRIVATE);
+                localVersion = preferences.getInt("version", 0);
+                new beachesVersion().execute("http://nammakarnataka.net23.net/beaches/beaches_version.json");
+            } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
+            }
+        }else if (isNetworkConnected()) {
+            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
+
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {

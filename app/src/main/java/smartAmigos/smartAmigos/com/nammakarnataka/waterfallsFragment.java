@@ -84,13 +84,19 @@ public class waterfallsFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
         Fresco.initialize(getActivity());
+
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
-                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
-            }
-            else
+                SharedPreferences preferences = getActivity().getSharedPreferences("waterfalls_version", Context.MODE_PRIVATE);
+                localVersion = preferences.getInt("version", 0);
+                new waterfallsVersion().execute("http://nammakarnataka.net23.net/waterfalls/waterfalls_version.json");
+            } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
+            }
+        }else if (isNetworkConnected()) {
+            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
+
 
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
