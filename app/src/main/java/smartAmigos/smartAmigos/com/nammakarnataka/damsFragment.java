@@ -3,6 +3,7 @@ package smartAmigos.smartAmigos.com.nammakarnataka;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -53,6 +54,7 @@ public class damsFragment extends Fragment {
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
     ListView list;
+    TextView t;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +62,10 @@ public class damsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_dams, container, false);
 
         context = getActivity().getApplicationContext();
+        t = (TextView) view.findViewById(R.id.q1);
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        t.setTypeface(myFont);
+
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
         list = (ListView) view.findViewById(R.id.damList);
 
