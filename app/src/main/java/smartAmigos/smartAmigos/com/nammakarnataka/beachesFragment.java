@@ -72,10 +72,12 @@ public class beachesFragment extends Fragment {
 
 
         Fresco.initialize(getActivity());
-        loadJsonFile();
-
-        if (isNetworkConnected()) {
-            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+        if(!loadJsonFile()){
+            if (isNetworkConnected()) {
+                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
         }
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -258,7 +260,7 @@ public class beachesFragment extends Fragment {
     }
 
 
-    private void loadJsonFile() {
+    private boolean loadJsonFile() {
         beaches_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
@@ -302,7 +304,9 @@ public class beachesFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            return true;
         }
+        return false;
     }
 
 

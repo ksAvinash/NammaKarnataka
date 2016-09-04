@@ -171,7 +171,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_news) {
+            Intent intent = new Intent(MainActivity.this,newsActivity.class);
+            startActivity(intent);
             return true;
         }
 
