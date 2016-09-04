@@ -2,14 +2,18 @@ package smartAmigos.smartAmigos.com.nammakarnataka;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +58,7 @@ public class hillstationsFragment extends Fragment {
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
     ListView list;
-TextView t;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -63,20 +67,20 @@ TextView t;
         view = inflater.inflate(R.layout.fragment_hillstations, container, false);
         context = getActivity().getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
-        t = (TextView) view.findViewById(R.id.r1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
-        t.setTypeface(myFont);
-
-
         list = (ListView) view.findViewById(R.id.hillstationsList);
-
-        Fresco.initialize(getActivity());
-        loadJsonFile();
-
-        if(isNetworkConnected()){
-            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
+
+        Fresco.initialize(getActivity());
+        if(!loadJsonFile()){
+            if (isNetworkConnected()) {
+                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
+        }
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
@@ -93,13 +97,29 @@ TextView t;
 
         });
 
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        getActivity().finish();
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
 
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         return view;
 
     }
 
-    private void loadJsonFile() {
+    private boolean loadJsonFile() {
         hillstations_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
@@ -142,7 +162,9 @@ TextView t;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            return true;
         }
+        return false;
     }
 
     private boolean isNetworkConnected() {

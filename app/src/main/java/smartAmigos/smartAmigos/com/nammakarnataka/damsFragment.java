@@ -2,14 +2,18 @@ package smartAmigos.smartAmigos.com.nammakarnataka;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Typeface;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,7 +58,6 @@ public class damsFragment extends Fragment {
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
     ListView list;
-    TextView t;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,19 +65,20 @@ public class damsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_dams, container, false);
 
         context = getActivity().getApplicationContext();
-        t = (TextView) view.findViewById(R.id.q1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
-        t.setTypeface(myFont);
-
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
         list = (ListView) view.findViewById(R.id.damList);
 
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
 
         Fresco.initialize(getActivity());
-        loadJsonFile();
-
-        if(isNetworkConnected()){
-            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+        if(!loadJsonFile()){
+            if (isNetworkConnected()) {
+                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
         }
 
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
@@ -93,13 +97,30 @@ public class damsFragment extends Fragment {
 
         });
 
+        view.setFocusableInTouchMode(true);
+        view.requestFocus();
+        view.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_BACK) {
+                        getActivity().finish();
+                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                        startActivity(intent);
+
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         return view;
     }
 
 
 
-    private void loadJsonFile() {
+    private boolean loadJsonFile() {
         dams_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
@@ -142,7 +163,9 @@ public class damsFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            return true;
         }
+        return false;
     }
 
 

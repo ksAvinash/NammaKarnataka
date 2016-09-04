@@ -2,12 +2,15 @@ package smartAmigos.smartAmigos.com.nammakarnataka;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -52,6 +55,9 @@ public class MyLocation extends AppCompatActivity {
         setContentView(R.layout.activity_my_location);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         context = getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout)findViewById(R.id.refresh);
@@ -61,13 +67,26 @@ public class MyLocation extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              finish();
+                finish();
+            }
+        });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
-        loadJsonFile();
-        if (isNetworkConnected()) {
-            Toast.makeText(this, "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+        if(!loadJsonFile()){
+            if (isNetworkConnected()) {
+                Toast.makeText(this, "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
         }
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -88,7 +107,7 @@ public class MyLocation extends AppCompatActivity {
     }
 
 
-    private void loadJsonFile() {
+    private boolean loadJsonFile() {
         dist_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
@@ -128,9 +147,9 @@ public class MyLocation extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-
+            return true;
         }
+        return false;
     }
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -291,7 +310,6 @@ public class MyLocation extends AppCompatActivity {
             }
         });
     }
-
 
 
     public class myDistListAdapterClass extends ArrayAdapter<districts_adapter> {

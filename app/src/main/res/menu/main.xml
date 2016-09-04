@@ -7,4 +7,9 @@
         android:title="@string/action_settings"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_news"
+        android:orderInCategory="100"
+        android:title="Place News"
+        app:showAsAction="never" />
 </menu>

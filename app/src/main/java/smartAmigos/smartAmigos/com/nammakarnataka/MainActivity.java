@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -99,9 +98,10 @@ public class MainActivity extends AppCompatActivity
 
         mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
         final HashMap<String, Integer> file_maps = new HashMap<>();
+        //Positively do not change any images
         file_maps.put("Hampi", R.drawable.hampi);
-        file_maps.put("Bijapur", R.drawable.bijapur);
-        file_maps.put("Bangal Fort", R.drawable.bangalorefort);
+        file_maps.put("Jog Falls", R.drawable.jogfallss);
+        file_maps.put("Mysore Palace", R.drawable.mysuru_palace);
         file_maps.put("Wonder la", R.drawable.wonderla);
 
 
@@ -171,7 +171,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_news) {
+            Intent intent = new Intent(MainActivity.this,newsActivity.class);
+            startActivity(intent);
             return true;
         }
 
@@ -228,10 +230,6 @@ public class MainActivity extends AppCompatActivity
 
 
             case R.id.new_place:
-//                intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com, charanshetty25595@gmail.com"));
-//                intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Place Request");
-//                intent.putExtra(Intent.EXTRA_TEXT, "Place Name : \n\n District : \n\nCategory : \n\nAny details of the place ?");
-//                startActivity(intent);
                 fragment = new addNewPlace();
                 ft = getSupportFragmentManager().beginTransaction();
                 ft.replace(R.id.content_main, fragment);
@@ -241,15 +239,8 @@ public class MainActivity extends AppCompatActivity
             case R.id.feedback:
                 intent = new Intent(MainActivity.this, feedbacks.class);
                 startActivity(intent);
-                //fragment = new feedback();
-               // ft = getSupportFragmentManager().beginTransaction();
-                //ft.replace(R.id.content_main, fragment);
-                //ft.commit();
+
                 break;
-               // intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com, charanshetty25595@gmail.com"));
-               // intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
-                //startActivity(intent);
-               // break;
 
 
             case R.id.nav_home:

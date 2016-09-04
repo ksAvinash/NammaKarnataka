@@ -18,9 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -30,6 +36,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
@@ -52,7 +59,10 @@ public class placeDisplayFragment extends Fragment {
     private double latitude, longitude;
     private LinearLayout comment_layout;
     private CardView comment_CardView;
+    SliderLayout mDemoSlider;
 
+
+    JSONArray images;
     @SuppressLint("ValidFragment")
     public placeDisplayFragment(JSONObject child, String category) {
         this.child = child;
@@ -73,8 +83,11 @@ public class placeDisplayFragment extends Fragment {
         location_textView = (TextView) view.findViewById(R.id.location_textView);
         season_textView = (TextView) view.findViewById(R.id.season_textView);
         additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
+        mDemoSlider = (SliderLayout)view.findViewById(R.id.layout_images);
+
 
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
+
 
         comment_input = (EditText) view.findViewById(R.id.comment_input);
         comment_layout = (LinearLayout) view.findViewById(R.id.comment_layout);
@@ -106,8 +119,24 @@ public class placeDisplayFragment extends Fragment {
                     place_name = child.getString("name");
                     new Send().execute(user_name, comment, category, place_name);
                     comment_layout.removeAllViews();
-                    place_name = place_name.replaceAll(" ","\\%20");
+                    place_name = place_name.replaceAll(" ", "\\%20");
                     new GetDataTask().execute(new URL("http://charan.net23.net/modifiedGetData.php?Place=" + place_name));
+                } catch (Exception e) {
+
+                }
+            }
+        });
+
+        gmapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    latitude = child.getDouble("latitude");
+                    longitude = child.getDouble("longitude");
+                    startActivity(
+                            new Intent(
+                                    android.content.Intent.ACTION_VIEW,
+                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + child.getString("name") + ")@" + latitude + "," + longitude)));
                 } catch (Exception e) {
 
                 }
@@ -117,23 +146,6 @@ public class placeDisplayFragment extends Fragment {
         if (category.equals("TEMPLES")) {
             comment_CardView.setVisibility(View.GONE);
         } else {
-            gmapButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    try {
-                        latitude = child.getDouble("latitude");
-                        longitude = child.getDouble("longitude");
-                        startActivity(
-                                new Intent(
-                                        android.content.Intent.ACTION_VIEW,
-                                        Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + child.getString("name") + ")@" + latitude + "," + longitude)));
-                    } catch (Exception e) {
-
-                    }
-                }
-            });
-
-
             try {
                 place_name = child.getString("name");
                 place_name = place_name.replaceAll(" ", "\\%20");
@@ -142,6 +154,45 @@ public class placeDisplayFragment extends Fragment {
                 Log.e("Fetch", "Rod at fetch");
             }
         }
+
+
+
+//        //code for multiple images loading starts
+
+
+        TextSliderView textSliderView;
+
+        String [] imagesArray = new String[25];
+        try {
+            images = child.getJSONArray("image");
+            for (int i=0;i<images.length();i++){
+                imagesArray[i] = images.getString(i);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        for(int i=0;i<images.length();i++){
+            textSliderView = new TextSliderView(getContext());
+            textSliderView
+                    .image(imagesArray[i])
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+            mDemoSlider.addSlider(textSliderView);
+        }
+
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.RotateDown);
+        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+        mDemoSlider.setDuration(6000);
+
+        //Code for multiple images loading ends
+
+
+
+
+
+
         return view;
     }
 
@@ -201,7 +252,7 @@ public class placeDisplayFragment extends Fragment {
             String result = "";
             try {
                 URL url = params[0];
-                Log.i("URL :",url.toString());
+                Log.i("URL :", url.toString());
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setConnectTimeout(20 * 1000);
                 urlConnection.setReadTimeout(20 * 1000);
@@ -235,20 +286,29 @@ public class placeDisplayFragment extends Fragment {
                     JSONObject json = jArray.getJSONObject(i);
                     String Name = json.getString("Name");
                     String Comment = json.getString("Comment");
+
                     TextView nameTextView = new TextView(getContext());
                     nameTextView.setTextColor(Color.parseColor("#3949ab"));
-                    nameTextView.setBackgroundColor(Color.parseColor("#DFDFDF"));
+                    nameTextView.setBackgroundColor(Color.WHITE);
                     nameTextView.setText(Name);
                     nameTextView.setPadding(2, 2, 2, 2);
                     comment_layout.addView(nameTextView);
 
                     TextView commentTextView = new TextView(getContext());
+                    LinearLayout.LayoutParams commentlayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    commentlayoutParams.setMargins(35, 2, 2, 2);
+                    commentTextView.setLayoutParams(commentlayoutParams);
                     commentTextView.setTextColor(Color.BLACK);
-                    commentTextView.setBackgroundColor(Color.parseColor("#DFDFDF"));
+                    commentTextView.setBackgroundColor(Color.WHITE);
                     commentTextView.setText(Comment);
-                    commentTextView.setPadding(10, 2, 2, 2);
+//                    commentTextView.setPadding(10, 2, 2, 2);
                     comment_layout.addView(commentTextView);
 
+                    TextView blankTextView = new TextView(getContext());
+                    LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    layoutParams.setMargins(0, 5, 0, 0);
+                    blankTextView.setLayoutParams(layoutParams);
+                    comment_layout.addView(blankTextView);
                 }
             } catch (Exception e) {
 

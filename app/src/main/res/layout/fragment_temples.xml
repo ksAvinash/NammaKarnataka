@@ -2,12 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
+    android:background="@drawable/appbackground"
     tools:context=".templesFragment">
 
 
-    <pttextview.widget.PTTextView
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/p1"
         android:layout_width="wrap_content"
@@ -20,8 +19,7 @@
         app:textWeight="bold"
         app:typeface="pt_serif_bold_italic" />
 
-    <com.cjj.MaterialRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.cjj.MaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/refresh"
         android:layout_width="match_parent"
