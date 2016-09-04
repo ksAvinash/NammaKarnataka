@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "639987226137",
+    "project_id": "nammakarnataka-142220"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639987226137:android:41d3fcab7d94cc65",
+        "android_client_info": {
+          "package_name": "smartAmigos.smartAmigos.com.nammakarnataka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639987226137-87gv9i6jncue11p9svuunf596gmuauoe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "smartAmigos.smartAmigos.com.nammakarnataka",
+            "certificate_hash": "BD68C951CDB9D5FF590A4EB418CC214CE410DAFD"
+          }
+        },
+        {
+          "client_id": "639987226137-vfib4ts34d7c8mnnal13nahu1jr0rsju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCtTNUryoBjXxIv-QelB3Y2wFd0f_nOM8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639987226137:android:61384694ba46db13",
+        "android_client_info": {
+          "package_name": "smartAmigos.com.nammakarnataka"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639987226137-7g6i9n27aihvi7ij0rba2nlfrldmn83j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "smartAmigos.com.nammakarnataka",
+            "certificate_hash": "BD68C951CDB9D5FF590A4EB418CC214CE410DAFD"
+          }
+        },
+        {
+          "client_id": "639987226137-vfib4ts34d7c8mnnal13nahu1jr0rsju.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCtTNUryoBjXxIv-QelB3Y2wFd0f_nOM8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
