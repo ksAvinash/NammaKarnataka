@@ -57,6 +57,9 @@ public class MyLocation extends AppCompatActivity {
         setContentView(R.layout.activity_my_location);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         context = getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout)findViewById(R.id.refresh);
@@ -69,12 +72,23 @@ public class MyLocation extends AppCompatActivity {
                 finish();
             }
         });
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
-        loadJsonFile();
-        if (isNetworkConnected()) {
-            Toast.makeText(this, "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+        if(!loadJsonFile()){
+            if (isNetworkConnected()) {
+                Toast.makeText(this, "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            else
+                Toast.makeText(this, "No Internet Connection!", Toast.LENGTH_SHORT).show();
         }
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -95,7 +109,7 @@ public class MyLocation extends AppCompatActivity {
     }
 
 
-    private void loadJsonFile() {
+    private boolean loadJsonFile() {
         dist_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
@@ -135,9 +149,9 @@ public class MyLocation extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-
+            return true;
         }
+        return false;
     }
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
