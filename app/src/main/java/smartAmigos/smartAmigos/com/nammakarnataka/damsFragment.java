@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -58,7 +59,7 @@ public class damsFragment extends Fragment {
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
     ListView list;
-
+    TextView t;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,6 +67,10 @@ public class damsFragment extends Fragment {
 
         context = getActivity().getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+        t = (TextView) view.findViewById(R.id.q1);
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        t.setTypeface(myFont);
+
         list = (ListView) view.findViewById(R.id.damList);
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

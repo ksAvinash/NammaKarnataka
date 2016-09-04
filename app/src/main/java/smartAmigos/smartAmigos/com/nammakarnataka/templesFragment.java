@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -60,7 +61,7 @@ public class templesFragment extends Fragment {
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
     ListView list;
-
+    TextView t;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,6 +69,11 @@ public class templesFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_temples, container, false);
         context = getActivity().getApplicationContext();
+
+        t = (TextView) view.findViewById(R.id.p1);
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        t.setTypeface(myFont);
+
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
         list = (ListView) view.findViewById(R.id.templeList);
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

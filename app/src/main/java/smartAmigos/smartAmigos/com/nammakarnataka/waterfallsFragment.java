@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -52,6 +53,7 @@ public class waterfallsFragment extends Fragment {
     static SimpleDraweeView draweeView;
 
     View view;
+    TextView t;
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
@@ -69,6 +71,10 @@ public class waterfallsFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_waterfalls, container, false);
         context = getActivity().getApplicationContext();
+
+        t = (TextView) view.findViewById(R.id.z1);
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        t.setTypeface(myFont);
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
         list = (ListView) view.findViewById(R.id.waterfallsList);
 
