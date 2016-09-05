@@ -50,6 +50,15 @@ public class MyLocation extends AppCompatActivity {
     FloatingActionButton fab;
     static int serverVersion, localVersion;
     Context context;
+
+    @Override
+    public void onBackPressed() {
+        if(getFragmentManager().getBackStackEntryCount() > 0)
+            getFragmentManager().popBackStack();
+        else
+            super.onBackPressed();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +81,7 @@ public class MyLocation extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+               onBackPressed();
             }
         });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
