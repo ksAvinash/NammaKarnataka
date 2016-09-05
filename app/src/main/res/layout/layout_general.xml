@@ -213,42 +213,6 @@
                 </LinearLayout>
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/colorWhite"
-                app:cardElevation="4dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <pttextview.widget.PTTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:text="@string/transport"
-                        android:textColor="@color/orangeText"
-                        app:textWeight="bold"
-                        android:textSize="18sp" />
-
-                    <View style="@style/Divider" />
-
-                    <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
-                        xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/transport_textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
-                        android:layout_marginRight="4dp"
-                        android:padding="5dp"
-                        android:textColor="@color/defTextColor" />
-                </LinearLayout>
-            </android.support.v7.widget.CardView>
 
 
             <android.support.v7.widget.CardView
