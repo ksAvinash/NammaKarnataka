@@ -76,6 +76,8 @@
             android:name=".newsActivity"
             android:label="@string/title_activity_news"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".NotifHandler"
+            android:label="NotifHandler"></activity>
     </application>
 
 </manifest>

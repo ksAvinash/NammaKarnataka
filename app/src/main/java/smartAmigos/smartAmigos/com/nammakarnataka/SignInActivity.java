@@ -52,7 +52,7 @@ public class SignInActivity extends AppCompatActivity implements
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_STANDARD);
+        signInButton.setSize(SignInButton.SIZE_WIDE);
         signInButton.setScopes(gso.getScopeArray());
     }
 
@@ -176,8 +176,9 @@ public class SignInActivity extends AppCompatActivity implements
     private void updateUI(boolean signedIn) {
         if (signedIn) {
             findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            Intent intent = new Intent(getApplicationContext(),SplasherActivity.class);
+            Intent intent = new Intent(getBaseContext(),SplasherActivity.class);
             startActivity(intent);
+            this.finish();
         } else {
             findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
         }

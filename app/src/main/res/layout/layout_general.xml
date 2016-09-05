@@ -194,6 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
+                        android:id="@+id/nearby_textView"
                         android:text="@string/nearby"
                         android:textColor="@color/orangeText"
                         app:textWeight="bold"

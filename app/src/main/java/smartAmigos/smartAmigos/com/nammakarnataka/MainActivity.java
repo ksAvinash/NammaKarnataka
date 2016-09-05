@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -42,7 +43,7 @@ public class MainActivity extends AppCompatActivity
     SliderLayout mDemoSlider;
     FloatingActionButton fab;
     DrawerLayout drawer;
-    private String nameInput = "";
+    private static long back_pressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,7 +123,12 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if(back_pressed+2000>System.currentTimeMillis()) {
+                super.onBackPressed();
+                finish();
+            }
+            else Toast.makeText(getBaseContext(),"Press once again to exit!",Toast.LENGTH_SHORT).show();
+            back_pressed = System.currentTimeMillis();
         }
     }
 

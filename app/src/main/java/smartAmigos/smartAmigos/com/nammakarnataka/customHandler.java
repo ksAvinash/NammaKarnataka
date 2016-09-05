@@ -44,12 +44,18 @@ public class customHandler extends BroadcastReceiver
             }
 
             //Start lanuch Activity
-            String packageName = context.getPackageName();
-            Intent resultIntent = new Intent(context.getPackageManager().getLaunchIntentForPackage(packageName));
-            resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            String packageName = context.getPackageName();
+//            Intent resultIntent = new Intent(context.getPackageManager().getLaunchIntentForPackage(packageName));
+//            resultIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//
+//            resultIntent.putExtras(intent.getBundleExtra("pushData"));
+//            Pushbots.sharedInstance().startActivity(resultIntent);
 
-            resultIntent.putExtras(intent.getBundleExtra("pushData"));
-            Pushbots.sharedInstance().startActivity(resultIntent);
+            //Custom
+            Intent intent1 = new Intent().setClass(context.getApplicationContext(),NotifHandler.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intent1.putExtras(intent.getBundleExtra("pushData"));
+            Pushbots.sharedInstance().startActivity(intent1);
 
             // Handle Push Message when received
         }else if(action.equals(PBConstants.EVENT_MSG_RECEIVE)){
