@@ -31,6 +31,10 @@ public class feedbacks extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View customView = inflater.inflate(R.layout.activity_feedbacks, null);
 
+
+
+
+
         final MaterialStyledDialog dialogHeader_3 = new MaterialStyledDialog(context)
                 // .setHeaderDrawable(R.drawable.header)
                 .setHeaderColor(R.color.colorBlue)
