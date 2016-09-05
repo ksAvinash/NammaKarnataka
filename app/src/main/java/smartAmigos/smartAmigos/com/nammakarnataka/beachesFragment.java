@@ -214,7 +214,7 @@ public class beachesFragment extends Fragment {
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    beaches_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    beaches_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
                 }
                 materialRefreshLayout.finishRefresh();
                 displayList(items);
@@ -292,7 +292,7 @@ public class beachesFragment extends Fragment {
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    beaches_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    beaches_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
                 }
                 displayList(items);
             } catch (JSONException e) {

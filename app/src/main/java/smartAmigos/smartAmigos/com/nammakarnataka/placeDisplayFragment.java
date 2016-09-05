@@ -52,7 +52,7 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class placeDisplayFragment extends Fragment {
     JSONObject child;
-    private TextView place_textView, description_textView, location_textView, season_textView, additionalInformation;
+    private TextView place_textView, description_textView, location_textView, season_textView, additionalInformation,nearby_textView;
     private Button gmapButton, submit_comment;
     public String category, comment, user_name, place_name;
     public EditText comment_input;
@@ -84,7 +84,7 @@ public class placeDisplayFragment extends Fragment {
         season_textView = (TextView) view.findViewById(R.id.season_textView);
         additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
         mDemoSlider = (SliderLayout)view.findViewById(R.id.layout_images);
-
+        nearby_textView = (TextView)view.findViewById(R.id.nearby_textView);
 
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
 
@@ -99,6 +99,7 @@ public class placeDisplayFragment extends Fragment {
         try {
             place_textView.setText(child.getString("name"));
             description_textView.setText(child.getString("description"));
+            nearby_textView.setText(child.getString("nearByPlaces"));
             location_textView.setText(child.getString("district") + "  ( " + String.valueOf(child.getDouble("latitude")) + " , " + String.valueOf(child.getDouble("longitude")) + " )");
             season_textView.setText(child.getString("bestSeason"));
             additionalInformation.setText(child.getString("additionalInformation"));

@@ -114,24 +114,6 @@ public class waterfallsFragment extends Fragment {
 
         });
 
-        //handle backpress
-//        view.setFocusableInTouchMode(true);
-//        view.requestFocus();
-//        view.setOnKeyListener(new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View v, int keyCode, KeyEvent event) {
-//                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-//                    if (keyCode == KeyEvent.KEYCODE_BACK) {
-//                        getActivity().finish();
-//                        Intent intent = new Intent(getActivity(), MainActivity.class);
-//                        startActivity(intent);
-//
-//                        return true;
-//                    }
-//                }
-//                return false;
-//            }
-//        });
 
         return view;
 
@@ -194,7 +176,7 @@ public class waterfallsFragment extends Fragment {
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
                     displayList();
                 }
             } catch (JSONException e) {
@@ -400,7 +382,7 @@ public class waterfallsFragment extends Fragment {
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
                     materialRefreshLayout.finishRefresh();
                     displayList();
                 }

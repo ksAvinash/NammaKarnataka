@@ -4,18 +4,28 @@ package smartAmigos.smartAmigos.com.nammakarnataka.adapter;
 public class generic_adapter {
 
     String image[], title, description, district;
-    String bestSeason,additionalInformation;
+    String bestSeason,additionalInformation,nearByPlaces;
     Double latitude, longitude;
 
-    public generic_adapter(String[] image, String title, String description, String district, String bestSeason, String additionalInformation, Double latitude, Double longitude) {
+    public generic_adapter(String[] image, String title, String description, String district, String bestSeason, String additionalInformation, String nearByPlaces,Double latitude, Double longitude) {
         this.image = image;
         this.title = title;
         this.description = description;
         this.district = district;
+        this.nearByPlaces = nearByPlaces;
         this.bestSeason = bestSeason;
         this.additionalInformation = additionalInformation;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public void setNearByPlaces(String nearByPlaces) {
+        this.nearByPlaces = nearByPlaces;
+    }
+
+    public String getNearByPlaces() {
+
+        return nearByPlaces;
     }
 
     public void setImage(String[] image) {

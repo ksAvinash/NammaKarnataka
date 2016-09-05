@@ -85,7 +85,7 @@ public class distDisplayFragment extends Fragment {
                 for(int j=0;j<images.length();j++){
                     imagesArray[j] = images.getString(j);
                 }
-                district_specific_adapterList.add(new generic_adapter(imagesArray, pp.getString("name"), pp.getString("description"), pp.getString("district"), pp.getString("bestSeason"),pp.getString("additionalInformation"),pp.getDouble("latitude"), pp.getDouble("longitude")));
+                district_specific_adapterList.add(new generic_adapter(imagesArray, pp.getString("name"), pp.getString("description"), pp.getString("district"), pp.getString("bestSeason"),pp.getString("additionalInformation"),pp.getString("nearByPlaces"),pp.getDouble("latitude"), pp.getDouble("longitude")));
             }
             displayList(places);
         }catch (JSONException e){}
