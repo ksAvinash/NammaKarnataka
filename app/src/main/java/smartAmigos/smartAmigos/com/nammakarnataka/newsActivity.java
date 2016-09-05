@@ -97,6 +97,7 @@ public class newsActivity extends AppCompatActivity {
 
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
+                Toast.makeText(this, "please wait for a moment!", Toast.LENGTH_SHORT).show();
                 SharedPreferences preferences = getSharedPreferences("news_version", Context.MODE_PRIVATE);
                 localVersion = preferences.getInt("version", 0);
                 new NewsVersion().execute("http://nammakarnataka.net23.net/news/news_version.json");

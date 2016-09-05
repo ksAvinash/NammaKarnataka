@@ -82,6 +82,7 @@ public class hillstationsFragment extends Fragment {
         Fresco.initialize(getActivity());
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
+                Toast.makeText(getActivity(), "please wait for a moment!", Toast.LENGTH_SHORT).show();
                 SharedPreferences preferences = getActivity().getSharedPreferences("hillstations_version", Context.MODE_PRIVATE);
                 localVersion = preferences.getInt("version", 0);
                 new HillstationVersion().execute("http://nammakarnataka.net23.net/hillstations/hillstations_version.json");

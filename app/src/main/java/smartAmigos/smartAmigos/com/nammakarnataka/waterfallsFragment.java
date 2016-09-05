@@ -87,6 +87,7 @@ public class waterfallsFragment extends Fragment {
 
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
+                Toast.makeText(getActivity(), "please wait for a moment!", Toast.LENGTH_SHORT).show();
                 SharedPreferences preferences = getActivity().getSharedPreferences("waterfalls_version", Context.MODE_PRIVATE);
                 localVersion = preferences.getInt("version", 0);
                 new waterfallsVersion().execute("http://nammakarnataka.net23.net/waterfalls/waterfalls_version.json");

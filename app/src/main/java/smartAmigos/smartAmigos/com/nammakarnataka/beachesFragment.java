@@ -80,6 +80,7 @@ public class beachesFragment extends Fragment {
         Fresco.initialize(getActivity());
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
+                Toast.makeText(getActivity(), "please wait for a moment!", Toast.LENGTH_SHORT).show();
                 SharedPreferences preferences = getActivity().getSharedPreferences("beaches_version", Context.MODE_PRIVATE);
                 localVersion = preferences.getInt("version", 0);
                 new beachesVersion().execute("http://nammakarnataka.net23.net/beaches/beaches_version.json");

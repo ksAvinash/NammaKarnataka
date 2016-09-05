@@ -98,6 +98,7 @@ public class MyLocation extends AppCompatActivity {
 
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
+                Toast.makeText(this, "please wait for a moment!", Toast.LENGTH_SHORT).show();
                 SharedPreferences preferences = getSharedPreferences("districts_version", Context.MODE_PRIVATE);
                 localVersion = preferences.getInt("version", 0);
                 new DistrictVersion().execute("http://nammakarnataka.net23.net/districts/districts_version.json");
