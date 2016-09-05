@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/content_news"
    android:background="@drawable/appbackground"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="smartAmigos.smartAmigos.com.nammakarnataka.newsActivity"
@@ -32,6 +33,7 @@
         app:wave_color="@color/material_green">
 
         <ListView
+            android:divider="@null"
             android:id="@+id/newsList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
