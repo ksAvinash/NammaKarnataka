@@ -72,6 +72,8 @@
             android:name=".MyLocation"
             android:label="My location"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity android:name=".NotifHandler"/>
     </application>
 
 </manifest>
