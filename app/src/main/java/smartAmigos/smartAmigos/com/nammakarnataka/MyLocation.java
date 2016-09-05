@@ -3,6 +3,7 @@ package smartAmigos.smartAmigos.com.nammakarnataka;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -62,6 +63,10 @@ public class MyLocation extends AppCompatActivity {
         context = getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout)findViewById(R.id.refresh);
         list = (ListView)findViewById(R.id.districtList);
+
+        TextView xt = (TextView)findViewById(R.id.xt);
+        Typeface myFont = Typeface.createFromAsset(this.getAssets(), "fonts/Kaushan.otf" );
+        xt.setTypeface(myFont);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

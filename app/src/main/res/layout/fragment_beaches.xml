@@ -6,7 +6,7 @@
     tools:context=".templesFragment">
 
 
-    <pttextview.widget.PTTextView
+    <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/j1"
@@ -16,9 +16,7 @@
         android:padding="15dp"
         android:text="Beaches"
         android:textColor="#000000"
-        android:textSize="25sp"
-        app:textWeight="bold"
-        app:typeface="pt_serif_bold_italic" />
+        android:textSize="25sp" />
 
     <com.cjj.MaterialRefreshLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,6 +28,7 @@
         app:wave_color="@color/material_green">
 
         <ListView
+            android:divider="@null"
             android:id="@+id/beachesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

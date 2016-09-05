@@ -105,9 +105,12 @@ public class SignInActivity extends AppCompatActivity implements
             GoogleSignInAccount acct = result.getSignInAccount();
             String user_name = acct.getDisplayName();
             editor.putString("userName", user_name);
-            editor.commit();
+            editor.apply();
             Toast.makeText(getApplicationContext(),"Signed in as : " + user_name,Toast.LENGTH_LONG).show();
             updateUI(true);
+
+            Intent intent = new Intent(SignInActivity.this,SplasherActivity.class);
+            startActivity(intent);
         } else {
             // Signed out, show unauthenticated UI.
             updateUI(false);

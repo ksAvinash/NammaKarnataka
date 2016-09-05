@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
@@ -61,6 +62,11 @@ public class distDisplayFragment extends Fragment {
         current_dist = (TextView)view.findViewById(R.id.current_dist);
         list = (ListView) view.findViewById(R.id.distCurrentList);
         context = getActivity().getApplicationContext();
+
+        TextView current_dist = (TextView)view.findViewById(R.id.current_dist);
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        current_dist.setTypeface(myFont);
+
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);

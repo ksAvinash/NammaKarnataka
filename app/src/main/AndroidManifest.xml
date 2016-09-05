@@ -34,20 +34,20 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="smartAmigos.smartAmigos.com.nammakarnataka.MESSAGE" />
+            <!--<intent-filter>-->
+                <!--<action android:name="smartAmigos.smartAmigos.com.nammakarnataka.MESSAGE" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--</intent-filter>-->
         </activity>
         <activity
             android:name=".SplasherActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <!--intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter-->
+            </intent-filter>
         </activity>
 
         <receiver
@@ -75,9 +75,9 @@
         <activity
             android:name=".newsActivity"
             android:label="@string/title_activity_news"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".NotifHandler"
-            android:label="NotifHandler"></activity>
+            android:label="NotifHandler"/>
     </application>
 
 </manifest>

@@ -6,8 +6,7 @@
     tools:context=".templesFragment">
 
 
-    <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <TextView
         android:id="@+id/p1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,9 +14,7 @@
         android:padding="15dp"
         android:text="Temples"
         android:textColor="#000000"
-        android:textSize="25sp"
-        app:textWeight="bold"
-        app:typeface="pt_serif_bold_italic" />
+        android:textSize="25sp" />
 
     <com.cjj.MaterialRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -28,6 +25,7 @@
         app:wave_color="@color/material_green">
 
         <ListView
+            android:divider="@null"
             android:id="@+id/templeList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

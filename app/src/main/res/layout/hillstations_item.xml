@@ -13,6 +13,7 @@
         app:cardBackgroundColor="@color/colorWhite"
         app:cardElevation="10dp">
     <LinearLayout
+        android:padding="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">

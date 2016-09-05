@@ -1,10 +1,12 @@
 package smartAmigos.smartAmigos.com.nammakarnataka;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class newsActivity extends AppCompatActivity {
@@ -32,9 +34,9 @@ public class newsActivity extends AppCompatActivity {
                finish();
             }
         });
-
-
-
+        TextView t = (TextView)findViewById(R.id.it);
+        Typeface myFont = Typeface.createFromAsset(this.getAssets(), "fonts/Kaushan.otf" );
+        t.setTypeface(myFont);
 
     }
 
