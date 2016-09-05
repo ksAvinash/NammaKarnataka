@@ -346,7 +346,7 @@ public class trekkingFragment extends Fragment {
             editor.putInt("version", serverVersion);
             editor.apply();
 
-            Toast.makeText(getActivity(), "Trekking List is updated!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Trekking List updated!", Toast.LENGTH_SHORT).show();
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONArray items = parent.getJSONArray("list");

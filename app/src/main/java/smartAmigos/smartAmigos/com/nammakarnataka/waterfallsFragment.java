@@ -372,7 +372,7 @@ public class waterfallsFragment extends Fragment {
             editor.putInt("version", serverVersion);
             editor.apply();
 
-
+            Toast.makeText(getActivity(), "Waterfalls List updated!", Toast.LENGTH_SHORT).show();
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONArray items = parent.getJSONArray("list");

@@ -204,6 +204,8 @@ public class beachesFragment extends Fragment {
             editor.putInt("version", serverVersion);
             editor.apply();
 
+            Toast.makeText(context, "Beaches List updated!", Toast.LENGTH_SHORT).show();
+
 
             try {
                 JSONObject parent = new JSONObject(s);
