@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cjj.MaterialRefreshLayout;
+import com.cjj.MaterialRefreshListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -105,6 +106,21 @@ public class newsActivity extends AppCompatActivity {
         }else if (isNetworkConnected()) {
             Toast.makeText(this, "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
+        materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
+            @Override
+            public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
+
+                if (isNetworkConnected()) {
+                    SharedPreferences preferences = getSharedPreferences("news_version", Context.MODE_PRIVATE);
+                    localVersion = preferences.getInt("version", 0);
+                    new NewsVersion().execute("http://nammakarnataka.net23.net/news/news_version.json");
+                } else {
+                    Toast.makeText(context, "No Internet Connection!", Toast.LENGTH_SHORT).show();
+                    materialRefreshLayout.finishRefresh();
+                }
+            }
+
+        });
 
 
     }

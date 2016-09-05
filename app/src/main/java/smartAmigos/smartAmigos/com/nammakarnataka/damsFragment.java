@@ -107,24 +107,6 @@ public class damsFragment extends Fragment {
 
         });
 
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        getActivity().finish();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
-
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
-
         return view;
     }
 
@@ -247,7 +229,7 @@ public class damsFragment extends Fragment {
     public class myDamListAdapterClass extends ArrayAdapter<generic_adapter> {
 
         myDamListAdapterClass() {
-            super(context, R.layout.dams_item, dams_adapterList);
+            super(context, R.layout.hillstations_item, dams_adapterList);
         }
 
 
@@ -256,20 +238,20 @@ public class damsFragment extends Fragment {
             View itemView = convertView;
             if (itemView == null) {
                 LayoutInflater inflater = LayoutInflater.from(getActivity());
-                itemView = inflater.inflate(R.layout.dams_item, parent, false);
+                itemView = inflater.inflate(R.layout.hillstations_item, parent, false);
 
             }
             generic_adapter current = dams_adapterList.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage()[0]);
-            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_damImage);
+            draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_hillstationsImage);
             draweeView.setImageURI(uri);
             //Code ends here.
-            TextView t_name = (TextView) itemView.findViewById(R.id.item_damTitle);
+            TextView t_name = (TextView) itemView.findViewById(R.id.item_hillstationsTitle);
             t_name.setText(current.getTitle());
 
-            TextView t_dist = (TextView) itemView.findViewById(R.id.item_damDistrict);
+            TextView t_dist = (TextView) itemView.findViewById(R.id.item_hillstationsDistrict);
             t_dist.setText(current.getDistrict());
 
             return itemView;

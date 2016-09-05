@@ -52,7 +52,7 @@ public class customHandler extends BroadcastReceiver
 //            Pushbots.sharedInstance().startActivity(resultIntent);
 
             //Custom
-            Intent intent1 = new Intent().setClass(context.getApplicationContext(),NotifHandler.class);
+            Intent intent1 = new Intent().setClass(context.getApplicationContext(),newsActivity.class);
             intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent1.putExtras(intent.getBundleExtra("pushData"));
             Pushbots.sharedInstance().startActivity(intent1);

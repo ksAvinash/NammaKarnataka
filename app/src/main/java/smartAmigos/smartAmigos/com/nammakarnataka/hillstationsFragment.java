@@ -108,23 +108,6 @@ public class hillstationsFragment extends Fragment {
 
         });
 
-        view.setFocusableInTouchMode(true);
-        view.requestFocus();
-        view.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        getActivity().finish();
-                        Intent intent = new Intent(getActivity(), MainActivity.class);
-                        startActivity(intent);
-
-                        return true;
-                    }
-                }
-                return false;
-            }
-        });
 
         return view;
 

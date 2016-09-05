@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(3000);
+        mDemoSlider.setDuration(6000);
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -123,12 +123,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            if(back_pressed+2000>System.currentTimeMillis()) {
-                super.onBackPressed();
-                finish();
-            }
-            else Toast.makeText(getBaseContext(),"Press once again to exit!",Toast.LENGTH_SHORT).show();
-            back_pressed = System.currentTimeMillis();
+           super.onBackPressed();
         }
     }
 
