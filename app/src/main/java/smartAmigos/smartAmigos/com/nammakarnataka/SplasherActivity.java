@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+
+
 public class SplasherActivity extends AppCompatActivity {
 
     TextView t, t1;
@@ -49,7 +51,7 @@ public class SplasherActivity extends AppCompatActivity {
                 startActivity(intent);
                 SplasherActivity.this.finish();
             }
-        }, 1000);
+        }, 500);
 
 
     }

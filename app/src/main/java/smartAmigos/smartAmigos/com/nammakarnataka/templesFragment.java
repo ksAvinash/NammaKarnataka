@@ -74,6 +74,11 @@ public class templesFragment extends Fragment {
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
         t.setTypeface(myFont);
 
+
+
+
+
+
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
         list = (ListView) view.findViewById(R.id.templeList);
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -360,6 +365,7 @@ public class templesFragment extends Fragment {
 
             return itemView;
         }
+
 
     }
 
