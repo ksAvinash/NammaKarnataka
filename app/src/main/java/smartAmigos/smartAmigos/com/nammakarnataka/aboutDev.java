@@ -22,7 +22,6 @@ public class aboutDev extends AppCompatActivity {
 
         setContentView(R.layout.activity_about_dev);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
