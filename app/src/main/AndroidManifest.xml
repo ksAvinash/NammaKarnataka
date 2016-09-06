@@ -37,6 +37,7 @@
             <!--<intent-filter>-->
                 <!--<action android:name="smartAmigos.smartAmigos.com.nammakarnataka.MESSAGE" />-->
 
+
                 <!--<category android:name="android.intent.category.DEFAULT" />-->
             <!--</intent-filter>-->
         </activity>
