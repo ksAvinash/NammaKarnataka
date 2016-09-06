@@ -1,19 +1,19 @@
 {
   "project_info": {
-    "project_number": "639987226137",
-    "project_id": "nammakarnataka-142220"
+    "project_number": "352131322900",
+    "project_id": "nammakarnataka-142519"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:639987226137:android:41d3fcab7d94cc65",
+        "mobilesdk_app_id": "1:352131322900:android:41d3fcab7d94cc65",
         "android_client_info": {
           "package_name": "smartAmigos.smartAmigos.com.nammakarnataka"
         }
       },
       "oauth_client": [
         {
-          "client_id": "639987226137-87gv9i6jncue11p9svuunf596gmuauoe.apps.googleusercontent.com",
+          "client_id": "352131322900-tjee9f40tpdjchg9s971k4ru1adee5me.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "smartAmigos.smartAmigos.com.nammakarnataka",
@@ -21,52 +21,13 @@
           }
         },
         {
-          "client_id": "639987226137-vfib4ts34d7c8mnnal13nahu1jr0rsju.apps.googleusercontent.com",
+          "client_id": "352131322900-67amfbi8f7v1p22gupsa3m8974n87kuu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCCtTNUryoBjXxIv-QelB3Y2wFd0f_nOM8"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:639987226137:android:61384694ba46db13",
-        "android_client_info": {
-          "package_name": "smartAmigos.com.nammakarnataka"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "639987226137-7g6i9n27aihvi7ij0rba2nlfrldmn83j.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "smartAmigos.com.nammakarnataka",
-            "certificate_hash": "BD68C951CDB9D5FF590A4EB418CC214CE410DAFD"
-          }
-        },
-        {
-          "client_id": "639987226137-vfib4ts34d7c8mnnal13nahu1jr0rsju.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCCtTNUryoBjXxIv-QelB3Y2wFd0f_nOM8"
+          "current_key": "AIzaSyDBpJZgkfC36SA8zbTXFqlgRcBFGj7RnZ0"
         }
       ],
       "services": {
