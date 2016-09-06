@@ -159,7 +159,7 @@ public class MyLocation extends AppCompatActivity {
         dist_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
-        File file = new File("/data/data/smartAmigos.com.nammakarnataka/districts.json");
+        File file = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/districts.json");
         if (file.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(file);
@@ -209,7 +209,7 @@ public class MyLocation extends AppCompatActivity {
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/smartAmigos.com.nammakarnataka/districts.json");
+            File path = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/districts.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 

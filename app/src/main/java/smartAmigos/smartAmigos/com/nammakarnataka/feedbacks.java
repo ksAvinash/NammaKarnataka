@@ -32,16 +32,13 @@ public class feedbacks extends AppCompatActivity {
         View customView = inflater.inflate(R.layout.activity_feedbacks, null);
 
 
-
-
-
         final MaterialStyledDialog dialogHeader_3 = new MaterialStyledDialog(context)
                 // .setHeaderDrawable(R.drawable.header)
                 .setHeaderColor(R.color.colorBlue)
                 .setIcon(R.drawable.feedback_icon)
                 .withDialogAnimation(true)
                 .setTitle("Awesome!")
-                .setDescription("Glad to see you Like Namma Karnataka!\nKeep Supporting Us!")
+                .setDescription("Glad to see you like NAMMA KARNATAKA!\nKeep supporting us!")
                 .setPositive("Give us 5", new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(MaterialDialog dialog, DialogAction which) {
@@ -67,7 +64,7 @@ public class feedbacks extends AppCompatActivity {
                 .setIcon(R.drawable.feedback_icon)
                 .withDialogAnimation(true)
                 //  .setTitle("Your Feedback")
-                .setDescription("What Can we Improve?Your feedback is always welcome.")
+                .setDescription("What can we Improve? Your feedback is always welcomed.")
                 .setPositive("Feedback", new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(MaterialDialog dialog, DialogAction which) {

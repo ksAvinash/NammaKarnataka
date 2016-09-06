@@ -70,8 +70,8 @@
         android:textColor="#ffffff"
         android:textAlignment="center"
         android:text="\t\t\t\tRequest To our Users
-        \nAll the Revenue generated through ads will be solely used for Development of Kannada Language Related Applications.
-        \n\t\tKeep Supporting:)"
+        \nAll the Revenue generated through ads will be solely used for development of KANNADA language related applications.
+        \n\t\tKeep Supporting :)"
         android:gravity="center"
         android:id="@+id/textView11"
         android:layout_alignParentStart="true"

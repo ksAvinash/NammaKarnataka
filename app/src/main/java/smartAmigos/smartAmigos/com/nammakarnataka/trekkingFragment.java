@@ -153,7 +153,7 @@ public class trekkingFragment extends Fragment {
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/smartAmigos.com.nammakarnataka/trekking.json");
+            File path = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/trekking.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 
@@ -174,7 +174,7 @@ public class trekkingFragment extends Fragment {
         trekking_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
-        File file = new File("/data/data/smartAmigos.com.nammakarnataka/trekking.json");
+        File file = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/trekking.json");
         if (file.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(file);
