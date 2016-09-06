@@ -220,6 +220,8 @@ public class MainActivity extends AppCompatActivity
                 break;
 
 
+            
+
             case R.id.nav_home:
                 intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);
