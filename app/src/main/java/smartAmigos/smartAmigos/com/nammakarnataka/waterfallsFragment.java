@@ -221,7 +221,7 @@ public class waterfallsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String ret = null;
                 BufferedReader reader = null;
-                File file = new File("/data/data/smartAmigos.com.nammakarnataka/waterfalls.json");
+                File file = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/waterfalls.json");
                 if (file.exists()) {
 
 

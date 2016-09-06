@@ -287,7 +287,7 @@ public class damsFragment extends Fragment {
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/smartAmigos.com.nammakarnataka/dams.json");
+            File path = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/dams.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 

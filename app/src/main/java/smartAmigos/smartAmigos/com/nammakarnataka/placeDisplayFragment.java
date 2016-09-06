@@ -185,7 +185,7 @@ public class placeDisplayFragment extends Fragment {
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.RotateDown);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(6000);
+        mDemoSlider.setDuration(8000);
 
         //Code for multiple images loading ends
 
