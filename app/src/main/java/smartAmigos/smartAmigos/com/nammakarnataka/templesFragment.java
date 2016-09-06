@@ -92,7 +92,7 @@ public class templesFragment extends Fragment {
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
                 // Call displayInterstitial() function
-                if (interstitial.isLoaded()&&Math.random()>0.6) {
+                if (interstitial.isLoaded()&&Math.random()>0.75) {
                     interstitial.show();
                 }
             }

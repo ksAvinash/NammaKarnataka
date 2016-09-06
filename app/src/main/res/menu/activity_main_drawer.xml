@@ -42,7 +42,7 @@
         <item
             android:id="@+id/nav_myLocation"
             android:icon="@drawable/my_location"
-            android:title="My Location" />
+            android:title="Districts" />
 
     </group>
 
