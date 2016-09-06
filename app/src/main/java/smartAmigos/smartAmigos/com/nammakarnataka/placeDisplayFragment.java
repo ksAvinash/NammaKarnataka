@@ -52,7 +52,7 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class placeDisplayFragment extends Fragment {
     JSONObject child;
-    private TextView place_textView, description_textView, location_textView, season_textView, additionalInformation,nearby_textView;
+    private TextView place_textView, description_textView, location_textView, season_textView, additionalInformation, nearby_textView;
     private Button gmapButton, submit_comment;
     public String category, comment, user_name, place_name;
     public EditText comment_input;
@@ -63,6 +63,7 @@ public class placeDisplayFragment extends Fragment {
 
 
     JSONArray images;
+
     @SuppressLint("ValidFragment")
     public placeDisplayFragment(JSONObject child, String category) {
         this.child = child;
@@ -83,8 +84,8 @@ public class placeDisplayFragment extends Fragment {
         location_textView = (TextView) view.findViewById(R.id.location_textView);
         season_textView = (TextView) view.findViewById(R.id.season_textView);
         additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
-        mDemoSlider = (SliderLayout)view.findViewById(R.id.layout_images);
-        nearby_textView = (TextView)view.findViewById(R.id.nearby_textView);
+        mDemoSlider = (SliderLayout) view.findViewById(R.id.layout_images);
+        nearby_textView = (TextView) view.findViewById(R.id.nearby_textView);
 
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
 
@@ -157,16 +158,15 @@ public class placeDisplayFragment extends Fragment {
         }
 
 
-
 //        //code for multiple images loading starts
 
 
         TextSliderView textSliderView;
 
-        String [] imagesArray = new String[25];
+        String[] imagesArray = new String[25];
         try {
             images = child.getJSONArray("image");
-            for (int i=0;i<images.length();i++){
+            for (int i = 0; i < images.length(); i++) {
                 imagesArray[i] = images.getString(i);
             }
         } catch (JSONException e) {
@@ -174,7 +174,7 @@ public class placeDisplayFragment extends Fragment {
         }
 
 
-        for(int i=0;i<images.length();i++){
+        for (int i = 0; i < images.length(); i++) {
             textSliderView = new TextSliderView(getContext());
             textSliderView
                     .image(imagesArray[i])
@@ -188,10 +188,6 @@ public class placeDisplayFragment extends Fragment {
         mDemoSlider.setDuration(6000);
 
         //Code for multiple images loading ends
-
-
-
-
 
 
         return view;

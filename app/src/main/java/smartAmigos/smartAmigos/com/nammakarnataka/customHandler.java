@@ -14,24 +14,23 @@ import java.util.HashMap;
 /**
  * Created by CHARAN on 8/22/2016.
  */
-public class customHandler extends BroadcastReceiver
-{
+public class customHandler extends BroadcastReceiver {
     private static final String TAG = "customHandler";
+
     @Override
-    public void onReceive(Context context, Intent intent)
-    {
+    public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         Log.d(TAG, "action=" + action);
         // Handle Push Message when opened
         if (action.equals(PBConstants.EVENT_MSG_OPEN)) {
             //Check for Pushbots Instance
             Pushbots pushInstance = Pushbots.sharedInstance();
-            if(!pushInstance.isInitialized()){
+            if (!pushInstance.isInitialized()) {
                 Pushbots.sharedInstance().init(context.getApplicationContext());
             }
 
             //Clear Notification array
-            if(PBNotificationIntent.notificationsArray != null){
+            if (PBNotificationIntent.notificationsArray != null) {
                 PBNotificationIntent.notificationsArray = null;
             }
 
@@ -39,8 +38,8 @@ public class customHandler extends BroadcastReceiver
             Log.w(TAG, "User clicked notification with Message: " + PushdataOpen.get("message"));
 
             //Report Opened Push Notification to Pushbots
-            if(Pushbots.sharedInstance().isAnalyticsEnabled()){
-                Pushbots.sharedInstance().reportPushOpened( (String) PushdataOpen.get("PUSHANALYTICS"));
+            if (Pushbots.sharedInstance().isAnalyticsEnabled()) {
+                Pushbots.sharedInstance().reportPushOpened((String) PushdataOpen.get("PUSHANALYTICS"));
             }
 
             //Start lanuch Activity
@@ -52,13 +51,13 @@ public class customHandler extends BroadcastReceiver
 //            Pushbots.sharedInstance().startActivity(resultIntent);
 
             //Custom
-            Intent intent1 = new Intent().setClass(context.getApplicationContext(),NotifHandler.class);
-            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent intent1 = new Intent().setClass(context.getApplicationContext(), NotifHandler.class);
+            intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             intent1.putExtras(intent.getBundleExtra("pushData"));
             Pushbots.sharedInstance().startActivity(intent1);
 
             // Handle Push Message when received
-        }else if(action.equals(PBConstants.EVENT_MSG_RECEIVE)){
+        } else if (action.equals(PBConstants.EVENT_MSG_RECEIVE)) {
             HashMap<?, ?> PushdataOpen = (HashMap<?, ?>) intent.getExtras().get(PBConstants.EVENT_MSG_RECEIVE);
             Log.w(TAG, "User Received notification with Message: " + PushdataOpen.get("message"));
         }

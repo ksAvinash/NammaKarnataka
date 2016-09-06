@@ -1,15 +1,23 @@
 package smartAmigos.smartAmigos.com.nammakarnataka;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -27,6 +35,12 @@ import java.net.URL;
 public class NotifHandler extends Activity {
 
     private TextView place_textView, description_textView, location_textView, season_textView, additionalInformation, nearby_textView;
+    private Button gmapButton;
+    private String latitude, longitude, place_name;
+    private SliderLayout layout_images;
+    private TextSliderView textSliderView;
+    private CardView comment_CardView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +53,14 @@ public class NotifHandler extends Activity {
         season_textView = (TextView) findViewById(R.id.season_textView);
         additionalInformation = (TextView) findViewById(R.id.additionalInformation);
         nearby_textView = (TextView) findViewById(R.id.nearby_textView);
+
+        gmapButton = (Button) findViewById(R.id.gmapButton);
+
+        layout_images = (SliderLayout) findViewById(R.id.layout_images);
+
+        comment_CardView = (CardView) findViewById(R.id.comment_CardView);
+        comment_CardView.setVisibility(View.GONE);
+
 
 //        Bundle extras = getIntent().getExtras();
 //        if(extras.containsKey("useDB")){
@@ -62,12 +84,31 @@ public class NotifHandler extends Activity {
 
         try {
             new GetDataTask().execute(new URL("http://charan.net23.net/getdata.php"));
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
 
+        gmapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(
+                            new Intent(
+                                    android.content.Intent.ACTION_VIEW,
+                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + place_name + ")@" + latitude + "," + longitude)));
+                } catch (Exception e) {
+
+                }
+            }
+        });
+
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+    }
 
     public class GetDataTask extends AsyncTask<URL, Void, String> {
         private HttpURLConnection urlConnection;
@@ -115,17 +156,34 @@ public class NotifHandler extends Activity {
                     String description = json.getString("Description");
                     String location = json.getString("Location");
                     String lat = json.getString("Lat");
-                    String longitude = json.getString("Long");
+                    String longit = json.getString("Long");
                     String season = json.getString("Season");
                     String nearby = json.getString("Nearby");
                     String addinfo = json.getString("Addinfo");
+                    String imgUrl = json.getString("imgUrl");
+
+                    latitude = lat;
+                    longitude = longit;
+                    place_name = place;
 
                     place_textView.setText(place);
                     description_textView.setText(description);
-                    location_textView.setText(location+" ( "+lat+","+longitude+" ) ");
+                    location_textView.setText(location + " ( " + lat + "," + longit + " ) ");
                     season_textView.setText(season);
                     nearby_textView.setText(nearby);
                     additionalInformation.setText(addinfo);
+
+                    textSliderView = new TextSliderView(getApplicationContext());
+                    textSliderView
+                            .image(imgUrl)
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+                    layout_images.addSlider(textSliderView);
+
+
+                    layout_images.setPresetTransformer(SliderLayout.Transformer.RotateDown);
+                    layout_images.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                    layout_images.setCustomAnimation(new DescriptionAnimation());
+                    layout_images.setDuration(60000);
 
                 }
             } catch (Exception e) {
