@@ -348,7 +348,7 @@ public class MyLocation extends AppCompatActivity {
                     Fragment fragment = new distDisplayFragment(child);
                     FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                     ft.replace(R.id.content_my_location, fragment);
-                    ft.addToBackStack(null);
+                    ft.addToBackStack("districts");
                     ft.commit();
                 } catch (JSONException e) {
                     e.printStackTrace();

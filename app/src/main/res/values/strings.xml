@@ -39,4 +39,5 @@
     <string name="title_activity_news">newsActivity</string>
 
     <string name="admob_interstitial_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="title_activity_about_dev">aboutDev</string>
 </resources>

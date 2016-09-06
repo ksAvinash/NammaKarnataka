@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/appbackground"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+
+    tools:showIn="@layout/activity_about_dev">
+
+
+
+    <TextView
+        android:id="@+id/pq1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:text="About Developers"
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+    <ScrollView
+        android:layout_below="@+id/pq1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+
+                    <LinearLayout
+                        android:padding="4dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            fresco:roundingBorderColor="#f7f6e1"
+                            fresco:roundAsCircle="true"
+                            fresco:roundingBorderWidth="2dp"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            app:placeholderImage="@drawable/dev2"
+                            />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <pttextview.widget.PTTextView
+                                android:paddingTop="20dp"
+                                android:paddingLeft="30dp"
+                                android:textSize="20sp"
+                                app:textWeight="bold"
+                                android:textColor="#d5e1b3"
+                                android:text="Gowtham_Kumar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <pttextview.widget.PTTextView
+                                android:paddingLeft="15dp"
+                                android:paddingTop="15dp"
+                                android:textSize="12sp"
+                                app:textWeight="bold"
+                                android:text="gauthamkumar.0414@gmail.com"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:padding="4dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            fresco:roundingBorderColor="#f7f6e1"
+                            fresco:roundAsCircle="true"
+                            fresco:roundingBorderWidth="2dp"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            app:placeholderImage="@drawable/dev3"
+                            />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <pttextview.widget.PTTextView
+                                android:paddingTop="20dp"
+                                android:paddingLeft="30dp"
+                                android:textSize="20sp"
+                                app:textWeight="bold"
+                                android:textColor="#d5e1b3"
+                                android:text="Charan_NK"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <pttextview.widget.PTTextView
+                                android:paddingLeft="15dp"
+                                android:paddingTop="15dp"
+                                android:textSize="12sp"
+                                app:textWeight="bold"
+                                android:text="charanshetty25595@gmail.com"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+
+                    <LinearLayout
+                        android:padding="4dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            fresco:roundingBorderColor="#f7f6e1"
+                            fresco:roundAsCircle="true"
+                            fresco:roundingBorderWidth="2dp"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            app:placeholderImage="@drawable/dev4"
+                            />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <pttextview.widget.PTTextView
+                                android:paddingTop="20dp"
+                                android:paddingLeft="30dp"
+                                android:textSize="20sp"
+                                app:textWeight="bold"
+                                android:textColor="#d5e1b3"
+                                android:text="Ashwin_Chandlapur"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <pttextview.widget.PTTextView
+                                android:paddingLeft="15dp"
+                                android:paddingTop="15dp"
+                                android:textSize="12sp"
+                                app:textWeight="bold"
+                                android:text="ashwinchandlapur@gmail.com"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:padding="4dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            fresco:roundingBorderColor="#f7f6e1"
+                            fresco:roundAsCircle="true"
+                            fresco:roundingBorderWidth="2dp"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            app:placeholderImage="@drawable/dev1"
+                            />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <pttextview.widget.PTTextView
+                                android:paddingTop="20dp"
+                                android:paddingLeft="30dp"
+                                android:textSize="20sp"
+                                app:textWeight="bold"
+                                android:textColor="#d5e1b3"
+                                android:text="Avinash_ks"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <pttextview.widget.PTTextView
+                                android:paddingLeft="15dp"
+                                android:paddingTop="15dp"
+                                android:textSize="12sp"
+                                app:textWeight="bold"
+                                android:text="justmaitoavi@gmail.com"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
