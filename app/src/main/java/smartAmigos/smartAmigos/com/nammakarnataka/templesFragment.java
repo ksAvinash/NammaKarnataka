@@ -29,6 +29,9 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +54,8 @@ import smartAmigos.smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
 public class templesFragment extends Fragment {
 
-
+    InterstitialAd mInterstitialAd;
+    private InterstitialAd interstitial;
     private List<generic_adapter> temples_adapterList = new ArrayList<>();
 
     static SimpleDraweeView draweeView;
@@ -75,7 +79,25 @@ public class templesFragment extends Fragment {
         t.setTypeface(myFont);
 
 
+        //Call ads
+        AdRequest adRequest = new AdRequest.Builder().build();
 
+        // Prepare the Interstitial Ad
+        interstitial = new InterstitialAd(context);
+        // Insert the Ad Unit ID
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+
+        interstitial.loadAd(adRequest);
+        // Prepare an Interstitial Ad Listener
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                // Call displayInterstitial() function
+                if (interstitial.isLoaded()&&Math.random()>0.6) {
+                    interstitial.show();
+                }
+            }
+        });
+        //Finish calling ads
 
 
 

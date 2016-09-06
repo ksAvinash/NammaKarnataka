@@ -26,6 +26,9 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -55,7 +58,7 @@ public class trekkingFragment extends Fragment {
 
 
     static SimpleDraweeView draweeView;
-
+    private InterstitialAd interstitial;
     View view;
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
@@ -85,6 +88,26 @@ public class trekkingFragment extends Fragment {
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
+
+        //Call ads
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        // Prepare the Interstitial Ad
+        interstitial = new InterstitialAd(context);
+        // Insert the Ad Unit ID
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+
+        interstitial.loadAd(adRequest);
+        // Prepare an Interstitial Ad Listener
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                // Call displayInterstitial() function
+                if (interstitial.isLoaded()&&Math.random()>0.6) {
+                    interstitial.show();
+                }
+            }
+        });
+        //Finish calling ads
 
         Fresco.initialize(getActivity());
 

@@ -31,6 +31,9 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.pushbots.push.Pushbots;
 
 import java.util.HashMap;
@@ -43,7 +46,6 @@ public class MainActivity extends AppCompatActivity
     SliderLayout mDemoSlider;
     FloatingActionButton fab;
     DrawerLayout drawer;
-    private static long back_pressed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
-
 
         Pushbots.sharedInstance().init(getApplicationContext());
         Pushbots.sharedInstance().setCustomHandler(customHandler.class);
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-           super.onBackPressed();
+            super.onBackPressed();
         }
     }
 
@@ -223,7 +222,7 @@ public class MainActivity extends AppCompatActivity
 
 
             case R.id.nav_myLocation:
-                intent = new Intent(MainActivity.this,MyLocation.class);
+                intent = new Intent(MainActivity.this, MyLocation.class);
                 startActivity(intent);
                 break;
         }

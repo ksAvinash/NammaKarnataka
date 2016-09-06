@@ -24,6 +24,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,6 +55,9 @@ public class MyLocation extends AppCompatActivity {
     static int serverVersion, localVersion;
     Context context;
 
+    InterstitialAd mInterstitialAd;
+    private InterstitialAd interstitial;
+
     @Override
     public void onBackPressed() {
         if(getFragmentManager().getBackStackEntryCount() > 0)
@@ -68,6 +75,25 @@ public class MyLocation extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        //Call ads
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        // Prepare the Interstitial Ad
+        interstitial = new InterstitialAd(MyLocation.this);
+        // Insert the Ad Unit ID
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+
+        interstitial.loadAd(adRequest);
+        // Prepare an Interstitial Ad Listener
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                // Call displayInterstitial() function
+                if (interstitial.isLoaded()) {
+                    interstitial.show();
+                }
+            }
+        });
+        //Finish calling ads
 
         context = getApplicationContext();
         materialRefreshLayout = (MaterialRefreshLayout)findViewById(R.id.refresh);

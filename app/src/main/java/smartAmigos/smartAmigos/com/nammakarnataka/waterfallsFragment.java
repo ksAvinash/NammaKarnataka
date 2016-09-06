@@ -28,6 +28,9 @@ import com.cjj.MaterialRefreshLayout;
 import com.cjj.MaterialRefreshListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,6 +47,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 import smartAmigos.smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
 public class waterfallsFragment extends Fragment {
@@ -51,13 +55,14 @@ public class waterfallsFragment extends Fragment {
     private List<generic_adapter> waterfalls_adapterList = new ArrayList<>();
 
     static SimpleDraweeView draweeView;
-
+    private InterstitialAd interstitial;
     View view;
     TextView t;
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
     ListView list;
+
     public waterfallsFragment() {
         // Required empty public constructor
     }
@@ -73,19 +78,37 @@ public class waterfallsFragment extends Fragment {
         context = getActivity().getApplicationContext();
 
         t = (TextView) view.findViewById(R.id.z1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf");
         t.setTypeface(myFont);
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
         list = (ListView) view.findViewById(R.id.waterfallsList);
 
+        //Call ads
+        AdRequest adRequest = new AdRequest.Builder().build();
 
+        // Prepare the Interstitial Ad
+        interstitial = new InterstitialAd(context);
+        // Insert the Ad Unit ID
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+
+        interstitial.loadAd(adRequest);
+        // Prepare an Interstitial Ad Listener
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                // Call displayInterstitial() function
+                if (interstitial.isLoaded() && Math.random() > 0.6) {
+                    interstitial.show();
+                }
+            }
+        });
+        //Finish calling ads
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
         Fresco.initialize(getActivity());
 
-        if(!loadJsonFile()){
+        if (!loadJsonFile()) {
             if (isNetworkConnected()) {
                 Toast.makeText(getActivity(), "please wait for a moment!", Toast.LENGTH_SHORT).show();
                 SharedPreferences preferences = getActivity().getSharedPreferences("waterfalls_version", Context.MODE_PRIVATE);
@@ -94,7 +117,7 @@ public class waterfallsFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
-        }else if (isNetworkConnected()) {
+        } else if (isNetworkConnected()) {
             Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
 
@@ -119,6 +142,7 @@ public class waterfallsFragment extends Fragment {
         return view;
 
     }
+
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
@@ -170,14 +194,14 @@ public class waterfallsFragment extends Fragment {
             try {
                 JSONObject parent = new JSONObject(ret);
                 JSONArray items = parent.getJSONArray("list");
-                for (int i=0;i<items.length();i++){
+                for (int i = 0; i < items.length(); i++) {
                     JSONObject child = items.getJSONObject(i);
                     JSONArray images = child.getJSONArray("image");
-                    String [] imagesArray = new String[25];
-                    for(int j=0;j<images.length();j++){
+                    String[] imagesArray = new String[25];
+                    for (int j = 0; j < images.length(); j++) {
                         imagesArray[j] = images.getString(j);
                     }
-                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude")));
                     displayList();
                 }
             } catch (JSONException e) {
@@ -187,7 +211,6 @@ public class waterfallsFragment extends Fragment {
         }
         return false;
     }
-
 
 
     private void displayList() {
@@ -227,7 +250,7 @@ public class waterfallsFragment extends Fragment {
                         JSONObject root = new JSONObject(ret);
                         JSONArray eventJson = root.getJSONArray("list");
                         JSONObject child = eventJson.getJSONObject(position);
-                        Fragment fragment = new placeDisplayFragment(child,"WATERFALL");
+                        Fragment fragment = new placeDisplayFragment(child, "WATERFALL");
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_main, fragment);
                         ft.addToBackStack(null);
@@ -240,6 +263,7 @@ public class waterfallsFragment extends Fragment {
             }
         });
     }
+
     public class myWaterfallsListAdapterClass extends ArrayAdapter<generic_adapter> {
 
         myWaterfallsListAdapterClass() {
@@ -277,11 +301,6 @@ public class waterfallsFragment extends Fragment {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
-
-
-
-
 
 
     public class waterfallsVersion extends AsyncTask<String, String, String> {
@@ -376,14 +395,14 @@ public class waterfallsFragment extends Fragment {
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONArray items = parent.getJSONArray("list");
-                for (int i=0;i<items.length();i++){
+                for (int i = 0; i < items.length(); i++) {
                     JSONObject child = items.getJSONObject(i);
                     JSONArray images = child.getJSONArray("image");
-                    String [] imagesArray = new String[25];
-                    for(int j=0;j<images.length();j++){
+                    String[] imagesArray = new String[25];
+                    for (int j = 0; j < images.length(); j++) {
                         imagesArray[j] = images.getString(j);
                     }
-                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude")));
                     materialRefreshLayout.finishRefresh();
                     displayList();
                 }
@@ -394,8 +413,6 @@ public class waterfallsFragment extends Fragment {
         }
 
     }
-
-
 
 
 }
