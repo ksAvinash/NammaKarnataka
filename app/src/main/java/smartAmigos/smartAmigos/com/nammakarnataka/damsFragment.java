@@ -87,7 +87,7 @@ public class damsFragment extends Fragment {
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
                 // Call displayInterstitial() function
-                if (interstitial.isLoaded()&&Math.random()>0.6) {
+                if (interstitial.isLoaded()&&Math.random()>0.7) {
                     interstitial.show();
                 }
             }

@@ -27,6 +27,9 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -60,7 +63,7 @@ public class placeDisplayFragment extends Fragment {
     private LinearLayout comment_layout;
     private CardView comment_CardView;
     SliderLayout mDemoSlider;
-
+    private InterstitialAd interstitial;
 
     JSONArray images;
 
@@ -88,6 +91,26 @@ public class placeDisplayFragment extends Fragment {
         nearby_textView = (TextView) view.findViewById(R.id.nearby_textView);
 
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
+
+        //Call ads
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        // Prepare the Interstitial Ad
+        interstitial = new InterstitialAd(getContext());
+        // Insert the Ad Unit ID
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+
+        interstitial.loadAd(adRequest);
+        // Prepare an Interstitial Ad Listener
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                // Call displayInterstitial() function
+                if (interstitial.isLoaded()&&Math.random()>0.8) {
+                    interstitial.show();
+                }
+            }
+        });
+        //Finish calling ads
 
 
         comment_input = (EditText) view.findViewById(R.id.comment_input);

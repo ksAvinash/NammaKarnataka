@@ -88,7 +88,7 @@ public class MyLocation extends AppCompatActivity {
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
                 // Call displayInterstitial() function
-                if (interstitial.isLoaded()) {
+                if (interstitial.isLoaded()&&Math.random()>0.7) {
                     interstitial.show();
                 }
             }
