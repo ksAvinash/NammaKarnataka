@@ -33,6 +33,9 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
     String email_string,password_string;
 
     ProgressDialog progressDialog;
+
+
+
     FirebaseAuth firebaseAuth;
 
     @Override
