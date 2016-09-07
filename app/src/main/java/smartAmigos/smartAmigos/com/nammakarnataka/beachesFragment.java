@@ -100,8 +100,6 @@ public class beachesFragment extends Fragment {
         }
 
 
-        
-
         Fresco.initialize(getActivity());
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
