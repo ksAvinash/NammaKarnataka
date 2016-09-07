@@ -17,7 +17,7 @@
         android:layout_marginTop="131dp" />
 
 
-    
+
     <EditText
         android:hint="enter mail id"
 
