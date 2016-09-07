@@ -1,45 +1,39 @@
 package smartAmigos.smartAmigos.com.nammakarnataka;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.OptionalPendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
-/**
- * Created by CHARAN on 9/5/2016.
- */
-public class SignInActivity extends AppCompatActivity implements
-        GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+public class SignInActivity extends AppCompatActivity  implements View.OnClickListener{
 
-    private static final String TAG = "SignInActivity";
-    private static final int RC_SIGN_IN = 9001;
 
-    private GoogleApiClient mGoogleApiClient;
-    private TextView mStatusTextView;
-    private ProgressDialog mProgressDialog;
     private TextView appNameTextView;
+    EditText email,password;
+    Button signup;
+
+    String email_string,password_string;
+
+    ProgressDialog progressDialog;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,161 +43,96 @@ public class SignInActivity extends AppCompatActivity implements
         getSupportActionBar().hide();
         setContentView(R.layout.activity_sigin);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        email = (EditText)findViewById(R.id.email_id);
+        password = (EditText)findViewById(R.id.password_id);
+
+        signup = (Button)findViewById(R.id.sign_up);
+        signup.setOnClickListener(this);
+
+
         appNameTextView = (TextView)findViewById(R.id.appNameTextView);
         Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Kaushan.otf" );
         appNameTextView.setTypeface(myFont);
 
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
+        progressDialog = new ProgressDialog(this);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        signInButton.setSize(SignInButton.SIZE_WIDE);
-        signInButton.setScopes(gso.getScopeArray());
-    }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
-        if (opr.isDone()) {
-            // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
-            // and the GoogleSignInResult will be available instantly.
-            Log.d(TAG, "Got cached sign-in");
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        } else {
-            // If the user has not previously signed in on this device or the sign-in has expired,
-            // this asynchronous branch will attempt to sign in the user silently.  Cross-device
-            // single sign-on will occur in this branch.
-            showProgressDialog();
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(GoogleSignInResult googleSignInResult) {
-                    hideProgressDialog();
-                    handleSignInResult(googleSignInResult);
-                }
-            });
-        }
-    }
-
-    // [START onActivityResult]
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-            handleSignInResult(result);
-        }
-    }
-    // [END onActivityResult]
-
-    // [START handleSignInResult]
-    private void handleSignInResult(GoogleSignInResult result) {
-        final SharedPreferences sharedPreferences = getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPreferences.edit();
-        Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
-            GoogleSignInAccount acct = result.getSignInAccount();
-            String user_name = acct.getDisplayName();
-            editor.putString("userName", user_name);
-            editor.apply();
-            Toast.makeText(getApplicationContext(),"Signed in as : " + user_name,Toast.LENGTH_LONG).show();
-            updateUI(true);
-
+        //login == 1 (true) then skip login page
+        SharedPreferences preferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+        if(preferences.getInt("version",0) == 1){
             Intent intent = new Intent(SignInActivity.this,SplasherActivity.class);
             startActivity(intent);
-        } else {
-            // Signed out, show unauthenticated UI.
-            updateUI(false);
-        }
-    }
-    // [END handleSignInResult]
-
-    // [START signIn]
-    private void signIn() {
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        startActivityForResult(signInIntent, RC_SIGN_IN);
-    }
-    // [END signIn]
-
-    // [START signOut]
-    private void signOut() {
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        // [START_EXCLUDE]
-                        updateUI(false);
-                        // [END_EXCLUDE]
-                    }
-                });
-    }
-    // [END signOut]
-
-    // [START revokeAccess]
-    private void revokeAccess() {
-        Auth.GoogleSignInApi.revokeAccess(mGoogleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                        // [START_EXCLUDE]
-                        updateUI(false);
-                        // [END_EXCLUDE]
-                    }
-                });
-    }
-    // [END revokeAccess]
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        // An unresolvable error has occurred and Google APIs (including Sign-In) will not
-        // be available.
-        Log.d(TAG, "onConnectionFailed:" + connectionResult);
-    }
-
-    private void showProgressDialog() {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setMessage(getString(R.string.loading));
-            mProgressDialog.setIndeterminate(true);
+            finish();
         }
 
-        mProgressDialog.show();
-    }
-
-    private void hideProgressDialog() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.hide();
-        }
-    }
-
-    private void updateUI(boolean signedIn) {
-        if (signedIn) {
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            Intent intent = new Intent(getBaseContext(),SplasherActivity.class);
-            startActivity(intent);
-            this.finish();
-        } else {
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-        }
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.sign_in_button:
-                signIn();
-                break;
+    public void onClick(View view) {
+        if(view.getId() == R.id.sign_up){
+
+            email_string = email.getText().toString().trim();
+            password_string = password.getText().toString().trim();
+
+            if(TextUtils.isEmpty(email_string) || TextUtils.isEmpty(password_string)){
+                Toast.makeText(getApplicationContext(),"email or password field is empty",Toast.LENGTH_SHORT).show();
+            }else{
+
+                  if(isNetworkConnected()){
+                      progressDialog.setMessage("Registering User..");
+                      progressDialog.show();
+
+                      firebaseAuth.createUserWithEmailAndPassword(email_string,password_string)
+                              .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                  @Override
+                                  public void onComplete(@NonNull Task<AuthResult> task) {
+                                      if(task.isSuccessful()){
+                                          SharedPreferences preferences = getSharedPreferences("login", Context.MODE_PRIVATE);
+                                          SharedPreferences.Editor editor = preferences.edit();
+                                          editor.putInt("version",1);
+                                          editor.apply();
+
+
+                                          String[] user = email_string.split("@");
+
+                                          SharedPreferences sharedPreferences = getSharedPreferences("KarnatakaPref", Context.MODE_PRIVATE);
+                                          SharedPreferences.Editor editor2 = sharedPreferences.edit();
+                                          editor2.putString("userName",user[0]);
+                                          editor2.apply();
+
+                                         // sharedPreferences.getString("userName", null);
+
+
+
+                                          Toast.makeText(getApplicationContext(),"Signed up successfully!",Toast.LENGTH_LONG).show();
+
+                                          Intent intent = new Intent(SignInActivity.this,SplasherActivity.class);
+                                          startActivity(intent);
+                                          finish();
+
+                                      }else {
+                                          Toast.makeText(getApplicationContext(),"Something went wrong!",Toast.LENGTH_LONG).show();
+                                      }
+
+
+                                      if(progressDialog.isShowing())
+                                          progressDialog.dismiss();
+                                  }
+                              });
+                  }else {
+                      Toast.makeText(getApplicationContext(),"No Internet Connection!",Toast.LENGTH_LONG).show();
+                  }
+
+            }
         }
     }
+
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
 }

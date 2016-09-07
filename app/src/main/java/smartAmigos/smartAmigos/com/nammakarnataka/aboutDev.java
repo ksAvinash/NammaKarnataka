@@ -27,7 +27,6 @@ public class aboutDev extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
