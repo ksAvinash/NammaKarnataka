@@ -192,7 +192,7 @@ public class hillstationsFragment extends Fragment {
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/hillstations.json");
+            File path = new File("/data/data/smartAmigos.com.nammakarnataka/hillstations.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 
@@ -217,7 +217,7 @@ public class hillstationsFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String ret = null;
                 BufferedReader reader = null;
-                File file = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/hillstations.json");
+                File file = new File("/data/data/smartAmigos.com.nammakarnataka/hillstations.json");
                 if (file.exists()) {
 
 
