@@ -1,4 +1,4 @@
-package smartAmigos.smartAmigos.com.nammakarnataka;
+package smartAmigos.com.nammakarnataka;
 
 
 import android.annotation.SuppressLint;
@@ -32,7 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartAmigos.smartAmigos.com.nammakarnataka.adapter.generic_adapter;
+import smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
 
 public class distDisplayFragment extends Fragment {

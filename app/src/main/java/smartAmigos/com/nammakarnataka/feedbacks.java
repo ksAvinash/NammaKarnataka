@@ -1,4 +1,4 @@
-package smartAmigos.smartAmigos.com.nammakarnataka;
+package smartAmigos.com.nammakarnataka;
 
 import android.content.Context;
 import android.content.Intent;

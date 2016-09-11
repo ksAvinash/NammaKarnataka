@@ -1,7 +1,7 @@
-package smartAmigos.smartAmigos.com.nammakarnataka;
+package smartAmigos.com.nammakarnataka;
+
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -13,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,30 +46,35 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartAmigos.smartAmigos.com.nammakarnataka.adapter.generic_adapter;
+import smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
 
-public class beachesFragment extends Fragment {
+public class templesFragment extends Fragment {
 
+    InterstitialAd mInterstitialAd;
     private InterstitialAd interstitial;
+    private List<generic_adapter> temples_adapterList = new ArrayList<>();
+
+    static SimpleDraweeView draweeView;
+
     View view;
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
-    static SimpleDraweeView draweeView;
     ListView list;
     TextView t;
-    private List<generic_adapter> beaches_adapterList = new ArrayList<>();
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view  = inflater.inflate(R.layout.fragment_beaches, container, false);
+
+
+        view = inflater.inflate(R.layout.fragment_temples, container, false);
         context = getActivity().getApplicationContext();
 
-        t = (TextView) view.findViewById(R.id.j1);
+        t = (TextView) view.findViewById(R.id.p1);
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
         t.setTypeface(myFont);
+
 
         //Call ads
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -85,28 +89,29 @@ public class beachesFragment extends Fragment {
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
                 // Call displayInterstitial() function
-                if (interstitial.isLoaded()&&Math.random()>0.7) {
+                if (interstitial.isLoaded()&&Math.random()>0.75) {
                     interstitial.show();
                 }
             }
         });
         //Finish calling ads
 
-        materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
-        list = (ListView) view.findViewById(R.id.beachesList);
 
+
+        materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
+        list = (ListView) view.findViewById(R.id.templeList);
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
-
         Fresco.initialize(getActivity());
+
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
                 Toast.makeText(getActivity(), "please wait for a moment!", Toast.LENGTH_SHORT).show();
-                SharedPreferences preferences = getActivity().getSharedPreferences("beaches_version", Context.MODE_PRIVATE);
+                SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
                 localVersion = preferences.getInt("version", 0);
-                new beachesVersion().execute("http://nammakarnataka.net23.net/beaches/beaches_version.json");
+                new TempleVersion().execute("http://nammakarnataka.net23.net/temples/temple_version.json");
             } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
@@ -114,14 +119,15 @@ public class beachesFragment extends Fragment {
             Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
 
+
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
 
                 if (isNetworkConnected()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("beaches_version", Context.MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
                     localVersion = preferences.getInt("version", 0);
-                    new beachesVersion().execute("http://nammakarnataka.net23.net/beaches/beaches_version.json");
+                    new TempleVersion().execute("http://nammakarnataka.net23.net/temples/temple_version.json");
                 } else {
                     Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
                     materialRefreshLayout.finishRefresh();
@@ -130,12 +136,11 @@ public class beachesFragment extends Fragment {
 
         });
 
-
         return view;
     }
 
 
-    public class beachesVersion extends AsyncTask<String, String, String> {
+    public class TempleVersion extends AsyncTask<String, String, String> {
         HttpURLConnection connection;
         BufferedReader reader;
 
@@ -164,7 +169,7 @@ public class beachesFragment extends Fragment {
             super.onPostExecute(s);
             try {
                 JSONObject parent = new JSONObject(s);
-                JSONObject news_version = parent.getJSONObject("beaches_version");
+                JSONObject news_version = parent.getJSONObject("temple_version");
 
                 serverVersion = news_version.getInt("version");
 
@@ -173,118 +178,21 @@ public class beachesFragment extends Fragment {
                 e.printStackTrace();
             }
             if (localVersion != serverVersion) {
-               new beachesFile().execute("http://nammakarnataka.net23.net/beaches/beaches.json");
+                new templeFile().execute("http://nammakarnataka.net23.net/temples/temple.json");
             } else {
-                Toast.makeText(getActivity(), "Beaches List is up to date!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Temple List is up to date!", Toast.LENGTH_SHORT).show();
                 materialRefreshLayout.finishRefresh();
             }
 
         }
-    }
-
-
-
-
-
-    public class beachesFile extends AsyncTask<String, String, String> {
-
-        HttpURLConnection connection;
-        BufferedReader reader;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-            try {
-                URL url = new URL(params[0]);
-                connection = (HttpURLConnection) url.openConnection();
-                InputStream stream = connection.getInputStream();
-                reader = new BufferedReader(new InputStreamReader(stream));
-                StringBuilder builder = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    builder.append(line);
-                }
-                String str = builder.toString();
-                saveJsonFile(str);
-                return str;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            beaches_adapterList.clear();
-
-            SharedPreferences preferences = getActivity().getSharedPreferences("beaches_version", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("version", serverVersion);
-            editor.apply();
-
-            Toast.makeText(context, "Beaches List updated!", Toast.LENGTH_SHORT).show();
-
-
-            try {
-                JSONObject parent = new JSONObject(s);
-                JSONArray items = parent.getJSONArray("list");
-                for (int i=0;i<items.length();i++){
-                    JSONObject child = items.getJSONObject(i);
-                    JSONArray images = child.getJSONArray("image");
-                    String [] imagesArray = new String[25];
-                    for(int j=0;j<images.length();j++){
-                        imagesArray[j] = images.getString(j);
-                    }
-                    beaches_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
-                }
-                materialRefreshLayout.finishRefresh();
-                displayList(items);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
-
-
-
-    private void saveJsonFile(String data) {
-        FileOutputStream stream = null;
-        try {
-            File path = new File("/data/data/smartAmigos.com.nammakarnataka/beaches.json");
-            stream = new FileOutputStream(path);
-            stream.write(data.getBytes());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (stream != null)
-                    stream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
     }
 
 
     private boolean loadJsonFile() {
-        beaches_adapterList.clear();
+        temples_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
-        File file = new File("/data/data/smartAmigos.com.nammakarnataka/beaches.json");
+        File file = new File("/data/data/smartAmigos.com.nammakarnataka/temple.json");
         if (file.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(file);
@@ -318,7 +226,8 @@ public class beachesFragment extends Fragment {
                     for(int j=0;j<images.length();j++){
                         imagesArray[j] = images.getString(j);
                     }
-                    beaches_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    temples_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
+
                 }
                 displayList(items);
             } catch (JSONException e) {
@@ -326,8 +235,103 @@ public class beachesFragment extends Fragment {
             }
             return true;
         }
+
         return false;
     }
+
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
+
+    private void saveJsonFile(String data) {
+        FileOutputStream stream = null;
+        try {
+            File path = new File("/data/data/smartAmigos.com.nammakarnataka/temple.json");
+            stream = new FileOutputStream(path);
+            stream.write(data.getBytes());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stream != null)
+                    stream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public class templeFile extends AsyncTask<String, String, String> {
+
+        HttpURLConnection connection;
+        BufferedReader reader;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuilder builder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+                String str = builder.toString();
+                saveJsonFile(str);
+                return str;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            temples_adapterList.clear();
+
+            SharedPreferences preferences = getActivity().getSharedPreferences("temple_version", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("version", serverVersion);
+            editor.apply();
+
+            Toast.makeText(getActivity(), "Temples List updated!", Toast.LENGTH_SHORT).show();
+
+            try {
+                JSONObject parent = new JSONObject(s);
+                JSONArray items = parent.getJSONArray("list");
+                for (int i=0;i<items.length();i++){
+                    JSONObject child = items.getJSONObject(i);
+                    JSONArray images = child.getJSONArray("image");
+                    String [] imagesArray = new String[25];
+                    for(int j=0;j<images.length();j++){
+                        imagesArray[j] = images.getString(j);
+                    }
+                    temples_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
+
+                }
+                materialRefreshLayout.finishRefresh();
+                displayList(items);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
 
 
     private void displayList(final JSONArray par) {
@@ -338,25 +342,24 @@ public class beachesFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                try {
-                    JSONObject child = par.getJSONObject(position);
-                    Fragment fragment = new placeDisplayFragment(child,"BEACHES");
-                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                    ft.replace(R.id.content_main, fragment);
-                    ft.addToBackStack(null);
-                    ft.commit();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                    try {
+                        JSONObject child = par.getJSONObject(position);
+                        Fragment fragment = new placeDisplayFragment(child,"TEMPLES");
+                        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_main, fragment);
+                        ft.addToBackStack(null);
+                        ft.commit();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
             }
         });
     }
 
-
     public class myTempleListAdapterClass extends ArrayAdapter<generic_adapter> {
 
         myTempleListAdapterClass() {
-            super(context, R.layout.hillstations_item, beaches_adapterList);
+            super(context, R.layout.hillstations_item, temples_adapterList);
         }
 
 
@@ -368,7 +371,7 @@ public class beachesFragment extends Fragment {
                 itemView = inflater.inflate(R.layout.hillstations_item, parent, false);
 
             }
-            generic_adapter current = beaches_adapterList.get(position);
+            generic_adapter current = temples_adapterList.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage()[0]);
@@ -384,5 +387,8 @@ public class beachesFragment extends Fragment {
             return itemView;
         }
 
+
     }
+
+
 }

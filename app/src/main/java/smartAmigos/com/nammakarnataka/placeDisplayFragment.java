@@ -1,4 +1,4 @@
-package smartAmigos.smartAmigos.com.nammakarnataka;
+package smartAmigos.com.nammakarnataka;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -50,6 +49,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 
 @SuppressLint("ValidFragment")
@@ -134,6 +134,9 @@ public class placeDisplayFragment extends Fragment {
         submit_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                    delayButton();
+
                 try {
                     if (TextUtils.isEmpty(comment_input.getText().toString())) {
                         Toast.makeText(getActivity(), "Please enter a comment", Toast.LENGTH_LONG).show();
@@ -215,6 +218,20 @@ public class placeDisplayFragment extends Fragment {
 
         return view;
     }
+
+
+    public void delayButton(){
+
+        submit_comment.setEnabled(false);
+
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               submit_comment.setEnabled(true);
+            }
+        }, 10000);
+    }
+
 
 
     class Send extends AsyncTask<String, Void, Boolean> {

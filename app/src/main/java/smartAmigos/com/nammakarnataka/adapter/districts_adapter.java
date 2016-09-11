@@ -1,4 +1,4 @@
-package smartAmigos.smartAmigos.com.nammakarnataka.adapter;
+package smartAmigos.com.nammakarnataka.adapter;
 
 
 public class districts_adapter {
@@ -9,7 +9,6 @@ public class districts_adapter {
     }
 
     public String getDistrict() {
-
 
         return district;
     }

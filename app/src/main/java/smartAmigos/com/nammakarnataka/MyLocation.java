@@ -1,4 +1,4 @@
-package smartAmigos.smartAmigos.com.nammakarnataka;
+package smartAmigos.com.nammakarnataka;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -43,7 +43,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartAmigos.smartAmigos.com.nammakarnataka.adapter.districts_adapter;
+import smartAmigos.com.nammakarnataka.adapter.districts_adapter;
 
 
 public class MyLocation extends AppCompatActivity {
