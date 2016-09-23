@@ -48,23 +48,23 @@ public class NotifHandler extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_general);
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        // Prepare the Interstitial Ad
-        interstitial = new InterstitialAd(NotifHandler.this);
-        // Insert the Ad Unit ID
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-
-        interstitial.loadAd(adRequest);
-        // Prepare an Interstitial Ad Listener
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                // Call displayInterstitial() function
-                if (interstitial.isLoaded()) {
-                    interstitial.show();
-                }
-            }
-        });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//
+//        // Prepare the Interstitial Ad
+//        interstitial = new InterstitialAd(NotifHandler.this);
+//        // Insert the Ad Unit ID
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//
+//        interstitial.loadAd(adRequest);
+//        // Prepare an Interstitial Ad Listener
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                // Call displayInterstitial() function
+//                if (interstitial.isLoaded()) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
 
         place_textView = (TextView) findViewById(R.id.place_textView);
         description_textView = (TextView) findViewById(R.id.description_textView);
@@ -81,7 +81,24 @@ public class NotifHandler extends Activity {
         comment_CardView.setVisibility(View.GONE);
 
 
-//        Bundle extras = getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
+        try {
+            String place_name = extras.getString("placename");
+            String description = extras.getString("description");
+            String location = extras.getString("location");
+            String best_season = extras.getString("bestseason");
+            String nearby_places = extras.getString("nearby");
+            String additional_info = extras.getString("addinfo");
+            place_textView.setText(place_name);
+            description_textView.setText(description);
+            location_textView.setText(location);
+            season_textView.setText(best_season);
+            nearby_textView.setText(nearby_places);
+            additionalInformation.setText(additional_info);
+        }catch (Exception e){
+
+        }
+
 //        if(extras.containsKey("useDB")){
 //            String useDB = extras.getString("useDB");
 //            Log.i("useDB",useDB);
@@ -102,24 +119,24 @@ public class NotifHandler extends Activity {
 //        }
 
         try {
-            new GetDataTask().execute(new URL("http://charan.net23.net/getdata.php"));
+//            new GetDataTask().execute(new URL("http://charan.net23.net/getdata.php"));
         } catch (Exception e) {
 
         }
 
-        gmapButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    startActivity(
-                            new Intent(
-                                    android.content.Intent.ACTION_VIEW,
-                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + place_name + ")@" + latitude + "," + longitude)));
-                } catch (Exception e) {
-
-                }
-            }
-        });
+//        gmapButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                try {
+//                    startActivity(
+//                            new Intent(
+//                                    android.content.Intent.ACTION_VIEW,
+//                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + place_name + ")@" + latitude + "," + longitude)));
+//                } catch (Exception e) {
+//
+//                }
+//            }
+//        });
 
     }
 
