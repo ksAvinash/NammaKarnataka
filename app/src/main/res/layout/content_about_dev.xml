@@ -111,7 +111,7 @@
                                 android:paddingTop="15dp"
                                 android:textSize="12sp"
                                 app:textWeight="bold"
-                                android:text="justmaitoavi@gmail.com"
+                                android:text="justmailtoavi@gmail.com"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                         </LinearLayout>

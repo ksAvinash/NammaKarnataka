@@ -134,6 +134,17 @@ public class MainActivity extends AppCompatActivity
             startActivity(intent);
 
         }
+        else if(item.getItemId() == R.id.action_share){
+
+            String str = "https://play.google.com/store/apps/details?id=" + getPackageName();
+
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,
+                    "All you need to know about Karnataka\n\nDownload:\n"+ str);
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
+        }
 
         return super.onOptionsItemSelected(item);
     }
