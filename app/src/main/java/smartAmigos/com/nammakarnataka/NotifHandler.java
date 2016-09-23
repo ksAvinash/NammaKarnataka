@@ -48,23 +48,23 @@ public class NotifHandler extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_general);
 
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//
-//        // Prepare the Interstitial Ad
-//        interstitial = new InterstitialAd(NotifHandler.this);
-//        // Insert the Ad Unit ID
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//
-//        interstitial.loadAd(adRequest);
-//        // Prepare an Interstitial Ad Listener
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                // Call displayInterstitial() function
-//                if (interstitial.isLoaded()) {
-//                    interstitial.show();
-//                }
-//            }
-//        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        // Prepare the Interstitial Ad
+        interstitial = new InterstitialAd(NotifHandler.this);
+        // Insert the Ad Unit ID
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+
+        interstitial.loadAd(adRequest);
+        // Prepare an Interstitial Ad Listener
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                // Call displayInterstitial() function
+                if (interstitial.isLoaded()) {
+                    interstitial.show();
+                }
+            }
+        });
 
         place_textView = (TextView) findViewById(R.id.place_textView);
         description_textView = (TextView) findViewById(R.id.description_textView);
@@ -83,60 +83,50 @@ public class NotifHandler extends Activity {
 
         Bundle extras = getIntent().getExtras();
         try {
-            String place_name = extras.getString("placename");
+            place_name = extras.getString("placename");
             String description = extras.getString("description");
             String location = extras.getString("location");
+            latitude = extras.getString("latitude");
+            longitude = extras.getString("longitude");
             String best_season = extras.getString("bestseason");
             String nearby_places = extras.getString("nearby");
             String additional_info = extras.getString("addinfo");
+            String image_url = extras.getString("imgUrl");
             place_textView.setText(place_name);
             description_textView.setText(description);
-            location_textView.setText(location);
+            location_textView.setText(location+"( "+latitude+", "+longitude+" )");
             season_textView.setText(best_season);
             nearby_textView.setText(nearby_places);
             additionalInformation.setText(additional_info);
+
+            textSliderView = new TextSliderView(getApplicationContext());
+            textSliderView
+                    .image(image_url)
+                    .setScaleType(BaseSliderView.ScaleType.Fit);
+            layout_images.addSlider(textSliderView);
+
+
+            layout_images.setPresetTransformer(SliderLayout.Transformer.RotateDown);
+            layout_images.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+            layout_images.setCustomAnimation(new DescriptionAnimation());
+            layout_images.setDuration(60000);
         }catch (Exception e){
 
         }
 
-//        if(extras.containsKey("useDB")){
-//            String useDB = extras.getString("useDB");
-//            Log.i("useDB",useDB);
-//            if(useDB.equals("true")){
-//
-//            } else {
-//                if(extras.containsKey("place")&&extras.containsKey("description")&&extras.containsKey("location")&&extras.containsKey("lat")&&extras.containsKey("long")
-//                        &&extras.containsKey("season")&&extras.containsKey("nearby")&&extras.containsKey("addinfo")){
-//                    place_textView.setText(extras.getString("place"));
-//                    description_textView.setText(extras.getString("description"));
-//                    location_textView.setText(extras.getString("location")+" ( "+extras.getString("lat")+","+extras.getString("long")+" ) ");
-//                    season_textView.setText(extras.getString("season"));
-//                    nearby_textView.setText(extras.getString("nearby_textView"));
-//                    additionalInformation.setText(extras.getString("addinfo"));
-//                }
-//            }
-//
-//        }
+        gmapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    startActivity(
+                            new Intent(
+                                    android.content.Intent.ACTION_VIEW,
+                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + place_name + ")@" + latitude + "," + longitude)));
+                } catch (Exception e) {
 
-        try {
-//            new GetDataTask().execute(new URL("http://charan.net23.net/getdata.php"));
-        } catch (Exception e) {
-
-        }
-
-//        gmapButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                try {
-//                    startActivity(
-//                            new Intent(
-//                                    android.content.Intent.ACTION_VIEW,
-//                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + place_name + ")@" + latitude + "," + longitude)));
-//                } catch (Exception e) {
-//
-//                }
-//            }
-//        });
+                }
+            }
+        });
 
     }
 
@@ -144,87 +134,5 @@ public class NotifHandler extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(this, MainActivity.class));
-    }
-
-    public class GetDataTask extends AsyncTask<URL, Void, String> {
-        private HttpURLConnection urlConnection;
-
-        @Override
-        protected String doInBackground(URL... params) {
-
-            StringBuilder builder = new StringBuilder();
-            String result = "";
-            try {
-                URL url = params[0];
-                Log.i("URL :", url.toString());
-                urlConnection = (HttpURLConnection) url.openConnection();
-                urlConnection.setConnectTimeout(20 * 1000);
-                urlConnection.setReadTimeout(20 * 1000);
-                InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                String response;
-                while ((response = reader.readLine()) != null) {
-                    builder.append(response + "\n");
-//                    Log.i("Response",response.toString());
-                    result = builder.toString();
-                }
-                in.close();
-            } catch (Exception e) {
-
-            }
-            return result;
-        }
-
-        @Override
-        protected void onPreExecute() {
-            // super.onPreExecute();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            try {
-                JSONArray jArray = new JSONArray(result);
-
-                for (int i = 0; i < jArray.length(); i++) {
-                    JSONObject json = jArray.getJSONObject(i);
-                    String place = json.getString("Place");
-                    String description = json.getString("Description");
-                    String location = json.getString("Location");
-                    String lat = json.getString("Lat");
-                    String longit = json.getString("Long");
-                    String season = json.getString("Season");
-                    String nearby = json.getString("Nearby");
-                    String addinfo = json.getString("Addinfo");
-                    String imgUrl = json.getString("imgUrl");
-
-                    latitude = lat;
-                    longitude = longit;
-                    place_name = place;
-
-                    place_textView.setText(place);
-                    description_textView.setText(description);
-                    location_textView.setText(location + " ( " + lat + "," + longit + " ) ");
-                    season_textView.setText(season);
-                    nearby_textView.setText(nearby);
-                    additionalInformation.setText(addinfo);
-
-                    textSliderView = new TextSliderView(getApplicationContext());
-                    textSliderView
-                            .image(imgUrl)
-                            .setScaleType(BaseSliderView.ScaleType.Fit);
-                    layout_images.addSlider(textSliderView);
-
-
-                    layout_images.setPresetTransformer(SliderLayout.Transformer.RotateDown);
-                    layout_images.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-                    layout_images.setCustomAnimation(new DescriptionAnimation());
-                    layout_images.setDuration(60000);
-
-                }
-            } catch (Exception e) {
-
-            }
-        }
     }
 }
