@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "670634392749",
-    "firebase_url": "https://new-namma-karnataka.firebaseio.com",
-    "project_id": "new-namma-karnataka",
-    "storage_bucket": "new-namma-karnataka.appspot.com"
+    "project_number": "220053332990",
+    "firebase_url": "https://namma-karnataka-62868.firebaseio.com",
+    "project_id": "namma-karnataka-62868",
+    "storage_bucket": "namma-karnataka-62868.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:670634392749:android:41d3fcab7d94cc65",
+        "mobilesdk_app_id": "1:220053332990:android:61384694ba46db13",
         "android_client_info": {
-          "package_name": "smartAmigos.smartAmigos.com.nammakarnataka"
+          "package_name": "smartAmigos.com.nammakarnataka"
         }
       },
       "oauth_client": [
         {
-          "client_id": "670634392749-uijtakflj3ibht7sb5mf3kmnr65lbtfc.apps.googleusercontent.com",
+          "client_id": "220053332990-15un6g411sq77ap140jdaraf1epoimul.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAwTqMjciCgBv9vD9sDnJHW6OQ_hiad2k0"
+          "current_key": "AIzaSyAf7pi0GECdwvsMQlZVqTTlFzQ5OY4OcSE"
         }
       ],
       "services": {

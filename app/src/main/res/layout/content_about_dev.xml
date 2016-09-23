@@ -76,6 +76,50 @@
                     </LinearLayout>
 
 
+
+                    <LinearLayout
+                        android:padding="4dp"
+                        android:orientation="horizontal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            fresco:roundingBorderColor="#f7f6e1"
+                            fresco:roundAsCircle="true"
+                            fresco:roundingBorderWidth="2dp"
+                            android:layout_width="120dp"
+                            android:layout_height="120dp"
+                            app:placeholderImage="@drawable/dev1"
+                            />
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <pttextview.widget.PTTextView
+                                android:paddingTop="20dp"
+                                android:paddingLeft="30dp"
+                                android:textSize="20sp"
+                                app:textWeight="bold"
+                                android:textColor="#d5e1b3"
+                                android:text="Avinash_ks"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <pttextview.widget.PTTextView
+                                android:paddingLeft="15dp"
+                                android:paddingTop="15dp"
+                                android:textSize="12sp"
+                                app:textWeight="bold"
+                                android:text="justmaitoavi@gmail.com"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
                     <LinearLayout
                         android:padding="4dp"
                         android:orientation="horizontal"
@@ -161,46 +205,6 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:padding="4dp"
-                        android:orientation="horizontal"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-
-                        <com.facebook.drawee.view.SimpleDraweeView
-                            fresco:roundingBorderColor="#f7f6e1"
-                            fresco:roundAsCircle="true"
-                            fresco:roundingBorderWidth="2dp"
-                            android:layout_width="120dp"
-                            android:layout_height="120dp"
-                            app:placeholderImage="@drawable/dev1"
-                            />
-
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <pttextview.widget.PTTextView
-                                android:paddingTop="20dp"
-                                android:paddingLeft="30dp"
-                                android:textSize="20sp"
-                                app:textWeight="bold"
-                                android:textColor="#d5e1b3"
-                                android:text="Avinash_ks"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-
-                            <pttextview.widget.PTTextView
-                                android:paddingLeft="15dp"
-                                android:paddingTop="15dp"
-                                android:textSize="12sp"
-                                app:textWeight="bold"
-                                android:text="justmaitoavi@gmail.com"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
-                        </LinearLayout>
-
-                    </LinearLayout>
 
 
 

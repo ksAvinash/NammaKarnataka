@@ -7,7 +7,7 @@
     android:id="@+id/content_my_location"
     android:background="@drawable/appbackground"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="smartAmigos.smartAmigos.com.nammakarnataka.MyLocation"
+    tools:context=".MyLocation"
     tools:showIn="@layout/activity_my_location">
 
 

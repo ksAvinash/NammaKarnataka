@@ -1,8 +1,7 @@
-package smartAmigos.smartAmigos.com.nammakarnataka;
+package smartAmigos.com.nammakarnataka;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
@@ -14,7 +13,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,40 +46,42 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartAmigos.smartAmigos.com.nammakarnataka.adapter.generic_adapter;
+import smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
+public class waterfallsFragment extends Fragment {
 
-public class hillstationsFragment extends Fragment {
-
-    private List<generic_adapter> hillstations_adapterList = new ArrayList<>();
+    private List<generic_adapter> waterfalls_adapterList = new ArrayList<>();
 
     static SimpleDraweeView draweeView;
     private InterstitialAd interstitial;
     View view;
+    TextView t;
     Context context;
     MaterialRefreshLayout materialRefreshLayout;
     static int serverVersion, localVersion;
     ListView list;
-    TextView t;
+
+    public waterfallsFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        view = inflater.inflate(R.layout.fragment_hillstations, container, false);
+
+        view = inflater.inflate(R.layout.fragment_waterfalls, container, false);
         context = getActivity().getApplicationContext();
 
-        t = (TextView) view.findViewById(R.id.r1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        t = (TextView) view.findViewById(R.id.z1);
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf");
         t.setTypeface(myFont);
-
         materialRefreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.refresh);
-        list = (ListView) view.findViewById(R.id.hillstationsList);
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }
+        list = (ListView) view.findViewById(R.id.waterfallsList);
 
-//Call ads
+        //Call ads
         AdRequest adRequest = new AdRequest.Builder().build();
 
         // Prepare the Interstitial Ad
@@ -94,35 +94,40 @@ public class hillstationsFragment extends Fragment {
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
                 // Call displayInterstitial() function
-                if (interstitial.isLoaded()&&Math.random()>0.7) {
+                if (interstitial.isLoaded() && Math.random() > 0.7) {
                     interstitial.show();
                 }
             }
         });
         //Finish calling ads
 
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
         Fresco.initialize(getActivity());
-        if(!loadJsonFile()){
+
+        if (!loadJsonFile()) {
             if (isNetworkConnected()) {
                 Toast.makeText(getActivity(), "please wait for a moment!", Toast.LENGTH_SHORT).show();
-                SharedPreferences preferences = getActivity().getSharedPreferences("hillstations_version", Context.MODE_PRIVATE);
+                SharedPreferences preferences = getActivity().getSharedPreferences("waterfalls_version", Context.MODE_PRIVATE);
                 localVersion = preferences.getInt("version", 0);
-                new HillstationVersion().execute("http://nammakarnataka.net23.net/hillstations/hillstations_version.json");
+                new waterfallsVersion().execute("http://nammakarnataka.net23.net/waterfalls/waterfalls_version.json");
             } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
-        }else if (isNetworkConnected()) {
+        } else if (isNetworkConnected()) {
             Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
+
 
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
             public void onRefresh(final MaterialRefreshLayout materialRefreshLayout) {
 
                 if (isNetworkConnected()) {
-                    SharedPreferences preferences = getActivity().getSharedPreferences("hillstations_version", Context.MODE_PRIVATE);
+                    SharedPreferences preferences = getActivity().getSharedPreferences("waterfalls_version", Context.MODE_PRIVATE);
                     localVersion = preferences.getInt("version", 0);
-                    new HillstationVersion().execute("http://nammakarnataka.net23.net/hillstations/hillstations_version.json");
+                    new waterfallsVersion().execute("http://nammakarnataka.net23.net/waterfalls/waterfalls_version.json");
                 } else {
                     Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
                     materialRefreshLayout.finishRefresh();
@@ -136,11 +141,31 @@ public class hillstationsFragment extends Fragment {
 
     }
 
+    private void saveJsonFile(String data) {
+        FileOutputStream stream = null;
+        try {
+            File path = new File("/data/data/smartAmigos.com.nammakarnataka/waterfalls.json");
+            stream = new FileOutputStream(path);
+            stream.write(data.getBytes());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stream != null)
+                    stream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     private boolean loadJsonFile() {
-        hillstations_adapterList.clear();
+        waterfalls_adapterList.clear();
         String ret = null;
         BufferedReader reader = null;
-        File file = new File("/data/data/smartAmigos.smartAmigos.com.nammakarnataka/hillstations.json");
+        File file = new File("/data/data/smartAmigos.com.nammakarnataka/waterfalls.json");
         if (file.exists()) {
             try {
                 FileInputStream fis = new FileInputStream(file);
@@ -163,19 +188,20 @@ public class hillstationsFragment extends Fragment {
                     }
             }
 
+
             try {
                 JSONObject parent = new JSONObject(ret);
                 JSONArray items = parent.getJSONArray("list");
-                for (int i=0;i<items.length();i++){
+                for (int i = 0; i < items.length(); i++) {
                     JSONObject child = items.getJSONObject(i);
                     JSONArray images = child.getJSONArray("image");
-                    String [] imagesArray = new String[25];
-                    for(int j=0;j<images.length();j++){
+                    String[] imagesArray = new String[25];
+                    for (int j = 0; j < images.length(); j++) {
                         imagesArray[j] = images.getString(j);
                     }
-                    hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude")));
+                    displayList();
                 }
-                displayList();
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -184,40 +210,16 @@ public class hillstationsFragment extends Fragment {
         return false;
     }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        return cm.getActiveNetworkInfo() != null;
-    }
-
-    private void saveJsonFile(String data) {
-        FileOutputStream stream = null;
-        try {
-            File path = new File("/data/data/smartAmigos.com.nammakarnataka/hillstations.json");
-            stream = new FileOutputStream(path);
-            stream.write(data.getBytes());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (stream != null)
-                    stream.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 
     private void displayList() {
-        ArrayAdapter<generic_adapter> adapter = new myHillstationsListAdapterClass();
+        ArrayAdapter<generic_adapter> adapter = new myWaterfallsListAdapterClass();
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String ret = null;
                 BufferedReader reader = null;
-                File file = new File("/data/data/smartAmigos.com.nammakarnataka/hillstations.json");
+                File file = new File("/data/data/smartAmigos.com.nammakarnataka/waterfalls.json");
                 if (file.exists()) {
 
 
@@ -243,11 +245,10 @@ public class hillstationsFragment extends Fragment {
                     }
 
                     try {
-
                         JSONObject root = new JSONObject(ret);
                         JSONArray eventJson = root.getJSONArray("list");
                         JSONObject child = eventJson.getJSONObject(position);
-                        Fragment fragment = new placeDisplayFragment(child,"Hillstations");
+                        Fragment fragment = new placeDisplayFragment(child, "WATERFALL");
                         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_main, fragment);
                         ft.addToBackStack(null);
@@ -261,11 +262,10 @@ public class hillstationsFragment extends Fragment {
         });
     }
 
+    public class myWaterfallsListAdapterClass extends ArrayAdapter<generic_adapter> {
 
-    public class myHillstationsListAdapterClass extends ArrayAdapter<generic_adapter> {
-
-        myHillstationsListAdapterClass() {
-            super(context, R.layout.hillstations_item, hillstations_adapterList);
+        myWaterfallsListAdapterClass() {
+            super(context, R.layout.hillstations_item, waterfalls_adapterList);
         }
 
 
@@ -277,7 +277,7 @@ public class hillstationsFragment extends Fragment {
                 itemView = inflater.inflate(R.layout.hillstations_item, parent, false);
 
             }
-            generic_adapter current = hillstations_adapterList.get(position);
+            generic_adapter current = waterfalls_adapterList.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage()[0]);
@@ -295,10 +295,13 @@ public class hillstationsFragment extends Fragment {
 
     }
 
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
 
 
-
-    public class HillstationVersion extends AsyncTask<String, String, String> {
+    public class waterfallsVersion extends AsyncTask<String, String, String> {
         HttpURLConnection connection;
         BufferedReader reader;
 
@@ -325,20 +328,18 @@ public class hillstationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-
             try {
                 JSONObject parent = new JSONObject(s);
-                JSONObject news_version = parent.getJSONObject("hillstations_version");
+                JSONObject news_version = parent.getJSONObject("waterfalls_version");
                 serverVersion = news_version.getInt("version");
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             if (localVersion != serverVersion) {
-                new hillstationFile().execute("http://nammakarnataka.net23.net/hillstations/hillstations.json");
+                new waterfallsFile().execute("http://nammakarnataka.net23.net/waterfalls/waterfalls.json");
             } else {
-                Toast.makeText(getActivity(), "Hillstations List is up to date!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Waterfalls List is up to date!", Toast.LENGTH_SHORT).show();
                 materialRefreshLayout.finishRefresh();
             }
 
@@ -346,9 +347,7 @@ public class hillstationsFragment extends Fragment {
     }
 
 
-
-
-    public class hillstationFile extends AsyncTask<String, String, String> {
+    public class waterfallsFile extends AsyncTask<String, String, String> {
 
         HttpURLConnection connection;
         BufferedReader reader;
@@ -382,35 +381,36 @@ public class hillstationsFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            waterfalls_adapterList.clear();
 
-            hillstations_adapterList.clear();
 
-
-            SharedPreferences preferences = getActivity().getSharedPreferences("hillstations_version", Context.MODE_PRIVATE);
+            SharedPreferences preferences = getActivity().getSharedPreferences("waterfalls_version", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("version", serverVersion);
             editor.apply();
 
-            Toast.makeText(context, "Hillstations List updated!", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(getActivity(), "Waterfalls List updated!", Toast.LENGTH_SHORT).show();
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONArray items = parent.getJSONArray("list");
-                for (int i=0;i<items.length();i++){
+                for (int i = 0; i < items.length(); i++) {
                     JSONObject child = items.getJSONObject(i);
                     JSONArray images = child.getJSONArray("image");
-                    String [] imagesArray = new String[25];
-                    for(int j=0;j<images.length();j++){
+                    String[] imagesArray = new String[25];
+                    for (int j = 0; j < images.length(); j++) {
                         imagesArray[j] = images.getString(j);
                     }
-                    hillstations_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
+                    waterfalls_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude")));
                     materialRefreshLayout.finishRefresh();
                     displayList();
                 }
-            }  catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
 
         }
+
     }
+
+
 }

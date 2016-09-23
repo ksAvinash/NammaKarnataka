@@ -1,4 +1,4 @@
-package smartAmigos.smartAmigos.com.nammakarnataka;
+package smartAmigos.com.nammakarnataka;
 
 
 import android.content.Context;
@@ -46,7 +46,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import smartAmigos.smartAmigos.com.nammakarnataka.adapter.generic_adapter;
+import smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
 
 /**
