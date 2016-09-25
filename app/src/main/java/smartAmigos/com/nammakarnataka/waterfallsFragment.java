@@ -105,6 +105,7 @@ public class waterfallsFragment extends Fragment {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
         Fresco.initialize(getActivity());
+        awesomeAlgorithm();
 
         if (!loadJsonFile()) {
             if (isNetworkConnected()) {
@@ -115,10 +116,7 @@ public class waterfallsFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
-        } else if (isNetworkConnected()) {
-            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
-
 
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -140,6 +138,28 @@ public class waterfallsFragment extends Fragment {
         return view;
 
     }
+
+    private void awesomeAlgorithm() {
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("golmal", Context.MODE_PRIVATE);
+        int b = preferences.getInt("waterfall",0);
+        if(b == 4){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("waterfall",1);
+            editor.commit();
+
+            new waterfallsVersion().execute("http://nammakarnataka.net23.net/waterfalls/waterfalls_version.json");
+
+        }else{
+            if(b%3 == 0){
+                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("waterfall",++b);
+            editor.commit();
+        }
+    }
+
 
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;

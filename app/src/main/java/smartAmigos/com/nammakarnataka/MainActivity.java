@@ -1,8 +1,12 @@
 package smartAmigos.com.nammakarnataka;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,6 +23,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -26,6 +31,15 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.pushbots.push.Pushbots;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
 
 
@@ -46,6 +60,12 @@ public class MainActivity extends AppCompatActivity
 
         Pushbots.sharedInstance().init(getApplicationContext());
         Pushbots.sharedInstance().setCustomHandler(customHandler.class);
+
+
+        t = (TextView) findViewById(R.id.listNews);
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Kaushan.otf" );
+        t.setTypeface(myFont);
+
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -81,7 +101,7 @@ public class MainActivity extends AppCompatActivity
             mDemoSlider.addSlider(textSliderView);
         }
 
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.DepthPage);
+        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
         mDemoSlider.setDuration(6000);
@@ -104,6 +124,49 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        if(isNetworkConnected())
+            new listNewsVersion().execute("http://nammakarnataka.net23.net/news/news.json");
+
+    }
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null;
+    }
+
+
+
+
+    public class listNewsVersion extends AsyncTask<String, String, String> {
+        HttpURLConnection connection;
+        BufferedReader reader;
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                URL url = new URL(params[0]);
+                connection = (HttpURLConnection) url.openConnection();
+                InputStream stream = connection.getInputStream();
+                reader = new BufferedReader(new InputStreamReader(stream));
+                StringBuilder builder = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    builder.append(line);
+                }
+                return builder.toString();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            t.setText(s);
+        }
     }
 
     @Override

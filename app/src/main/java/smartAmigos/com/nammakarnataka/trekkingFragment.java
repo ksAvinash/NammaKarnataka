@@ -110,6 +110,7 @@ public class trekkingFragment extends Fragment {
         //Finish calling ads
 
         Fresco.initialize(getActivity());
+        awesomeAlgorithm();
 
         if (!loadJsonFile()) {
             if (isNetworkConnected()) {
@@ -120,9 +121,8 @@ public class trekkingFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
-        } else if (isNetworkConnected()) {
-            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
+
 
 
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
@@ -142,6 +142,30 @@ public class trekkingFragment extends Fragment {
         });
         return view;
     }
+
+
+
+    private void awesomeAlgorithm() {
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("golmal", Context.MODE_PRIVATE);
+        int b = preferences.getInt("trekking",0);
+        if(b == 4){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("trekking",1);
+            editor.commit();
+
+            new TrekkingVersion().execute("http://nammakarnataka.net23.net/trekking/trekking_version.json");
+
+        }else{
+            if(b%3 == 0){
+                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("trekking",++b);
+            editor.commit();
+        }
+    }
+
 
 
     private boolean isNetworkConnected() {

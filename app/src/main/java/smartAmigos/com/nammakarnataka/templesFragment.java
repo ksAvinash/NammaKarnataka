@@ -105,6 +105,7 @@ public class templesFragment extends Fragment {
         }
 
         Fresco.initialize(getActivity());
+        awesomeAlgorithm();
 
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
@@ -115,8 +116,6 @@ public class templesFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
-        }else if (isNetworkConnected()) {
-            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -137,6 +136,28 @@ public class templesFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    private void awesomeAlgorithm() {
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("golmal", Context.MODE_PRIVATE);
+        int b = preferences.getInt("temple",0);
+        if(b == 4){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("temple",1);
+            editor.commit();
+
+            new TempleVersion().execute("http://nammakarnataka.net23.net/temples/temple_version.json");
+
+        }else{
+            if(b%3 == 0){
+                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("temple",++b);
+            editor.commit();
+        }
     }
 
 

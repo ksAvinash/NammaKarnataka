@@ -88,7 +88,7 @@ public class MyLocation extends AppCompatActivity {
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
                 // Call displayInterstitial() function
-                if (interstitial.isLoaded()&&Math.random()>0.7) {
+                if (interstitial.isLoaded()&&Math.random()>0.3) {
                     interstitial.show();
                 }
             }
@@ -122,6 +122,8 @@ public class MyLocation extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
+        awesomeAlgorithm();
+
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
                 Toast.makeText(this, "please wait for a moment!", Toast.LENGTH_SHORT).show();
@@ -131,8 +133,6 @@ public class MyLocation extends AppCompatActivity {
             } else {
                 Toast.makeText(context, "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
-        }else if (isNetworkConnected()) {
-            Toast.makeText(this, "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
 
 
@@ -152,6 +152,28 @@ public class MyLocation extends AppCompatActivity {
 
         });
 
+    }
+
+
+    private void awesomeAlgorithm() {
+
+        SharedPreferences preferences = getSharedPreferences("golmal", Context.MODE_PRIVATE);
+        int b = preferences.getInt("district",0);
+        if(b == 4){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("district",1);
+            editor.commit();
+
+            new DistrictVersion().execute("http://nammakarnataka.net23.net/districts/districts_version.json");
+
+        }else{
+            if(b%3 == 0){
+                Toast.makeText(this, "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("district",++b);
+            editor.commit();
+        }
     }
 
 

@@ -24,7 +24,7 @@
                 android:contentDescription="Could'nt Fetch!"
                 android:id="@+id/layout_images"
                 android:layout_width="match_parent"
-                android:layout_height="220dp" />
+                android:layout_height="300dp" />
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"

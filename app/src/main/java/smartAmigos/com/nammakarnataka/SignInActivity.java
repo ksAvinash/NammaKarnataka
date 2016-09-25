@@ -58,7 +58,7 @@ public class SignInActivity extends AppCompatActivity  implements View.OnClickLi
         appNameTextView.setTypeface(myFont);
 
         progressDialog = new ProgressDialog(this);
-
+        progressDialog.setCancelable(false);
 
         //login == 1 (true) then skip login page
         SharedPreferences preferences = getSharedPreferences("login", Context.MODE_PRIVATE);

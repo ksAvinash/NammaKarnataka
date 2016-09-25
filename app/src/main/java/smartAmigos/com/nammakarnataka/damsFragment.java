@@ -99,6 +99,8 @@ public class damsFragment extends Fragment {
         }
 
         Fresco.initialize(getActivity());
+        awesomeAlgorithm();
+
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
                 Toast.makeText(getActivity(), "please wait for a moment!", Toast.LENGTH_SHORT).show();
@@ -108,9 +110,8 @@ public class damsFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
-        }else if (isNetworkConnected()) {
-            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
+
 
 
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
@@ -130,6 +131,28 @@ public class damsFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    private void awesomeAlgorithm() {
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("golmal", Context.MODE_PRIVATE);
+        int b = preferences.getInt("dam",0);
+        if(b == 4){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("dam",1);
+            editor.commit();
+
+            new damVersion().execute("http://nammakarnataka.net23.net/dams/dams_version.json");
+
+        }else{
+            if(b%3 == 0){
+                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("dam",++b);
+            editor.commit();
+        }
     }
 
 

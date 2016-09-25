@@ -100,6 +100,8 @@ public class hillstationsFragment extends Fragment {
         //Finish calling ads
 
         Fresco.initialize(getActivity());
+        awesomeAlgorithm();
+
         if(!loadJsonFile()){
             if (isNetworkConnected()) {
                 Toast.makeText(getActivity(), "please wait for a moment!", Toast.LENGTH_SHORT).show();
@@ -109,9 +111,8 @@ public class hillstationsFragment extends Fragment {
             } else {
                 Toast.makeText(getActivity(), "No Internet Connection!", Toast.LENGTH_SHORT).show();
             }
-        }else if (isNetworkConnected()) {
-            Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
         }
+
 
         materialRefreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -131,7 +132,27 @@ public class hillstationsFragment extends Fragment {
 
 
         return view;
+    }
 
+    private void awesomeAlgorithm() {
+
+        SharedPreferences preferences = getActivity().getSharedPreferences("golmal", Context.MODE_PRIVATE);
+        int b = preferences.getInt("hillstation",0);
+        if(b == 4){
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("hillstation",1);
+            editor.commit();
+
+            new HillstationVersion().execute("http://nammakarnataka.net23.net/hillstations/hillstations_version.json");
+
+        }else{
+            if(b%3 == 0){
+                Toast.makeText(getActivity(), "Swipe down to refresh Contents!", Toast.LENGTH_SHORT).show();
+            }
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("hillstation",++b);
+            editor.commit();
+        }
     }
 
     private boolean loadJsonFile() {

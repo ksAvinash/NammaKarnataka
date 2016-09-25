@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/content_main"
@@ -12,37 +12,42 @@
     tools:showIn="@layout/app_bar_main">
 
 
-    <!--LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#29402b"
-        android:layout_marginTop="1dp"
-        android:id="@+id/start_slider"
-        android:orientation="vertical" /-->
 
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/mainActivitySlider"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@color/colorAccent"
-        android:layout_below="@+id/start_slider">
-
-    </com.daimajia.slider.library.SliderLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:background="#29402b"
-        android:layout_alignBottom="@+id/mainActivitySlider"/>
-    
-    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/start_slider"
+        android:layout_above="@+id/mainActivitySlider"
+        android:orientation="vertical" />
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/mainActivitySlider"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/display_text"
-            android:textSize="20sp"/>
-    </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+        android:layout_height="270dp"
+        android:background="@color/colorAccent"
+        android:layout_centerInParent="true"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="#29402b"
+        android:layout_below="@+id/mainActivitySlider"
+        />
+
+
+    <TextView
+        android:padding="35dp"
+        android:textSize="20sp"
+        android:id="@+id/listNews"
+        android:layout_below="@+id/mainActivitySlider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+
+</RelativeLayout>
