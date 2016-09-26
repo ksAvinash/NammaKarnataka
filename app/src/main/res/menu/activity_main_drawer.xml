@@ -39,6 +39,12 @@
             android:icon="@drawable/beach"
             android:title="Beaches" />
 
+
+        <item
+            android:id="@+id/nav_heritage"
+            android:icon="@drawable/heritage"
+            android:title="Heritage" />
+
         <item
             android:id="@+id/nav_myLocation"
             android:icon="@drawable/my_location"

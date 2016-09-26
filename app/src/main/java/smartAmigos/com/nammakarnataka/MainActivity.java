@@ -285,6 +285,15 @@ public class MainActivity extends AppCompatActivity
 
 
 
+            case R.id.nav_heritage:
+                fragment = new heritageFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
+                break;
+
 
             case R.id.nav_home:
                 intent = new Intent(MainActivity.this, MainActivity.class);
