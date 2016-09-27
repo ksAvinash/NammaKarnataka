@@ -148,6 +148,7 @@ public class templesFragment extends Fragment {
             editor.putInt("temple",1);
             editor.commit();
 
+            if(isNetworkConnected())
             new TempleVersion().execute("http://nammakarnataka.net23.net/temples/temple_version.json");
 
         }else{

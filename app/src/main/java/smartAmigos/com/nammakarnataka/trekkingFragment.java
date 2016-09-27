@@ -154,6 +154,7 @@ public class trekkingFragment extends Fragment {
             editor.putInt("trekking",1);
             editor.commit();
 
+            if(isNetworkConnected())
             new TrekkingVersion().execute("http://nammakarnataka.net23.net/trekking/trekking_version.json");
 
         }else{

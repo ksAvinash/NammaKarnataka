@@ -144,6 +144,7 @@ public class beachesFragment extends Fragment {
             editor.putInt("beach",1);
             editor.commit();
 
+            if(isNetworkConnected())
             new beachesVersion().execute("http://nammakarnataka.net23.net/beaches/beaches_version.json");
 
         }else{

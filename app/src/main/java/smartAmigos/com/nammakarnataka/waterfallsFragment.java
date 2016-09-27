@@ -148,6 +148,7 @@ public class waterfallsFragment extends Fragment {
             editor.putInt("waterfall",1);
             editor.commit();
 
+            if(isNetworkConnected())
             new waterfallsVersion().execute("http://nammakarnataka.net23.net/waterfalls/waterfalls_version.json");
 
         }else{

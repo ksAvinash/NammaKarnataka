@@ -164,6 +164,7 @@ public class MyLocation extends AppCompatActivity {
             editor.putInt("district",1);
             editor.commit();
 
+            if(isNetworkConnected())
             new DistrictVersion().execute("http://nammakarnataka.net23.net/districts/districts_version.json");
 
         }else{

@@ -159,6 +159,7 @@ public class heritageFragment extends Fragment {
             editor.putInt("heritage",1);
             editor.commit();
 
+            if(isNetworkConnected())
             new heritageVersion().execute("http://nammakarnataka.net23.net/heritage/heritage_version.json");
 
         }else{

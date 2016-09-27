@@ -143,6 +143,7 @@ public class hillstationsFragment extends Fragment {
             editor.putInt("hillstation",1);
             editor.commit();
 
+            if(isNetworkConnected())
             new HillstationVersion().execute("http://nammakarnataka.net23.net/hillstations/hillstations_version.json");
 
         }else{

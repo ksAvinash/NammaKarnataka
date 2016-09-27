@@ -142,7 +142,7 @@ public class damsFragment extends Fragment {
             SharedPreferences.Editor editor = preferences.edit();
             editor.putInt("dam",1);
             editor.commit();
-
+            if(isNetworkConnected())
             new damVersion().execute("http://nammakarnataka.net23.net/dams/dams_version.json");
 
         }else{
@@ -332,7 +332,6 @@ public class damsFragment extends Fragment {
 
 
 
-    //Async tasks
 
 
 
