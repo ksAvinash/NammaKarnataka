@@ -32,6 +32,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.pushbots.push.Pushbots;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -137,9 +138,7 @@ public class MainActivity extends AppCompatActivity
         if (isNetworkConnected()) {
             SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
             localVersion = preferences.getInt("version", 0);
-
             new baseNewsVersion().execute("http://nammakarnataka.net23.net/base/base_version.json");
-
         }
     }
 
@@ -242,23 +241,28 @@ public class MainActivity extends AppCompatActivity
                 pd.dismiss();
 
 
-//            try {
-//                JSONObject parent = new JSONObject(s);
-//                JSONArray items = parent.getJSONArray("list");
-//                for (int i = 0; i < items.length(); i++) {
-//                    JSONObject child = items.getJSONObject(i);
-//                    JSONArray images = child.getJSONArray("image");
-//                    String[] imagesArray = new String[25];
-//                    for (int j = 0; j < images.length(); j++) {
-//                        imagesArray[j] = images.getString(j);
-//                    }
-//                    // temples_adapterList.add(new generic_adapter(imagesArray, child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"),child.getString("additionalInformation"),child.getString("nearByPlaces"),child.getDouble("latitude"), child.getDouble("longitude")));
-//
-//                }
-//
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                JSONObject parent = new JSONObject(s);
+                JSONArray items = parent.getJSONArray("list");
+                for (int i = 0; i < items.length(); i++) {
+                    JSONObject child = items.getJSONObject(i);
+                    JSONArray images = child.getJSONArray("image");
+                    String[] imagesArray = new String[25];
+                    for (int j = 0; j < images.length(); j++) {
+                        imagesArray[j] = images.getString(j);
+                    }
+
+                    //code to add to the database starts
+
+
+
+
+                    //code to add to the database ends
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
 
         }
     }
@@ -396,7 +400,7 @@ public class MainActivity extends AppCompatActivity
 
 
             case R.id.nav_myLocation:
-                intent = new Intent(MainActivity.this, MyLocation.class);
+                intent = new Intent(MainActivity.this, districts.class);
                 startActivity(intent);
                 break;
         }

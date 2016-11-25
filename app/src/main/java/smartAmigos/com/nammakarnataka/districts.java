@@ -46,7 +46,7 @@ import java.util.List;
 import smartAmigos.com.nammakarnataka.adapter.districts_adapter;
 
 
-public class MyLocation extends AppCompatActivity {
+public class districts extends AppCompatActivity {
     private List<districts_adapter> dist_adapterList = new ArrayList<>();
 
     MaterialRefreshLayout materialRefreshLayout;
@@ -79,7 +79,7 @@ public class MyLocation extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
 
         // Prepare the Interstitial Ad
-        interstitial = new InterstitialAd(MyLocation.this);
+        interstitial = new InterstitialAd(districts.this);
         // Insert the Ad Unit ID
         interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
 

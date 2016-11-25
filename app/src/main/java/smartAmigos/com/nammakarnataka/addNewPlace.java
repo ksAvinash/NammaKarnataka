@@ -1,6 +1,7 @@
 package smartAmigos.com.nammakarnataka;
 
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -44,11 +45,11 @@ public class addNewPlace extends Fragment {
     public static final String SEASON_KEY = "entry_1299151993";
     public static final String INFO_KEY = "entry_16681967";
 
+    ProgressDialog pd;
     EditText place_input, location_input, nearby_input, season_input, addinfo_input;
     Spinner category_spinner;
     Button submit_newplace;
     TextView spinner_response;
-    private ProgressBar spinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -59,12 +60,12 @@ public class addNewPlace extends Fragment {
         nearby_input = (EditText) view.findViewById(R.id.nearby_input);
         season_input = (EditText) view.findViewById(R.id.season_input);
         addinfo_input = (EditText) view.findViewById(R.id.addinfo_input);
-
         spinner_response = (TextView) view.findViewById(R.id.spinner_response);
 
-        spinner = (ProgressBar) view.findViewById(R.id.progressBar1);
-        spinner.getIndeterminateDrawable().setColorFilter(0xFFFF0000, android.graphics.PorterDuff.Mode.MULTIPLY);
-        spinner.setVisibility(View.GONE);
+        pd = new ProgressDialog(getContext());
+
+
+
 
         category_spinner = (Spinner) view.findViewById(R.id.category_input);
         ArrayAdapter<CharSequence> event_adapter = ArrayAdapter.createFromResource(getContext(),
@@ -110,17 +111,23 @@ public class addNewPlace extends Fragment {
         submit_newplace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                spinner.setVisibility(View.VISIBLE);
+                pd.setMessage("Uploading please wait..");
+                pd.setCancelable(false);
+                pd.show();
+
                 if (TextUtils.isEmpty(place_input.getText().toString())) {
                     place_input.setError("Mandatory");
-                    spinner.setVisibility(View.GONE);
+                    if(pd.isShowing())
+                            pd.dismiss();
                 }
                 if (TextUtils.isEmpty(spinner_response.getText().toString())) {
                     ((TextView) category_spinner.getSelectedView()).setError("Category needed");
-                    spinner.setVisibility(View.GONE);
+                    if(pd.isShowing())
+                        pd.dismiss();
                 } else if (TextUtils.isEmpty(location_input.getText().toString())) {
                     location_input.setError("Mandatory");
-                    spinner.setVisibility(View.GONE);
+                    if(pd.isShowing())
+                        pd.dismiss();
                 } else {
                     PostDataTask postDataTask = new PostDataTask();
                     postDataTask.execute(URL, place_input.getText().toString(), location_input.getText().toString(), spinner_response.getText().toString(),
@@ -201,10 +208,12 @@ public class addNewPlace extends Fragment {
         protected void onPostExecute(Boolean result) {
             //Print Success or failure message accordingly
             if (result) {
-                spinner.setVisibility(View.GONE);
+                if(pd.isShowing())
+                    pd.dismiss();
+
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle("Thank You!");
-                builder.setMessage("Thank you for your support.\n We have recieved your request to add a new place.\n We shall process your request and update the contents.");
+                builder.setMessage("We have successfully recieved your place request.\nWe shall process it and update the contents soon");
                 builder.setCancelable(true);
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -216,8 +225,9 @@ public class addNewPlace extends Fragment {
                 });
                 builder.show();
             } else {
-                spinner.setVisibility(View.GONE);
-                Toast.makeText(getContext(), "There was some error in sending message. No Internet Connection!.", Toast.LENGTH_LONG).show();
+                if(pd.isShowing())
+                    pd.dismiss();
+                Toast.makeText(getContext(), "Unexpected error!\n please try later", Toast.LENGTH_LONG).show();
             }
         }
     }

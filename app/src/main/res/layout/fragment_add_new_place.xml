@@ -82,7 +82,7 @@
                     android:id="@+id/category_input"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"></Spinner>
+                    android:layout_weight="1"/>
 
             </LinearLayout>
 
@@ -150,6 +150,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:paddingStart="50dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="10dp"
@@ -174,15 +175,6 @@
                     android:layout_weight="0.5"
                     android:textColor="@color/colorWhite" />
             </LinearLayout>
-
-            <ProgressBar
-                android:id="@+id/progressBar1"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center_horizontal"
-                android:progressTint="@color/colorBlue" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

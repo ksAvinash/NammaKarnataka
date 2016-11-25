@@ -75,7 +75,7 @@
 
         <activity android:name=".feedbacks" />
         <activity
-            android:name=".MyLocation"
+            android:name=".districts"
             android:label="My location"
             android:theme="@style/AppTheme.NoActionBar" />
 
