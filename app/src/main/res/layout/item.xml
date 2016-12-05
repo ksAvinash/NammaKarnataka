@@ -25,7 +25,7 @@
                 fresco:roundAsCircle="true"
                 fresco:roundingBorderWidth="2dp"
                 android:padding="1dp"
-                android:id="@+id/item_hillstationsImage"
+                android:id="@+id/item_Image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 fresco:placeholderImage="@drawable/home" />
@@ -37,7 +37,7 @@
             <pttextview.widget.PTTextView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/item_hillstationsTitle"
+                android:id="@+id/item_Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -48,7 +48,7 @@
 
 
             <TextView
-                android:id="@+id/item_hillstationsDistrict"
+                android:id="@+id/item_Dist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="20dp"

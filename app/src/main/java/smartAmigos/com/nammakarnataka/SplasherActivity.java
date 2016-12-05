@@ -30,7 +30,6 @@ public class SplasherActivity extends AppCompatActivity {
 
         final SharedPreferences sharedPreferences = getSharedPreferences("FeedbackSettings", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
-
         editor.putInt("nameSet", 0);
         editor.commit();
 

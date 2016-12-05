@@ -8,7 +8,6 @@
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/j1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,23 +17,15 @@
         android:textColor="#000000"
         android:textSize="25sp" />
 
-    <com.cjj.MaterialRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/j1"
-        app:wave_color="@color/material_green">
+
 
         <ListView
             android:divider="@null"
             android:id="@+id/beachesList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/refresh" />
+            android:layout_below="@+id/j1" />
 
-    </com.cjj.MaterialRefreshLayout>
 
 
 </RelativeLayout>

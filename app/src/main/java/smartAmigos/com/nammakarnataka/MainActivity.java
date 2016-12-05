@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
@@ -25,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -46,6 +48,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 
+import smartAmigos.com.nammakarnataka.adapter.DatabaseHelper;
+
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -56,6 +60,9 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     static int serverVersion, localVersion;
     ProgressDialog pd;
+
+
+    DatabaseHelper myDBHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,32 +96,40 @@ public class MainActivity extends AppCompatActivity
         mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
         final HashMap<String, Integer> file_maps = new HashMap<>();
         //Positively do not change any images
-        file_maps.put("Hampi", R.drawable.hampi);
+        file_maps.put("TB Dam", R.drawable.tb_dam);
         file_maps.put("Jog Falls", R.drawable.jog);
         file_maps.put("Mysore Palace", R.drawable.mysuru_palace);
-        file_maps.put("Udupi", R.drawable.udupi);
+        file_maps.put("Mullayanagiri", R.drawable.mullayanagiri);
+        file_maps.put("Dandeli", R.drawable.dandeli);
+        file_maps.put("Wonder La",R.drawable.wonderla);
 
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-        for (String name : file_maps.keySet()) {
-            TextSliderView textSliderView = new TextSliderView(getApplicationContext());
-            // initialize a SliderLayout
-            textSliderView
-                    .description(name)
-                    .image(file_maps.get(name))
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
+                for (String name : file_maps.keySet()) {
+                    TextSliderView textSliderView = new TextSliderView(getApplicationContext());
+                    // initialize a SliderLayout
+                    textSliderView
+                            .description(name)
+                            .image(file_maps.get(name))
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
 
-            //add your extra information
-            textSliderView.bundle(new Bundle());
-            textSliderView.getBundle()
-                    .putString("extra", name);
+                    //add your extra information
+                    textSliderView.bundle(new Bundle());
+                    textSliderView.getBundle()
+                            .putString("extra", name);
 
-            mDemoSlider.addSlider(textSliderView);
-        }
+                    mDemoSlider.addSlider(textSliderView);
+                }
 
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
-        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(6000);
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
+                mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+                mDemoSlider.setDuration(7000);
+
+            }
+        }).start();
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,11 +150,15 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if (isNetworkConnected()) {
-            SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
-            localVersion = preferences.getInt("version", 0);
-            new baseNewsVersion().execute("http://nammakarnataka.net23.net/base/base_version.json");
-        }
+
+
+
+                if (isNetworkConnected()) {
+                    SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
+                    localVersion = preferences.getInt("version", 0);
+                    new baseNewsVersion().execute("http://nammakarnataka.net23.net/base/base_version.json");
+                }
+
     }
 
     private boolean isNetworkConnected() {
@@ -187,11 +206,12 @@ public class MainActivity extends AppCompatActivity
                 e.printStackTrace();
             }
             if (localVersion != serverVersion) {
-
-                pd.setMessage("Fetching updates please wait..");
+                pd.setMessage("Fetching new places please wait..");
                 pd.setCancelable(false);
                 pd.show();
                 new baseFile().execute("http://nammakarnataka.net23.net/base/base.json");
+            }else {
+                Toast.makeText(getApplicationContext(), "All places are up to date!", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -231,10 +251,7 @@ public class MainActivity extends AppCompatActivity
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putInt("version", serverVersion);
-            editor.commit();
+            boolean isSuccessPlaces = true, isSuccessImages = true;
 
 
             if(pd.isShowing())
@@ -247,17 +264,26 @@ public class MainActivity extends AppCompatActivity
                 for (int i = 0; i < items.length(); i++) {
                     JSONObject child = items.getJSONObject(i);
                     JSONArray images = child.getJSONArray("image");
-                    String[] imagesArray = new String[25];
+                    myDBHelper = new DatabaseHelper(getApplicationContext());
+
                     for (int j = 0; j < images.length(); j++) {
-                        imagesArray[j] = images.getString(j);
+                        if(!myDBHelper.insertIntoImages(child.getInt("id"),images.getString(j)))
+                           isSuccessImages = false;
                     }
 
-                    //code to add to the database starts
+                    if(!myDBHelper.insertIntoPlace(child.getInt("id"), child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude"), child.getString("category")))
+                        isSuccessPlaces = false;
 
+                }
 
-
-
-                    //code to add to the database ends
+                if(isSuccessImages && isSuccessPlaces){
+                    SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("version", serverVersion);
+                    editor.commit();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Error receiving files..",Toast.LENGTH_SHORT).show();
                 }
 
             } catch (JSONException e) {
@@ -287,25 +313,38 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
 
-        if (item.getItemId() == R.id.action_dev) {
-            Intent intent = new Intent(MainActivity.this, aboutDev.class);
-            startActivity(intent);
 
-        } else if (item.getItemId() == R.id.action_share) {
+        switch (item.getItemId()){
+            case R.id.action_dev:
+                                    Intent intent = new Intent(MainActivity.this, aboutDev.class);
+                                    startActivity(intent);
+                                    break;
 
-            String str = "https://play.google.com/store/apps/details?id=" + getPackageName();
 
-            Intent sendIntent = new Intent();
-            sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT,
-                    "All you need to know about Karnataka\n\nDownload:\n" + str);
-            sendIntent.setType("text/plain");
-            startActivity(sendIntent);
+            case R.id.action_share:
+                                    String str = "https://play.google.com/store/apps/details?id=" + getPackageName();
+                                    Intent sendIntent = new Intent();
+                                    sendIntent.setAction(Intent.ACTION_SEND);
+                                    sendIntent.putExtra(Intent.EXTRA_TEXT,
+                                            "All you need to know about Karnataka\n\nDownload:\n" + str);
+                                    sendIntent.setType("text/plain");
+                                    startActivity(sendIntent);
+                                    break;
+
+
+            case R.id.action_refresh:
+                                    if (isNetworkConnected()) {
+                                        Toast.makeText(getApplicationContext(), "Please wait..", Toast.LENGTH_SHORT).show();
+                                        SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
+                                        localVersion = preferences.getInt("version", 0);
+                                        new baseNewsVersion().execute("http://nammakarnataka.net23.net/base/base_version.json");
+                                    }else {
+                                        Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                                    }
+
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -411,8 +450,6 @@ public class MainActivity extends AppCompatActivity
         }
         return true;
     }
-
-
 
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;

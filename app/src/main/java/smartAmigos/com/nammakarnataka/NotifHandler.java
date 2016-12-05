@@ -19,19 +19,7 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-/**
- * Created by CHARAN on 9/6/2016.
- */
 public class NotifHandler extends Activity {
 
     private TextView place_textView, description_textView, location_textView, season_textView, additionalInformation, nearby_textView;
@@ -51,20 +39,16 @@ public class NotifHandler extends Activity {
         AdRequest adRequest = new AdRequest.Builder().build();
 
         // Prepare the Interstitial Ad
-        interstitial = new InterstitialAd(NotifHandler.this);
-        // Insert the Ad Unit ID
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-
-        interstitial.loadAd(adRequest);
-        // Prepare an Interstitial Ad Listener
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                // Call displayInterstitial() function
-                if (interstitial.isLoaded()) {
-                    interstitial.show();
-                }
-            }
-        });
+//        interstitial = new InterstitialAd(NotifHandler.this);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                if (interstitial.isLoaded()) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
 
         place_textView = (TextView) findViewById(R.id.place_textView);
         description_textView = (TextView) findViewById(R.id.description_textView);
@@ -77,7 +61,6 @@ public class NotifHandler extends Activity {
 
         layout_images = (SliderLayout) findViewById(R.id.layout_images);
 
-        comment_CardView = (CardView) findViewById(R.id.comment_CardView);
         comment_CardView.setVisibility(View.GONE);
 
 
@@ -105,11 +88,10 @@ public class NotifHandler extends Activity {
                     .setScaleType(BaseSliderView.ScaleType.Fit);
             layout_images.addSlider(textSliderView);
 
-
-            layout_images.setPresetTransformer(SliderLayout.Transformer.RotateDown);
+            layout_images.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
             layout_images.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
             layout_images.setCustomAnimation(new DescriptionAnimation());
-            layout_images.setDuration(60000);
+            layout_images.setDuration(10000);
         }catch (Exception e){
 
         }
@@ -135,4 +117,5 @@ public class NotifHandler extends Activity {
         super.onBackPressed();
         startActivity(new Intent(this, MainActivity.class));
     }
+
 }

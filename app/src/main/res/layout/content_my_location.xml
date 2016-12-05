@@ -23,24 +23,13 @@
         android:textSize="25sp" />
 
 
-
-    <com.cjj.MaterialRefreshLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/xt"
-        app:wave_color="@color/material_green">
-
         <ListView
             android:divider="@null"
             android:id="@+id/districtList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/refresh" />
+            android:layout_below="@+id/xt" />
 
-    </com.cjj.MaterialRefreshLayout>
 
 </RelativeLayout>
 

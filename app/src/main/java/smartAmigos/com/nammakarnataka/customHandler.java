@@ -4,16 +4,13 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-
 import com.pushbots.push.PBNotificationIntent;
 import com.pushbots.push.Pushbots;
 import com.pushbots.push.utils.PBConstants;
 
 import java.util.HashMap;
 
-/**
- * Created by CHARAN on 8/22/2016.
- */
+
 public class customHandler extends BroadcastReceiver {
     private static final String TAG = "customHandler";
 
