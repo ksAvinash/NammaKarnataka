@@ -146,4 +146,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery("select distinct "+PLACE_DISTRICT+" from "+TABLE_PLACES+" order by "+PLACE_DISTRICT+" ;",null);
     }
 
+
+    public Cursor getPlaceByString(String str){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("select * from "+TABLE_PLACES+" where "+PLACE_NAME+" like '%"+str+"%' ;",null);
+    }
 }

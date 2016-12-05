@@ -2,10 +2,12 @@ package smartAmigos.com.nammakarnataka;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
@@ -17,9 +19,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -146,15 +150,28 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        if(isNetworkConnected())
+            amesomeAlgorithm();
+
+    }
+
+    private void amesomeAlgorithm() {
 
 
+        SharedPreferences pref = getSharedPreferences("nk_pref",Context.MODE_PRIVATE);
+        int count = pref.getInt("count",0);
+        count++;
+        if(count == 8){
+            count = 0;
 
-                if (isNetworkConnected()) {
-                    SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
-                    localVersion = preferences.getInt("version", 0);
-                    new baseNewsVersion().execute("http://nammakarnataka.net23.net/base/base_version.json");
-                }
+            SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
+            localVersion = preferences.getInt("version", 0);
+            new baseNewsVersion().execute("http://nammakarnataka.net23.net/base/base_version.json");
 
+        }
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("count", count);
+        editor.commit();
     }
 
     private boolean isNetworkConnected() {
@@ -298,6 +315,36 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
+        final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+
+        searchView.setOnQueryTextListener(
+                new SearchView.OnQueryTextListener(){
+
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        myDBHelper = new DatabaseHelper(getApplicationContext());
+                        Cursor cursor = myDBHelper.getPlaceByString(query);
+
+
+                        Fragment fragment = new SearchResults(cursor);
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_main, fragment);
+                        ft.addToBackStack(null);
+                        ft.commit();
+
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        return false;
+                    }
+                }
+        );
         return true;
     }
 
@@ -332,6 +379,10 @@ public class MainActivity extends AppCompatActivity
                                     }else {
                                         Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                                     }
+                                    break;
+
+
+
 
         }
 
@@ -468,6 +519,8 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
+
+
 
 }
 
