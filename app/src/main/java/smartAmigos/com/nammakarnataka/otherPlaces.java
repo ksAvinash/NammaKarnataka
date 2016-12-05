@@ -1,7 +1,6 @@
 package smartAmigos.com.nammakarnataka;
 
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -19,61 +18,65 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import smartAmigos.com.nammakarnataka.adapter.DatabaseHelper;
 import smartAmigos.com.nammakarnataka.adapter.generic_adapter;
 
 
-public class distDisplayFragment extends Fragment {
+public class otherPlaces extends Fragment {
 
-    private List<generic_adapter> district_specific_adapterList = new ArrayList<>();
+    private List<generic_adapter> other_adapterList = new ArrayList<>();
     static SimpleDraweeView draweeView;
-    TextView current_dist;
-    ListView list;
+
     View view;
-    String district;
     Context context;
+    ListView list;
+    TextView t;
     DatabaseHelper myDBHelper;
     Cursor PlaceCursor;
-
-    @SuppressLint("ValidFragment")
-    public distDisplayFragment(String district) {
-        this.district = district;
-    }
-
-
-
-    public distDisplayFragment(){}
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_dist_display, container, false);
-
-        current_dist = (TextView)view.findViewById(R.id.current_dist);
-        list = (ListView) view.findViewById(R.id.distCurrentList);
+        view = inflater.inflate(R.layout.fragment_other_places, container, false);
         context = getActivity().getApplicationContext();
 
-        TextView current_dist = (TextView)view.findViewById(R.id.current_dist);
+        t = (TextView) view.findViewById(R.id.ps1);
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
-        current_dist.setTypeface(myFont);
-        current_dist.setText(district.toUpperCase());
+        t.setTypeface(myFont);
 
+        //Call ads
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//
+//        interstitial = new InterstitialAd(context);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                // Call displayInterstitial() function
+//                if (interstitial.isLoaded()&&Math.random()>0.75) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
+        //Finish calling ads
+
+
+        list = (ListView) view.findViewById(R.id.otherList);
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
-
         Fresco.initialize(getActivity());
-        district_specific_adapterList.clear();
 
 
         myDBHelper = new DatabaseHelper(context);
-        PlaceCursor = myDBHelper.getPlaceByDistrict(district);
+        PlaceCursor = myDBHelper.getAllOtherPlaces();
 
         while(PlaceCursor.moveToNext()){
 
@@ -83,8 +86,7 @@ public class distDisplayFragment extends Fragment {
                 imagesArray[i] = imageURLCursor.getString(1);
             }
 
-
-            district_specific_adapterList.add(
+            other_adapterList.add(
                     new generic_adapter(
                             imagesArray,        //id
                             PlaceCursor.getString(1),//name
@@ -98,16 +100,14 @@ public class distDisplayFragment extends Fragment {
                     ));
         }
 
-
         displayList();
 
 
         return view;
     }
 
-
     private void displayList() {
-        ArrayAdapter<generic_adapter> adapter = new myPlacesListAdapterClass();
+        ArrayAdapter<generic_adapter> adapter = new otherListAdapterClass();
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -116,10 +116,9 @@ public class distDisplayFragment extends Fragment {
                 PlaceCursor.moveToPosition(position);
                 int img_id = PlaceCursor.getInt(0);
 
-
                 Fragment fragment = new placeDisplayFragment(img_id);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_my_location, fragment);
+                ft.replace(R.id.content_main, fragment);
                 ft.addToBackStack(null);
                 ft.commit();
 
@@ -128,10 +127,10 @@ public class distDisplayFragment extends Fragment {
     }
 
 
-    public class myPlacesListAdapterClass extends ArrayAdapter<generic_adapter> {
+    public class otherListAdapterClass extends ArrayAdapter<generic_adapter> {
 
-        myPlacesListAdapterClass() {
-            super(context, R.layout.item, district_specific_adapterList);
+        otherListAdapterClass() {
+            super(context, R.layout.item, other_adapterList);
         }
 
 
@@ -139,11 +138,11 @@ public class distDisplayFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = convertView;
             if (itemView == null) {
-                LayoutInflater inflater = LayoutInflater.from(context);
+                LayoutInflater inflater = LayoutInflater.from(getActivity());
                 itemView = inflater.inflate(R.layout.item, parent, false);
 
             }
-            generic_adapter current = district_specific_adapterList.get(position);
+            generic_adapter current = other_adapterList.get(position);
 
             //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage()[0]);
@@ -158,6 +157,7 @@ public class distDisplayFragment extends Fragment {
 
             return itemView;
         }
+
 
     }
 

@@ -46,9 +46,14 @@
             android:title="Heritage" />
 
         <item
-            android:id="@+id/nav_myLocation"
-            android:icon="@drawable/my_location"
+            android:id="@+id/nav_districts"
+            android:icon="@drawable/districts"
             android:title="Districts" />
+
+        <item
+            android:id="@+id/nav_otherPlaces"
+            android:icon="@drawable/my_location"
+            android:title="Other Places" />
 
     </group>
 

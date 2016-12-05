@@ -43,7 +43,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String create_images_table = "create table "+TABLE_IMAGES+" ( "+PLACE_ID+" integer, "+IMAGE_URL+" text );";
         db.execSQL(create_images_table);
 
-
+        db.close();
     }
 
     @Override
@@ -52,6 +52,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists "+TABLE_IMAGES);
         onCreate(db);
     }
+
+
 
 
     public boolean insertIntoPlace(int id, String name, String description, String district, String bestseason, String additionalInfo, String nearbyPlaces, double latitude, double longitude, String category){
@@ -69,10 +71,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PLACE_LONGITUDE, longitude);
         contentValues.put(PLACE_CATEGORY, category);
 
-        if(db.insert(TABLE_PLACES, null, contentValues) == -1)
-            return false;
-        else
-            return true;
+        db.insert(TABLE_PLACES, null, contentValues);
+        return true;
     }
 
 
@@ -83,10 +83,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PLACE_ID, id);
         contentValues.put(IMAGE_URL, image_url);
 
-        if(db.insert(TABLE_IMAGES, null, contentValues) == -1)
-            return false;
-        else
-            return true;
+        db.insert(TABLE_IMAGES, null, contentValues);
+
+        return true;
     }
 
     public Cursor getAllTemples(){
@@ -117,6 +116,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select * from "+TABLE_PLACES+" where "+PLACE_CATEGORY+" = 'waterfall' ;",null);
     }
+    public Cursor getAllOtherPlaces(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("select * from "+TABLE_PLACES+" where "+PLACE_CATEGORY+" = 'other' ;",null);
+    }
+
+
 
 
     public Cursor getAllImagesArrayByID(int id){

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
@@ -73,11 +72,8 @@ public class MainActivity extends AppCompatActivity
 
         pd = new ProgressDialog(this);
 
-
-
         Pushbots.sharedInstance().init(getApplicationContext());
         Pushbots.sharedInstance().setCustomHandler(customHandler.class);
-
 
         t = (TextView) findViewById(R.id.listNews);
         Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Kaushan.otf");
@@ -86,26 +82,26 @@ public class MainActivity extends AppCompatActivity
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
-
         //check for permissions on android M
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
 
-        mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
-        final HashMap<String, Integer> file_maps = new HashMap<>();
-        //Positively do not change any images
-        file_maps.put("TB Dam", R.drawable.tb_dam);
-        file_maps.put("Jog Falls", R.drawable.jog);
-        file_maps.put("Mysore Palace", R.drawable.mysuru_palace);
-        file_maps.put("Mullayanagiri", R.drawable.mullayanagiri);
-        file_maps.put("Dandeli", R.drawable.dandeli);
-        file_maps.put("Wonder La",R.drawable.wonderla);
 
         new Thread(new Runnable() {
             @Override
             public void run() {
+
+                mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
+                final HashMap<String, Integer> file_maps = new HashMap<>();
+                //Positively do not change any images
+                file_maps.put("TB Dam", R.drawable.tb_dam);
+                file_maps.put("Jog Falls", R.drawable.jog);
+                file_maps.put("Mysore Palace", R.drawable.mysuru_palace);
+                file_maps.put("Mullayanagiri", R.drawable.mullayanagiri);
+                file_maps.put("Dandeli", R.drawable.dandeli);
+                file_maps.put("Wonder La",R.drawable.wonderla);
 
                 for (String name : file_maps.keySet()) {
                     TextSliderView textSliderView = new TextSliderView(getApplicationContext());
@@ -251,8 +247,6 @@ public class MainActivity extends AppCompatActivity
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            boolean isSuccessPlaces = true, isSuccessImages = true;
-
 
             if(pd.isShowing())
                 pd.dismiss();
@@ -267,24 +261,20 @@ public class MainActivity extends AppCompatActivity
                     myDBHelper = new DatabaseHelper(getApplicationContext());
 
                     for (int j = 0; j < images.length(); j++) {
-                        if(!myDBHelper.insertIntoImages(child.getInt("id"),images.getString(j)))
-                           isSuccessImages = false;
-                    }
+                        myDBHelper.insertIntoImages(child.getInt("id"),images.getString(j));
 
-                    if(!myDBHelper.insertIntoPlace(child.getInt("id"), child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude"), child.getString("category")))
-                        isSuccessPlaces = false;
+                    }
+                    myDBHelper.insertIntoPlace(child.getInt("id"), child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude"), child.getString("category"));
+
 
                 }
 
-                if(isSuccessImages && isSuccessPlaces){
+
                     SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putInt("version", serverVersion);
                     editor.commit();
-                }
-                else {
-                    Toast.makeText(getApplicationContext(), "Error receiving files..",Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(getApplicationContext(),"Update Successful",Toast.LENGTH_SHORT).show();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -438,10 +428,19 @@ public class MainActivity extends AppCompatActivity
                 break;
 
 
-            case R.id.nav_myLocation:
+            case R.id.nav_districts:
                 intent = new Intent(MainActivity.this, districts.class);
                 startActivity(intent);
                 break;
+
+
+            case R.id.nav_otherPlaces:
+                fragment = new otherPlaces();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
