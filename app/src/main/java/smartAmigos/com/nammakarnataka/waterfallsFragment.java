@@ -2,13 +2,10 @@ package smartAmigos.com.nammakarnataka;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Typeface;
-import android.net.ConnectivityManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -21,29 +18,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.cjj.MaterialRefreshLayout;
-import com.cjj.MaterialRefreshListener;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +50,6 @@ public class waterfallsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
 
         view = inflater.inflate(R.layout.fragment_waterfalls, container, false);
@@ -83,17 +61,17 @@ public class waterfallsFragment extends Fragment {
         list = (ListView) view.findViewById(R.id.waterfallsList);
 
         //Call ads
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        interstitial = new InterstitialAd(context);
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                if (interstitial.isLoaded() && Math.random() > 0.7) {
-//                    interstitial.show();
-//                }
-//            }
-//        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitial = new InterstitialAd(context);
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded() && Math.random() > 0.80) {
+                    interstitial.show();
+                }
+            }
+        });
         //Finish calling ads
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -101,6 +79,7 @@ public class waterfallsFragment extends Fragment {
         }
         Fresco.initialize(getActivity());
 
+        waterfalls_adapterList.clear();
 
         myDBHelper = new DatabaseHelper(context);
         PlaceCursor = myDBHelper.getAllWaterfalls();

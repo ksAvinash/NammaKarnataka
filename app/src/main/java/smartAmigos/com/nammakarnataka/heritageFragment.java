@@ -75,7 +75,7 @@ public class heritageFragment extends Fragment {
         interstitial.loadAd(adRequest);
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
-                if (interstitial.isLoaded() && Math.random() > 0.7) {
+                if (interstitial.isLoaded() && Math.random() > 0.75) {
                     interstitial.show();
                 }
             }
@@ -87,6 +87,8 @@ public class heritageFragment extends Fragment {
         }
 
         Fresco.initialize(getActivity());
+
+        heritage_adapterList.clear();
 
         myDBHelper = new DatabaseHelper(context);
         PlaceCursor = myDBHelper.getAllHeritages();

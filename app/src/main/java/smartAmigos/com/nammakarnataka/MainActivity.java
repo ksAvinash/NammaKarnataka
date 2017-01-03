@@ -25,6 +25,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,32 +67,31 @@ public class MainActivity extends AppCompatActivity
 
 
     DatabaseHelper myDBHelper;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         pd = new ProgressDialog(this);
+
 
         Pushbots.sharedInstance().init(getApplicationContext());
         Pushbots.sharedInstance().setCustomHandler(customHandler.class);
 
         t = (TextView) findViewById(R.id.listNews);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+
         Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Kaushan.otf");
         t.setTypeface(myFont);
 
 
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-
-        //check for permissions on android M
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
-
-
 
         new Thread(new Runnable() {
             @Override
@@ -102,9 +102,9 @@ public class MainActivity extends AppCompatActivity
                 //Positively do not change any images
                 file_maps.put("TB Dam", R.drawable.tb_dam);
                 file_maps.put("Jog Falls", R.drawable.jog);
-                file_maps.put("Mysore Palace", R.drawable.mysuru_palace);
+                file_maps.put("Mysore Palace", R.drawable.mysuru);
                 file_maps.put("Mullayanagiri", R.drawable.mullayanagiri);
-                file_maps.put("Dandeli", R.drawable.dandeli);
+                file_maps.put("Dandeli", R.drawable.dandeli1);
                 file_maps.put("Wonder La",R.drawable.wonderla);
 
                 for (String name : file_maps.keySet()) {
@@ -150,35 +150,24 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(isNetworkConnected())
-            amesomeAlgorithm();
-
-    }
-
-    private void amesomeAlgorithm() {
 
 
-        SharedPreferences pref = getSharedPreferences("nk_pref",Context.MODE_PRIVATE);
-        int count = pref.getInt("count",0);
-        count++;
-        if(count == 8){
-            count = 0;
 
+        if(isNetworkConnected()){
             SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
             localVersion = preferences.getInt("version", 0);
-            new baseNewsVersion().execute("http://nammakarnataka.net23.net/base/base_version.json");
-
+            new baseNewsVersion().execute("http://nammakarnataka.net23.net/general/base_version.json");
         }
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("count", count);
-        editor.commit();
+
+
     }
+
+
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
 
     public class baseNewsVersion extends AsyncTask<String, String, String> {
         HttpURLConnection connection;
@@ -203,7 +192,6 @@ public class MainActivity extends AppCompatActivity
             return null;
         }
 
-
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -211,9 +199,7 @@ public class MainActivity extends AppCompatActivity
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONObject base_version = parent.getJSONObject("base_version");
-
                 serverVersion = base_version.getInt("version");
-
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -222,12 +208,13 @@ public class MainActivity extends AppCompatActivity
                 pd.setMessage("Fetching new places please wait..");
                 pd.setCancelable(false);
                 pd.show();
-                new baseFile().execute("http://nammakarnataka.net23.net/base/base.json");
+                new baseFile().execute("http://nammakarnataka.net23.net/general/base.json");
             }else {
                 Toast.makeText(getApplicationContext(), "All places are up to date!", Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 
     public class baseFile extends AsyncTask<String, String, String> {
 
@@ -272,26 +259,33 @@ public class MainActivity extends AppCompatActivity
             try {
                 JSONObject parent = new JSONObject(s);
                 JSONArray items = parent.getJSONArray("list");
-                for (int i = 0; i < items.length(); i++) {
-                    JSONObject child = items.getJSONObject(i);
-                    JSONArray images = child.getJSONArray("image");
-                    myDBHelper = new DatabaseHelper(getApplicationContext());
 
-                    for (int j = 0; j < images.length(); j++) {
-                        myDBHelper.insertIntoImages(child.getInt("id"),images.getString(j));
+                if (items != null){
+
+                    myDBHelper = new DatabaseHelper(getApplicationContext());
+                    myDBHelper.deleteTables();
+
+                    for (int i = 0; i < items.length(); i++) {
+                        JSONObject child = items.getJSONObject(i);
+                        JSONArray images = child.getJSONArray("image");
+
+                        for (int j = 0; j < images.length(); j++) {
+                            myDBHelper.insertIntoImages(child.getInt("id"),images.getString(j));
+
+                        }
+                        myDBHelper.insertIntoPlace(child.getInt("id"), child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude"), child.getString("category"));
 
                     }
-                    myDBHelper.insertIntoPlace(child.getInt("id"), child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude"), child.getString("category"));
-
-
-                }
-
 
                     SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putInt("version", serverVersion);
                     editor.commit();
-                Toast.makeText(getApplicationContext(),"Update Successful",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Update Successful",Toast.LENGTH_SHORT).show();
+
+                }else {
+                    Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+                }
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -313,13 +307,10 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-
 
         searchView.setOnQueryTextListener(
                 new SearchView.OnQueryTextListener(){
@@ -329,11 +320,9 @@ public class MainActivity extends AppCompatActivity
                         myDBHelper = new DatabaseHelper(getApplicationContext());
                         Cursor cursor = myDBHelper.getPlaceByString(query);
 
-
                         Fragment fragment = new SearchResults(cursor);
                         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                         ft.replace(R.id.content_main, fragment);
-                        ft.addToBackStack(null);
                         ft.commit();
 
                         return false;
@@ -341,6 +330,14 @@ public class MainActivity extends AppCompatActivity
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
+                        myDBHelper = new DatabaseHelper(getApplicationContext());
+                        Cursor cursor = myDBHelper.getPlaceByString(newText);
+
+                        Fragment fragment = new SearchResults(cursor);
+                        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        ft.replace(R.id.content_main, fragment);
+                        ft.commit();
+
                         return false;
                     }
                 }
@@ -375,7 +372,7 @@ public class MainActivity extends AppCompatActivity
                                         Toast.makeText(getApplicationContext(), "Please wait..", Toast.LENGTH_SHORT).show();
                                         SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
                                         localVersion = preferences.getInt("version", 0);
-                                        new baseNewsVersion().execute("http://nammakarnataka.net23.net/base/base_version.json");
+                                        new baseNewsVersion().execute("http://nammakarnataka.net23.net/general/base_version.json");
                                     }else {
                                         Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                                     }
@@ -385,7 +382,6 @@ public class MainActivity extends AppCompatActivity
 
 
         }
-
 
         return super.onOptionsItemSelected(item);
     }
@@ -480,8 +476,11 @@ public class MainActivity extends AppCompatActivity
 
 
             case R.id.nav_districts:
-                intent = new Intent(MainActivity.this, districts.class);
-                startActivity(intent);
+                fragment = new districtFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
                 break;
 
 
@@ -504,7 +503,7 @@ public class MainActivity extends AppCompatActivity
     private void saveJsonFile(String data) {
         FileOutputStream stream = null;
         try {
-            File path = new File("/data/data/smartAmigos.com.nammakarnataka/base.json");
+            File path = new File("/data/data/smartAmigos.com.nammakarnataka/general.json");
             stream = new FileOutputStream(path);
             stream.write(data.getBytes());
 

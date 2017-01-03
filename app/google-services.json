@@ -1,27 +1,20 @@
 {
   "project_info": {
-    "project_number": "220053332990",
-    "firebase_url": "https://namma-karnataka-62868.firebaseio.com",
-    "project_id": "namma-karnataka-62868",
-    "storage_bucket": "namma-karnataka-62868.appspot.com"
+    "project_number": "193057784751",
+    "project_id": "firebase-nk-new"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:220053332990:android:61384694ba46db13",
+        "mobilesdk_app_id": "1:193057784751:android:61384694ba46db13",
         "android_client_info": {
           "package_name": "smartAmigos.com.nammakarnataka"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "220053332990-15un6g411sq77ap140jdaraf1epoimul.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAf7pi0GECdwvsMQlZVqTTlFzQ5OY4OcSE"
+          "current_key": "AIzaSyCOvI9qFym-XBo_fLexBQURFQ70gSm3eA4"
         }
       ],
       "services": {
@@ -33,7 +26,7 @@
           "other_platform_oauth_client": []
         },
         "ads_service": {
-          "status": 2
+          "status": 1
         }
       }
     }

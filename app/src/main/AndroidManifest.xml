@@ -67,10 +67,6 @@
         <service android:name="com.pushbots.push.GCMIntentService" />
 
         <activity android:name=".feedbacks" />
-        <activity
-            android:name=".districts"
-            android:label="My location"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".NotifHandler"/>
 
@@ -79,6 +75,8 @@
             android:label="About Dev's"
             android:theme="@style/AppTheme.NoActionBar"
             />
+
+
     </application>
 
 </manifest>

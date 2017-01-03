@@ -43,7 +43,7 @@ public class SplasherActivity extends AppCompatActivity {
                 startActivity(intent);
                 SplasherActivity.this.finish();
             }
-        }, 2500);
+        }, 3000);
 
 
     }

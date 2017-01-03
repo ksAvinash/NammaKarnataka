@@ -33,7 +33,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         String create_place_table = "create table "+TABLE_PLACES+" ("+PLACE_ID+" integer primary key , "+PLACE_NAME+"  text, "+PLACE_DESCRIPTION+" text, "+PLACE_DISTRICT+" text, "+PLACE_BESTSEASON+" text, "+PLACE_ADDITIONALINFO+" text, " +
@@ -43,7 +42,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String create_images_table = "create table "+TABLE_IMAGES+" ( "+PLACE_ID+" integer, "+IMAGE_URL+" text );";
         db.execSQL(create_images_table);
 
-        db.close();
     }
 
     @Override
@@ -54,7 +52,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
+    public void deleteTables(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        onUpgrade(db,0,1);
+    }
 
     public boolean insertIntoPlace(int id, String name, String description, String district, String bestseason, String additionalInfo, String nearbyPlaces, double latitude, double longitude, String category){
         SQLiteDatabase db = this.getWritableDatabase();

@@ -1,0 +1,29 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/appbackground"
+    tools:context=".districtFragment">
+
+
+    <TextView
+        android:id="@+id/xtt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:padding="15dp"
+        android:text="DISTRICTS"
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+
+    <ListView
+        android:divider="@null"
+        android:id="@+id/districtsList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/xtt" />
+
+
+</RelativeLayout>
+

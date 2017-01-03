@@ -119,7 +119,7 @@ public class distDisplayFragment extends Fragment {
 
                 Fragment fragment = new placeDisplayFragment(img_id);
                 FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.replace(R.id.content_my_location, fragment);
+                ft.replace(R.id.content_main, fragment);
                 ft.addToBackStack(null);
                 ft.commit();
 

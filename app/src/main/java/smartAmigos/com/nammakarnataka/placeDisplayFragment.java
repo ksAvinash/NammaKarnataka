@@ -85,17 +85,17 @@ public class placeDisplayFragment extends Fragment {
         mDemoSlider = (SliderLayout) view.findViewById(R.id.layout_images);
 
         //Call ads
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        interstitial = new InterstitialAd(getContext());
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                if (interstitial.isLoaded()&&Math.random()>0.8) {
-//                    interstitial.show();
-//                }
-//            }
-//        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitial = new InterstitialAd(getContext());
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded()&&Math.random()>0.85) {
+                    interstitial.show();
+                }
+            }
+        });
         //Finish calling ads
 
 

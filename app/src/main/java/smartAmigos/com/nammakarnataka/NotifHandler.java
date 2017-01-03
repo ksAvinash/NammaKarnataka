@@ -3,10 +3,7 @@ package smartAmigos.com.nammakarnataka;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,8 +24,6 @@ public class NotifHandler extends Activity {
     private String latitude, longitude, place_name;
     private SliderLayout layout_images;
     private TextSliderView textSliderView;
-    private CardView comment_CardView;
-    InterstitialAd mInterstitialAd;
     private InterstitialAd interstitial;
 
     @Override
@@ -37,18 +32,16 @@ public class NotifHandler extends Activity {
         setContentView(R.layout.layout_general);
 
         AdRequest adRequest = new AdRequest.Builder().build();
-
-        // Prepare the Interstitial Ad
-//        interstitial = new InterstitialAd(NotifHandler.this);
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                if (interstitial.isLoaded()) {
-//                    interstitial.show();
-//                }
-//            }
-//        });
+        interstitial = new InterstitialAd(NotifHandler.this);
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded()) {
+                    interstitial.show();
+                }
+            }
+        });
 
         place_textView = (TextView) findViewById(R.id.place_textView);
         description_textView = (TextView) findViewById(R.id.description_textView);
@@ -61,13 +54,12 @@ public class NotifHandler extends Activity {
 
         layout_images = (SliderLayout) findViewById(R.id.layout_images);
 
-        comment_CardView.setVisibility(View.GONE);
 
 
         Bundle extras = getIntent().getExtras();
         try {
             place_name = extras.getString("placename");
-            String description = extras.getString("description");
+                String description = extras.getString("description");
             String location = extras.getString("location");
             latitude = extras.getString("latitude");
             longitude = extras.getString("longitude");
