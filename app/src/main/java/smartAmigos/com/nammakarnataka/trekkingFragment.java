@@ -62,7 +62,7 @@ public class trekkingFragment extends Fragment {
         context = getActivity().getApplicationContext();
 
         t = (TextView) view.findViewById(R.id.pp1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf");
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf");
         t.setTypeface(myFont);
 
         list = (ListView) view.findViewById(R.id.trekkingList);
@@ -72,17 +72,17 @@ public class trekkingFragment extends Fragment {
         }
 
         //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.75) {
-                    interstitial.show();
-                }
-            }
-        });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitial = new InterstitialAd(context);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                if (interstitial.isLoaded()&&Math.random()>0.75) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
         //Finish calling ads
 
         trekking_adapterList.clear();

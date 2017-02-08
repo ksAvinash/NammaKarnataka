@@ -45,7 +45,7 @@ public class aboutDev extends AppCompatActivity {
         TextView pq1 = (TextView)findViewById(R.id.pq1);
 
 
-        Typeface myFont = Typeface.createFromAsset(this.getAssets(), "fonts/Kaushan.otf" );
+        Typeface myFont = Typeface.createFromAsset(this.getAssets(), "fonts/placenames.otf" );
         pq1.setTypeface(myFont);
 
 

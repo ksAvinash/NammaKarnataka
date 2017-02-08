@@ -33,6 +33,8 @@
         <item>Dams</item>
         <item>Treking places</item>
         <item>Beaches</item>
+        <item>Heritage</item>
+        <item>Others</item>
     </string-array>
     <string name="title_activity_my_location">MyLocation</string>
     <string name="title_activity_test">test</string>

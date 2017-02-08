@@ -52,23 +52,23 @@ public class otherPlaces extends Fragment {
         context = getActivity().getApplicationContext();
 
         t = (TextView) view.findViewById(R.id.ps1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
         t.setTypeface(myFont);
 
         //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                // Call displayInterstitial() function
-                if (interstitial.isLoaded()&&Math.random()>0.75) {
-                    interstitial.show();
-                }
-            }
-        });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//
+//        interstitial = new InterstitialAd(context);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                // Call displayInterstitial() function
+//                if (interstitial.isLoaded()&&Math.random()>0.75) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
         //Finish calling ads
 
 

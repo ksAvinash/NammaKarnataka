@@ -62,24 +62,24 @@ public class heritageFragment extends Fragment {
 
 
         t = (TextView) view.findViewById(R.id.zp1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf");
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf");
         t.setTypeface(myFont);
 
 
         list = (ListView) view.findViewById(R.id.heritageList);
 
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded() && Math.random() > 0.75) {
-                    interstitial.show();
-                }
-            }
-        });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitial = new InterstitialAd(context);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                if (interstitial.isLoaded() && Math.random() > 0.75) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
 
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

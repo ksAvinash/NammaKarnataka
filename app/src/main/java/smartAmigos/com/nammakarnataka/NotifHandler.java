@@ -19,11 +19,12 @@ import com.google.android.gms.ads.InterstitialAd;
 
 public class NotifHandler extends Activity {
 
-    private TextView place_textView, description_textView, location_textView, season_textView, additionalInformation, nearby_textView;
-    private Button gmapButton;
+    private TextView description_textView;
+    private TextView location_textView;
+    private TextView season_textView;
+    private TextView additionalInformation;
+    private TextView nearby_textView;
     private String latitude, longitude, place_name;
-    private SliderLayout layout_images;
-    private TextSliderView textSliderView;
     private InterstitialAd interstitial;
 
     @Override
@@ -43,16 +44,16 @@ public class NotifHandler extends Activity {
             }
         });
 
-        place_textView = (TextView) findViewById(R.id.place_textView);
+        TextView place_textView = (TextView) findViewById(R.id.place_textView);
         description_textView = (TextView) findViewById(R.id.description_textView);
         location_textView = (TextView) findViewById(R.id.location_textView);
         season_textView = (TextView) findViewById(R.id.season_textView);
         additionalInformation = (TextView) findViewById(R.id.additionalInformation);
         nearby_textView = (TextView) findViewById(R.id.nearby_textView);
 
-        gmapButton = (Button) findViewById(R.id.gmapButton);
+        Button gmapButton = (Button) findViewById(R.id.gmapButton);
 
-        layout_images = (SliderLayout) findViewById(R.id.layout_images);
+        SliderLayout layout_images = (SliderLayout) findViewById(R.id.layout_images);
 
 
 
@@ -67,6 +68,11 @@ public class NotifHandler extends Activity {
             String nearby_places = extras.getString("nearby");
             String additional_info = extras.getString("addinfo");
             String image_url = extras.getString("imgUrl");
+
+
+
+
+
             place_textView.setText(place_name);
             description_textView.setText(description);
             location_textView.setText(location+"( "+latitude+", "+longitude+" )");
@@ -74,16 +80,20 @@ public class NotifHandler extends Activity {
             nearby_textView.setText(nearby_places);
             additionalInformation.setText(additional_info);
 
-            textSliderView = new TextSliderView(getApplicationContext());
+            TextSliderView textSliderView = new TextSliderView(getApplicationContext());
             textSliderView
                     .image(image_url)
                     .setScaleType(BaseSliderView.ScaleType.Fit);
+
+
             layout_images.addSlider(textSliderView);
 
             layout_images.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
             layout_images.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
             layout_images.setCustomAnimation(new DescriptionAnimation());
             layout_images.setDuration(10000);
+
+
         }catch (Exception e){
 
         }

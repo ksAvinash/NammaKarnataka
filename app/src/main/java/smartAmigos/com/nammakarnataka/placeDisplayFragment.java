@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -64,9 +65,14 @@ public class placeDisplayFragment extends Fragment {
     SliderLayout mDemoSlider;
     private InterstitialAd interstitial;
     DatabaseHelper myDBHelper;
+    TextView t;
 
 
-    @SuppressLint("ValidFragment")
+    public placeDisplayFragment(){
+
+    }
+
+
     public placeDisplayFragment(int img_id) {
         this.img_id = img_id;
     }
@@ -81,6 +87,12 @@ public class placeDisplayFragment extends Fragment {
         TextView season_textView = (TextView) view.findViewById(R.id.season_textView);
         TextView additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
         TextView nearby_textView = (TextView) view.findViewById(R.id.nearby_textView);
+
+
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
+        place_textView.setTypeface(myFont);
+
+
         gmapButton = (Button) view.findViewById(R.id.gmapButton);
         mDemoSlider = (SliderLayout) view.findViewById(R.id.layout_images);
 

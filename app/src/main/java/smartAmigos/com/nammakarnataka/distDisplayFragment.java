@@ -60,7 +60,7 @@ public class distDisplayFragment extends Fragment {
         context = getActivity().getApplicationContext();
 
         TextView current_dist = (TextView)view.findViewById(R.id.current_dist);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
+        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
         current_dist.setTypeface(myFont);
         current_dist.setText(district.toUpperCase());
 

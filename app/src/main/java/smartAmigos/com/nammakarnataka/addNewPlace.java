@@ -95,6 +95,12 @@ public class addNewPlace extends Fragment {
                     case 6:
                         spinner_response.setText("BEACHES");
                         break;
+                    case 7:
+                        spinner_response.setText("HERITAGE");
+                        break;
+                    case 8:
+                        spinner_response.setText("OTHERS");
+                        break;
                     default:
                         break;
                 }
