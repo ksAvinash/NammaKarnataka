@@ -49,6 +49,8 @@
             </intent-filter>
         </activity>
 
+
+
         <receiver
             android:name="com.pushbots.google.gcm.GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
@@ -62,11 +64,17 @@
                 <category android:name="smartAmigos.com.nammakarnataka" />
             </intent-filter>
         </receiver>
+
+
+
         <receiver android:name=".customHandler" />
+
 
         <service android:name="com.pushbots.push.GCMIntentService" />
 
+
         <activity android:name=".feedbacks" />
+
 
         <activity android:name=".NotifHandler"/>
 

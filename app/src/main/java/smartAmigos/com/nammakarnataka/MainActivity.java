@@ -10,8 +10,10 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -69,7 +71,6 @@ public class MainActivity extends AppCompatActivity
     DatabaseHelper myDBHelper;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +78,6 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         pd = new ProgressDialog(this);
-
 
         Pushbots.sharedInstance().init(getApplicationContext());
         Pushbots.sharedInstance().setCustomHandler(customHandler.class);
@@ -160,7 +160,14 @@ public class MainActivity extends AppCompatActivity
         }
 
 
+
     }
+
+
+
+
+
+
 
 
 

@@ -49,8 +49,6 @@ public class aboutDev extends AppCompatActivity {
         pq1.setTypeface(myFont);
 
 
-
-
     }
 
 
