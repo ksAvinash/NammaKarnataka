@@ -259,8 +259,8 @@ public class MainActivity extends AppCompatActivity
             super.onPostExecute(s);
 
 
-            if(pd.isShowing())
-                pd.dismiss();
+
+            pd.setMessage("Updating Database...");
 
 
             try {
@@ -288,6 +288,11 @@ public class MainActivity extends AppCompatActivity
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putInt("version", serverVersion);
                     editor.commit();
+
+
+                    if(pd.isShowing())
+                        pd.dismiss();
+
                     Toast.makeText(getApplicationContext(),"Update Successful",Toast.LENGTH_SHORT).show();
 
                 }else {

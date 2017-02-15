@@ -62,14 +62,12 @@ public class NotifHandler extends Activity {
 
         setContentView(R.layout.layout_general);
 
-        //popluate the list view
+
         list = (ListView) findViewById(R.id.nearbyPlaceList);
         View header = getLayoutInflater().inflate(R.layout.header, null);
         View footer = getLayoutInflater().inflate(R.layout.footer, null);
         list.addHeaderView(header);
         list.addFooterView(footer);
-
-
 
 
 //        AdRequest adRequest = new AdRequest.Builder().build();
@@ -85,7 +83,6 @@ public class NotifHandler extends Activity {
 //        });
 
 
-
         TextView place_textView = (TextView) findViewById(R.id.place_textView);
         TextView description_textView = (TextView) findViewById(R.id.description_textView);
         TextView location_textView = (TextView) findViewById(R.id.location_textView);
@@ -95,28 +92,30 @@ public class NotifHandler extends Activity {
         SliderLayout layout_images = (SliderLayout) findViewById(R.id.layout_images);
 
 
-
-        Bundle extras = getIntent().getExtras();
         try {
 
+            Bundle extras = getIntent().getExtras();
             String value = extras.getString("data");
-            JSONObject parent = new JSONObject(value);
-            JSONArray images = parent.getJSONArray("image");
+
+
+            Log.d("NOTIFICATION DATA",value);
+
+            JSONObject item = new JSONObject(value);
+            JSONArray images = item.getJSONArray("image");
 
             for (int j = 0; j < images.length(); j++) {
                 imagesList[j] = images.getString(j);
             }
 
-            place_name = parent.getString("name");
-            description = parent.getString("description");
-            district = parent.getString("district");
-            latitude = parent.getDouble("latitude");
-            longitude = parent.getDouble("longitude");
-            best_season = parent.getString("bestSeason");
-            additional_info = parent.getString("additionalInformation");
-            nearby_places = parent.getString("nearByPlaces");
+            place_name = item.getString("name");
+            description = item.getString("description");
+            district = item.getString("district");
+            best_season = item.getString("bestSeason");
+            additional_info = item.getString("additionalInformation");
+            nearby_places = item.getString("nearByPlaces");
+            latitude = item.getDouble("latitude");
+            longitude = item.getDouble("longitude");
 
-            Toast.makeText(getApplicationContext(),place_name,Toast.LENGTH_SHORT).show();
 
 
             place_textView.setText(place_name);
@@ -124,7 +123,6 @@ public class NotifHandler extends Activity {
             location_textView.setText(district);
             season_textView.setText(best_season);
             additionalInformation.setText(additional_info);
-
 
 
             //Code for multiple images downloading
@@ -143,7 +141,7 @@ public class NotifHandler extends Activity {
 
 
 
-            //To populate listview of multiple images
+            //To populate listview of nearby places
             String places[] = nearby_places.split(",");
             for (String place : places) {
                 nearby_adapterList.add(new nearby_places_adapter(place));
@@ -151,7 +149,7 @@ public class NotifHandler extends Activity {
             displayList();
 
 
-        }catch (Exception ignored){
+        }catch (Exception e){
 
         }
 
