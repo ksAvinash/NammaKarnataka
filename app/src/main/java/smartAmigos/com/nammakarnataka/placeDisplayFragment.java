@@ -3,7 +3,6 @@ package smartAmigos.com.nammakarnataka;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -13,50 +12,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.CardView;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
-
 import smartAmigos.com.nammakarnataka.adapter.DatabaseHelper;
 import smartAmigos.com.nammakarnataka.adapter.nearby_places_adapter;
 
@@ -79,7 +52,7 @@ public class placeDisplayFragment extends Fragment {
 
     }
 
-    String nearPlaces;
+    String nearPlaces,placename;
 
 
     public placeDisplayFragment(int img_id) {
@@ -88,6 +61,8 @@ public class placeDisplayFragment extends Fragment {
 
 
     private List<nearby_places_adapter> nearby_adapterList = new ArrayList<>();
+
+
 
 
     @Nullable
@@ -111,7 +86,7 @@ public class placeDisplayFragment extends Fragment {
         TextView location_textView = (TextView) view.findViewById(R.id.location_textView);
         TextView season_textView = (TextView) view.findViewById(R.id.season_textView);
         TextView additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
-
+        SimpleDraweeView gallery_icon = (SimpleDraweeView) view.findViewById(R.id.gallery_icon);
 
 
 
@@ -124,17 +99,17 @@ public class placeDisplayFragment extends Fragment {
         mDemoSlider = (SliderLayout) view.findViewById(R.id.layout_images);
 
         //Call ads
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        interstitial = new InterstitialAd(getContext());
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                if (interstitial.isLoaded()&&Math.random()>0.85) {
-//                    interstitial.show();
-//                }
-//            }
-//        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitial = new InterstitialAd(getContext());
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded()&&Math.random()>0.7) {
+                    interstitial.show();
+                }
+            }
+        });
         //Finish calling ads
 
 
@@ -146,7 +121,8 @@ public class placeDisplayFragment extends Fragment {
         Cursor cursor = myDBHelper.getPlaceById(img_id);
 
         while (cursor.moveToNext()){
-            place_textView.setText(cursor.getString(1));
+            placename = cursor.getString(1);
+            place_textView.setText(placename);
             description_textView.setText(cursor.getString(2));
             location_textView.setText(cursor.getString(3));
             season_textView.setText(cursor.getString(4));
@@ -192,7 +168,6 @@ public class placeDisplayFragment extends Fragment {
 
 
 
-
         places = nearPlaces.split(",");
 
 
@@ -200,6 +175,20 @@ public class placeDisplayFragment extends Fragment {
             nearby_adapterList.add(new nearby_places_adapter(place));
         }
         displayList();
+
+
+
+        gallery_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new GalleryFragment(img_id,placename);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+            }
+        });
+
 
 
         return view;
@@ -252,8 +241,6 @@ public class placeDisplayFragment extends Fragment {
         }
 
     }
-
-
 
 
 

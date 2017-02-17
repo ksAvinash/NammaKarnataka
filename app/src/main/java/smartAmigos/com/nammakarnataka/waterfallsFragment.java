@@ -61,17 +61,17 @@ public class waterfallsFragment extends Fragment {
         list = (ListView) view.findViewById(R.id.waterfallsList);
 
         //Call ads
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        interstitial = new InterstitialAd(context);
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                if (interstitial.isLoaded() && Math.random() > 0.80) {
-//                    interstitial.show();
-//                }
-//            }
-//        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitial = new InterstitialAd(context);
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded() && Math.random() > 0.7) {
+                    interstitial.show();
+                }
+            }
+        });
         //Finish calling ads
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {

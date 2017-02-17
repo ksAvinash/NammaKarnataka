@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,55 +43,38 @@ import smartAmigos.com.nammakarnataka.adapter.nearby_places_adapter;
 public class NotifHandler extends Activity {
 
     Double latitude,longitude;
-    private String place_name, description,district,best_season,additional_info,nearby_places;
-    private InterstitialAd interstitial;
-    ListView list;
+    TextView placename, description, district, bestseason, additionalInformation, gmapButton, nearby;
+    SliderLayout image;
+    TextSliderView textSliderView;
 
-
-    private List<nearby_places_adapter> nearby_adapterList = new ArrayList<>();
-    Context context;
-
-    String imagesList[];
-
+    InterstitialAd interstitial;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getApplicationContext();
+        setContentView(R.layout.notification_layout);
 
 
-        Log.d("Notification","Tapped the notification");
 
-        setContentView(R.layout.layout_general);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitial = new InterstitialAd(NotifHandler.this);
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded()) {
+                    interstitial.show();
+                }
+            }
+        });
 
-
-        list = (ListView) findViewById(R.id.nearbyPlaceList);
-        View header = getLayoutInflater().inflate(R.layout.header, null);
-        View footer = getLayoutInflater().inflate(R.layout.footer, null);
-        list.addHeaderView(header);
-        list.addFooterView(footer);
-
-
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        interstitial = new InterstitialAd(NotifHandler.this);
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                if (interstitial.isLoaded()) {
-//                    interstitial.show();
-//                }
-//            }
-//        });
-
-
-        TextView place_textView = (TextView) findViewById(R.id.place_textView);
-        TextView description_textView = (TextView) findViewById(R.id.description_textView);
-        TextView location_textView = (TextView) findViewById(R.id.location_textView);
-        TextView season_textView = (TextView) findViewById(R.id.season_textView);
-        TextView additionalInformation = (TextView) findViewById(R.id.additionalInformation);
-        Button gmapButton = (Button) findViewById(R.id.gmapButton);
-        SliderLayout layout_images = (SliderLayout) findViewById(R.id.layout_images);
-
+        placename = (TextView) findViewById(R.id.noti_placename);
+        description = (TextView) findViewById(R.id.noti_description);
+        district = (TextView) findViewById(R.id.noti_district);
+        bestseason = (TextView) findViewById(R.id.noti_beastseason);
+        additionalInformation = (TextView) findViewById(R.id.noti_additionalInformation);
+        gmapButton = (Button) findViewById(R.id.noti_gmapButton);
+        image = (SliderLayout) findViewById(R.id.noti_images);
+        nearby = (TextView) findViewById(R.id.noti_nearby);
 
         try {
 
@@ -103,50 +87,34 @@ public class NotifHandler extends Activity {
             JSONObject item = new JSONObject(value);
             JSONArray images = item.getJSONArray("image");
 
-            for (int j = 0; j < images.length(); j++) {
-                imagesList[j] = images.getString(j);
-            }
+            placename.setText(item.getString("name"));
+            Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/placenames.otf" );
+            placename.setTypeface(myFont);
 
-            place_name = item.getString("name");
-            description = item.getString("description");
-            district = item.getString("district");
-            best_season = item.getString("bestSeason");
-            additional_info = item.getString("additionalInformation");
-            nearby_places = item.getString("nearByPlaces");
+            description.setText(item.getString("description"));
+            district.setText(item.getString("district"));
+            bestseason.setText(item.getString("bestSeason"));
+            additionalInformation.setText(item.getString("additionalInformation"));
+            nearby.setText(item.getString("nearByPlaces"));
+
             latitude = item.getDouble("latitude");
             longitude = item.getDouble("longitude");
 
 
-
-            place_textView.setText(place_name);
-            description_textView.setText(description);
-            location_textView.setText(district);
-            season_textView.setText(best_season);
-            additionalInformation.setText(additional_info);
-
-
-            //Code for multiple images downloading
-            for (String image: imagesList){
-                TextSliderView textSliderView = new TextSliderView(getApplicationContext());
+            int i=0;
+            while(images.getString(i) != null){
+                textSliderView = new TextSliderView(getApplicationContext());
                 textSliderView
-                        .image(image)
+                        .image(images.getString(i))
                         .setScaleType(BaseSliderView.ScaleType.Fit);
-
-                layout_images.addSlider(textSliderView);
+                image.addSlider(textSliderView);
+                i++;
             }
-            layout_images.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
-            layout_images.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-            layout_images.setCustomAnimation(new DescriptionAnimation());
-            layout_images.setDuration(7000);
 
-
-
-            //To populate listview of nearby places
-            String places[] = nearby_places.split(",");
-            for (String place : places) {
-                nearby_adapterList.add(new nearby_places_adapter(place));
-            }
-            displayList();
+            image.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
+            image.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+            image.setCustomAnimation(new DescriptionAnimation());
+            image.setDuration(60000);
 
 
         }catch (Exception e){
@@ -156,16 +124,16 @@ public class NotifHandler extends Activity {
         gmapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    startActivity(
-                            new Intent(
-                                    android.content.Intent.ACTION_VIEW,
-                                    Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + place_name + ")@" + latitude + "," + longitude)));
-                } catch (Exception ignored) {
+                startActivity(
+                        new Intent(
+                                android.content.Intent.ACTION_VIEW,
+                                Uri.parse("geo:" + latitude + "," + longitude + "?q=(" + placename.getText() + ")@" + latitude + "," + longitude)
+                        )
+                );
 
-                }
             }
         });
+
 
     }
 
@@ -173,42 +141,6 @@ public class NotifHandler extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
-
-
-
-
-    private void displayList() {
-        ArrayAdapter<nearby_places_adapter> adapter = new nearbyPlaceAdapterClass();
-        list.setAdapter(adapter);
-
-    }
-
-
-
-    public class nearbyPlaceAdapterClass extends ArrayAdapter<nearby_places_adapter> {
-
-        nearbyPlaceAdapterClass() {
-            super(context, R.layout.nearby_place_item, nearby_adapterList);
-        }
-
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View itemView = convertView;
-            if (itemView == null) {
-                LayoutInflater inflater = LayoutInflater.from(context);
-                itemView = inflater.inflate(R.layout.nearby_place_item, parent, false);
-
-            }
-            nearby_places_adapter current = nearby_adapterList.get(position);
-
-            TextView t_name = (TextView) itemView.findViewById(R.id.item_nearbyPlace);
-            t_name.setText(current.getNearPlace());
-
-            return itemView;
-        }
-
-    }
-
 }

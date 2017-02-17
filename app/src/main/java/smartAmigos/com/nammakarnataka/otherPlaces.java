@@ -56,19 +56,19 @@ public class otherPlaces extends Fragment {
         t.setTypeface(myFont);
 
         //Call ads
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//
-//        interstitial = new InterstitialAd(context);
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                // Call displayInterstitial() function
-//                if (interstitial.isLoaded()&&Math.random()>0.75) {
-//                    interstitial.show();
-//                }
-//            }
-//        });
+        AdRequest adRequest = new AdRequest.Builder().build();
+
+        interstitial = new InterstitialAd(context);
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                // Call displayInterstitial() function
+                if (interstitial.isLoaded()&&Math.random()>0.7) {
+                    interstitial.show();
+                }
+            }
+        });
         //Finish calling ads
 
 

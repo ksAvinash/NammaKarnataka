@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     static int serverVersion, localVersion;
     ProgressDialog pd;
-
+    String str;
 
     DatabaseHelper myDBHelper;
 
@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         pd = new ProgressDialog(this);
@@ -259,15 +260,13 @@ public class MainActivity extends AppCompatActivity
             super.onPostExecute(s);
 
 
-
-            pd.setMessage("Updating Database...");
-
-
             try {
+
+
                 JSONObject parent = new JSONObject(s);
                 JSONArray items = parent.getJSONArray("list");
 
-                if (items != null){
+                if (items != null) {
 
                     myDBHelper = new DatabaseHelper(getApplicationContext());
                     myDBHelper.deleteTables();
@@ -277,7 +276,7 @@ public class MainActivity extends AppCompatActivity
                         JSONArray images = child.getJSONArray("image");
 
                         for (int j = 0; j < images.length(); j++) {
-                            myDBHelper.insertIntoImages(child.getInt("id"),images.getString(j));
+                            myDBHelper.insertIntoImages(child.getInt("id"), images.getString(j));
 
                         }
                         myDBHelper.insertIntoPlace(child.getInt("id"), child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude"), child.getString("category"));
@@ -289,14 +288,13 @@ public class MainActivity extends AppCompatActivity
                     editor.putInt("version", serverVersion);
                     editor.commit();
 
-
-                    if(pd.isShowing())
+                    if (pd.isShowing())
                         pd.dismiss();
 
-                    Toast.makeText(getApplicationContext(),"Update Successful",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Update Successful", Toast.LENGTH_SHORT).show();
 
-                }else {
-                    Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                 }
 
             } catch (JSONException e) {
@@ -304,6 +302,7 @@ public class MainActivity extends AppCompatActivity
             }
 
         }
+
     }
 
 

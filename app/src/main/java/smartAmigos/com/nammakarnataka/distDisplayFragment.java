@@ -22,6 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 import java.util.List;
 import smartAmigos.com.nammakarnataka.adapter.DatabaseHelper;
@@ -39,6 +43,8 @@ public class distDisplayFragment extends Fragment {
     Context context;
     DatabaseHelper myDBHelper;
     Cursor PlaceCursor;
+
+    private InterstitialAd interstitial;
 
     @SuppressLint("ValidFragment")
     public distDisplayFragment(String district) {
@@ -58,6 +64,21 @@ public class distDisplayFragment extends Fragment {
         current_dist = (TextView)view.findViewById(R.id.current_dist);
         list = (ListView) view.findViewById(R.id.distCurrentList);
         context = getActivity().getApplicationContext();
+
+
+        //Call ads
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitial = new InterstitialAd(context);
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded()&&Math.random()>0.6) {
+                    interstitial.show();
+                }
+            }
+        });
+        //Finish calling ads
 
         TextView current_dist = (TextView)view.findViewById(R.id.current_dist);
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
