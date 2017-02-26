@@ -1,12 +1,12 @@
 {
   "project_info": {
-    "project_number": "751448701390",
-    "project_id": "firebase-nkv2"
+    "project_number": "416195021124",
+    "project_id": "firebase-namma-karnataka"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:751448701390:android:61384694ba46db13",
+        "mobilesdk_app_id": "1:416195021124:android:61384694ba46db13",
         "android_client_info": {
           "package_name": "smartAmigos.com.nammakarnataka"
         }
@@ -14,7 +14,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDJkqqF1dCQtjPh0aMOyB0cwDspKoBdXDo"
+          "current_key": "AIzaSyByWCT2j2bMPTVWeel7ixQTQ1hjsEsEW_Q"
         }
       ],
       "services": {

@@ -10,10 +10,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -27,7 +25,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -66,7 +63,6 @@ public class MainActivity extends AppCompatActivity
     DrawerLayout drawer;
     static int serverVersion, localVersion;
     ProgressDialog pd;
-    String str;
 
     DatabaseHelper myDBHelper;
 
@@ -101,7 +97,6 @@ public class MainActivity extends AppCompatActivity
                 mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
                 final HashMap<String, Integer> file_maps = new HashMap<>();
                 //Positively do not change any images
-                file_maps.put("TB Dam", R.drawable.tb_dam);
                 file_maps.put("Jog Falls", R.drawable.jog);
                 file_maps.put("Mysore Palace", R.drawable.mysuru);
                 file_maps.put("Mullayanagiri", R.drawable.mullayanagiri);
@@ -151,23 +146,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-
-        if(isNetworkConnected()){
-            SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
-            localVersion = preferences.getInt("version", 0);
-            new baseNewsVersion().execute("http://nammakarnataka.net23.net/general/base_version.json");
-        }
-
-
-
     }
-
-
-
-
-
 
 
 
@@ -501,6 +480,13 @@ public class MainActivity extends AppCompatActivity
                 ft.replace(R.id.content_main, fragment);
                 ft.addToBackStack(null);
                 ft.commit();
+                break;
+
+
+            case R.id.nav_maps:
+                intent = new Intent(MainActivity.this, MapsActivity.class);
+                startActivity(intent);
+                break;
 
         }
 

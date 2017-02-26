@@ -72,22 +72,6 @@ public class SearchResults extends Fragment {
         t.setTypeface(myFont);
 
 
-        //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.6) {
-                    interstitial.show();
-                }
-            }
-        });
-        // Finish calling ads
-
-
-
         list = (ListView) view.findViewById(R.id.searchList);
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);

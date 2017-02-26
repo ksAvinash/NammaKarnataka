@@ -66,19 +66,19 @@ public class distDisplayFragment extends Fragment {
         context = getActivity().getApplicationContext();
 
 
-        //Call ads
+       // Call ads
         AdRequest adRequest = new AdRequest.Builder().build();
         interstitial = new InterstitialAd(context);
         interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
         interstitial.loadAd(adRequest);
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.6) {
+                if (interstitial.isLoaded()&&Math.random()>0.8) {
                     interstitial.show();
                 }
             }
         });
-        //Finish calling ads
+       // Finish calling ads
 
         TextView current_dist = (TextView)view.findViewById(R.id.current_dist);
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );

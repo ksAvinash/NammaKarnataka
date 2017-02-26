@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.location.Location;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -89,7 +90,6 @@ public class placeDisplayFragment extends Fragment {
         SimpleDraweeView gallery_icon = (SimpleDraweeView) view.findViewById(R.id.gallery_icon);
 
 
-
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
         place_textView.setTypeface(myFont);
         context = getActivity().getApplicationContext();
@@ -105,7 +105,7 @@ public class placeDisplayFragment extends Fragment {
         interstitial.loadAd(adRequest);
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.7) {
+                if (interstitial.isLoaded()&&Math.random()>0.85) {
                     interstitial.show();
                 }
             }
@@ -132,6 +132,9 @@ public class placeDisplayFragment extends Fragment {
             longitude = cursor.getDouble(8);
         }
 
+
+
+        //https://maps.googleapis.com/maps/api/directions/json?origin=Bangalore&destination=Hampi&key=AIzaSyC6ry2jx3faHKXBn9450iYX8s0HYoYdAtM
 
         gmapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,6 +244,22 @@ public class placeDisplayFragment extends Fragment {
         }
 
     }
+
+
+    float getKms(Double lat1, Double lon1, Double lat2, Double lon2){
+        Location loc1 = new Location("");
+        loc1.setLatitude(lat1);
+        loc1.setLongitude(lon1);
+
+        Location loc2 = new Location("");
+        loc2.setLatitude(lat2);
+        loc2.setLongitude(lon2);
+
+        float distanceInMeters = loc1.distanceTo(loc2);
+        return distanceInMeters/1000;
+
+    }
+
 
 
 

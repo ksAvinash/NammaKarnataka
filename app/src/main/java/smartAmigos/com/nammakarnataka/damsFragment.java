@@ -19,13 +19,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.cjj.MaterialRefreshLayout;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +33,6 @@ public class damsFragment extends Fragment {
     private List<generic_adapter> dams_adapterList = new ArrayList<>();
 
     static SimpleDraweeView draweeView;
-    private InterstitialAd interstitial;
     View view;
     Context context;
     ListView list;
@@ -56,19 +50,7 @@ public class damsFragment extends Fragment {
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
         t.setTypeface(myFont);
 
-        //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.7) {
-                    interstitial.show();
-                }
-            }
-        });
-        //Finish calling ads
+
 
         list = (ListView) view.findViewById(R.id.damList);
 

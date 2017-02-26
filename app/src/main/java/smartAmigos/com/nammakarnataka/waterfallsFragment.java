@@ -20,8 +20,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +32,6 @@ public class waterfallsFragment extends Fragment {
     private List<generic_adapter> waterfalls_adapterList = new ArrayList<>();
 
     static SimpleDraweeView draweeView;
-    private InterstitialAd interstitial;
     View view;
     TextView t;
     Context context;
@@ -60,19 +57,6 @@ public class waterfallsFragment extends Fragment {
         t.setTypeface(myFont);
         list = (ListView) view.findViewById(R.id.waterfallsList);
 
-        //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded() && Math.random() > 0.7) {
-                    interstitial.show();
-                }
-            }
-        });
-        //Finish calling ads
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);

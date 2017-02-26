@@ -4,24 +4,21 @@ package smartAmigos.com.nammakarnataka;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.core.ImagePipeline;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -48,9 +45,9 @@ public class GalleryFragment extends Fragment {
     String placename;
     ListView list;
     Context context;
+    Uri uri;
 
     private InterstitialAd interstitial;
-
 
     public GalleryFragment(){}
 
@@ -66,14 +63,16 @@ public class GalleryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view  = inflater.inflate(R.layout.fragment_gallery, container, false);
+
         context = getActivity().getApplicationContext();
 
 
         list = (ListView) view.findViewById(R.id.galleryList);
 
 
-        //Call ads
+       // Call ads
         AdRequest adRequest = new AdRequest.Builder().build();
         interstitial = new InterstitialAd(context);
         interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
@@ -83,16 +82,17 @@ public class GalleryFragment extends Fragment {
                     interstitial.show();
             }
         });
-        // Finish calling ads
+         //Finish calling ads
 
+
+
+        Toast.makeText(context, "You can mail us photos of places you've visited, We will add it to the Gallery\nmail: justmailtoavi@gmail.com",Toast.LENGTH_LONG).show();
 
         //set the place name and font
         TextView gallery_name = (TextView)view.findViewById(R.id.gallery_name);
         gallery_name.setText(placename);
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
         gallery_name.setTypeface(myFont);
-
-
 
 
         gallery_adapterList.clear();
@@ -207,33 +207,17 @@ public class GalleryFragment extends Fragment {
             TextView mText=(TextView) convertView.findViewById(R.id.galleryText);
             mText.setText(current.getText());
 
+
+            uri = Uri.parse(current.getUrl());
             SimpleDraweeView mImage = (SimpleDraweeView) convertView.findViewById(R.id.galleryImage);
-            mImage.setImageURI(Uri.parse(current.getUrl()));
+            mImage.setImageURI(uri);
+
+            ImagePipeline imagePipeline = Fresco.getImagePipeline();
+            imagePipeline.evictFromCache(uri);
 
             return convertView;
         }
 
     }
-
-//    @Override
-//    public void onDestroy() {
-//        super.onDestroy();
-//
-//        unbindDrawables(getActivity().findViewById(R.id.galleryImage));
-//        System.gc();
-//    }
-//
-//
-//    private void unbindDrawables(View view) {
-//        if (view.getBackground() != null) {
-//            view.getBackground().setCallback(null);
-//        }
-//        if (view instanceof ViewGroup) {
-//            for (int i = 0; i < ((ViewGroup) view).getChildCount(); i++) {
-//                unbindDrawables(((ViewGroup) view).getChildAt(i));
-//            }
-//            ((ViewGroup) view).removeAllViews();
-//        }
-//    }
 
 }

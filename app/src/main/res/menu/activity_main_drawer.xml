@@ -57,6 +57,12 @@
             android:icon="@drawable/districts"
             android:title="Districts" />
 
+
+        <item
+            android:id="@+id/nav_maps"
+            android:icon="@drawable/maps_item"
+            android:title="MAPS" />
+
     </group>
 
     <group

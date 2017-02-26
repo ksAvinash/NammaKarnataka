@@ -17,11 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +39,6 @@ public class districtFragment extends Fragment {
     Cursor PlaceCursor;
 
     static SimpleDraweeView draweeView;
-    private InterstitialAd interstitial;
     private List<districts_adapter> dist_adapterList = new ArrayList<>();
 
 
@@ -64,19 +59,6 @@ public class districtFragment extends Fragment {
         }
 
 
-        //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.6) {
-                    interstitial.show();
-                }
-            }
-        });
-       // Finish calling ads
 
         dist_adapterList.clear();
 

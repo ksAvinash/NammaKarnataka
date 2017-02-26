@@ -55,22 +55,6 @@ public class otherPlaces extends Fragment {
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
         t.setTypeface(myFont);
 
-        //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                // Call displayInterstitial() function
-                if (interstitial.isLoaded()&&Math.random()>0.7) {
-                    interstitial.show();
-                }
-            }
-        });
-        //Finish calling ads
-
 
         list = (ListView) view.findViewById(R.id.otherList);
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
