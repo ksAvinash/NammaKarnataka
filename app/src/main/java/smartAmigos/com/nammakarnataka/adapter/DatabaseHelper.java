@@ -14,6 +14,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_PLACES = "nk_places";
     private static final String TABLE_IMAGES = "nk_images";
+    private static final String TABLE_FAVOURITE = "nk_fav";
+
+
 
     private static final String PLACE_ID = "id";
     private static final String PLACE_NAME = "name";
@@ -42,12 +45,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String create_images_table = "create table "+TABLE_IMAGES+" ( "+PLACE_ID+" integer, "+IMAGE_URL+" text );";
         db.execSQL(create_images_table);
 
+
+        String create_favourite_table = "create table "+TABLE_FAVOURITE+" ("+PLACE_ID+" integer primary key);";
+        db.execSQL(create_favourite_table);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists "+TABLE_PLACES);
         db.execSQL("drop table if exists "+TABLE_IMAGES);
+        db.execSQL("drop table if exists "+TABLE_FAVOURITE);
         onCreate(db);
     }
 
@@ -88,6 +95,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return true;
     }
+
+    public boolean insertIntoFavourites(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PLACE_ID, id);
+        db.insert(TABLE_FAVOURITE, null, contentValues);
+
+        return true;
+    }
+
+
+
+    public Cursor getAllFavourites(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("select * from "+TABLE_FAVOURITE+" ;",null);
+
+    }
+
+
+
 
     public Cursor getAllTemples(){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -152,6 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select * from "+TABLE_PLACES+" where "+PLACE_NAME+" like '%"+str+"%' ;",null);
     }
+
 
 
 }

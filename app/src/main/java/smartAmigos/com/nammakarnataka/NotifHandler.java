@@ -3,39 +3,26 @@ package smartAmigos.com.nammakarnataka;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import smartAmigos.com.nammakarnataka.adapter.DatabaseHelper;
-import smartAmigos.com.nammakarnataka.adapter.nearby_places_adapter;
 
 
 
@@ -46,26 +33,36 @@ public class NotifHandler extends Activity {
     TextView placename, description, district, bestseason, additionalInformation, gmapButton, nearby;
     SliderLayout image;
     TextSliderView textSliderView;
-
+    DatabaseHelper myDBHelper;
+    Context context;
+    int id;
     InterstitialAd interstitial;
+    String place_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notification_layout);
+        context = getApplicationContext();
+
+
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitial = new InterstitialAd(NotifHandler.this);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                if (interstitial.isLoaded()) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
 
 
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(NotifHandler.this);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()) {
-                    interstitial.show();
-                }
-            }
-        });
+        SimpleDraweeView favourite_icon = (SimpleDraweeView) findViewById(R.id.fav_notification_icon);
+        SimpleDraweeView gallery_icon = (SimpleDraweeView) findViewById(R.id.gallery_notification_icon);
+
+
 
         placename = (TextView) findViewById(R.id.noti_placename);
         description = (TextView) findViewById(R.id.noti_description);
@@ -87,7 +84,8 @@ public class NotifHandler extends Activity {
             JSONObject item = new JSONObject(value);
             JSONArray images = item.getJSONArray("image");
 
-            placename.setText(item.getString("name"));
+            placename.setText(place_name);
+            place_name = item.getString("name");
             Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/placenames.otf" );
             placename.setTypeface(myFont);
 
@@ -100,6 +98,7 @@ public class NotifHandler extends Activity {
             latitude = item.getDouble("latitude");
             longitude = item.getDouble("longitude");
 
+            id = item.getInt("id");
 
             int i=0;
             while(images.getString(i) != null){
@@ -133,6 +132,31 @@ public class NotifHandler extends Activity {
 
             }
         });
+
+
+
+
+
+        favourite_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, place_name+" Added to Favourites list id = "+id, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                myDBHelper = new DatabaseHelper(context);
+                myDBHelper.insertIntoFavourites(id);
+            }
+        });
+
+
+        gallery_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Gallery Fragment call", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
 
 
     }

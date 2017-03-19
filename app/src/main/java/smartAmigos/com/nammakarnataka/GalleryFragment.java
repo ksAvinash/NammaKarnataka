@@ -16,11 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.core.ImagePipeline;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
@@ -73,15 +72,15 @@ public class GalleryFragment extends Fragment {
 
 
        // Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                    interstitial.show();
-            }
-        });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitial = new InterstitialAd(context);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                    interstitial.show();
+//            }
+//        });
          //Finish calling ads
 
 
@@ -100,7 +99,6 @@ public class GalleryFragment extends Fragment {
 
         if(isNetworkConnected()){
             new galleryImages().execute("http://nammakarnataka.net23.net/BigImages/"+image_id+".json");
-            Toast.makeText(context,"Please wait..",Toast.LENGTH_SHORT).show();
         }else
             Toast.makeText(context,"No Internet Connection!",Toast.LENGTH_SHORT).show();
 
@@ -113,7 +111,6 @@ public class GalleryFragment extends Fragment {
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
-
 
 
 
@@ -209,15 +206,19 @@ public class GalleryFragment extends Fragment {
 
 
             uri = Uri.parse(current.getUrl());
+            ImagePipeline imagePipeline = Fresco.getImagePipeline();
+            imagePipeline.evictFromCache(uri);
+
             SimpleDraweeView mImage = (SimpleDraweeView) convertView.findViewById(R.id.galleryImage);
             mImage.setImageURI(uri);
 
-            ImagePipeline imagePipeline = Fresco.getImagePipeline();
-            imagePipeline.evictFromCache(uri);
 
             return convertView;
         }
 
     }
+
+
+
 
 }

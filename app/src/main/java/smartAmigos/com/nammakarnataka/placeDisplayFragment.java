@@ -4,13 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.Typeface;
-import android.location.Location;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -21,16 +19,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
+
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import smartAmigos.com.nammakarnataka.adapter.DatabaseHelper;
 import smartAmigos.com.nammakarnataka.adapter.nearby_places_adapter;
 
@@ -41,7 +36,6 @@ public class placeDisplayFragment extends Fragment {
     int img_id;
     private Button gmapButton;
     private double latitude, longitude;
-    SliderLayout mDemoSlider;
     private InterstitialAd interstitial;
     DatabaseHelper myDBHelper;
     TextView t;
@@ -88,6 +82,8 @@ public class placeDisplayFragment extends Fragment {
         TextView season_textView = (TextView) view.findViewById(R.id.season_textView);
         TextView additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
         SimpleDraweeView gallery_icon = (SimpleDraweeView) view.findViewById(R.id.gallery_icon);
+        SimpleDraweeView favourite_icon = (SimpleDraweeView) view.findViewById(R.id.fav_icon);
+        SimpleDraweeView draweeView = (SimpleDraweeView) view.findViewById(R.id.layout_images);
 
 
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
@@ -96,20 +92,19 @@ public class placeDisplayFragment extends Fragment {
 
 
         gmapButton = (Button) view.findViewById(R.id.gmapButton);
-        mDemoSlider = (SliderLayout) view.findViewById(R.id.layout_images);
 
         //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(getContext());
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.85) {
-                    interstitial.show();
-                }
-            }
-        });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitial = new InterstitialAd(getContext());
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                if (interstitial.isLoaded()&&Math.random()>0.85) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
         //Finish calling ads
 
 
@@ -134,7 +129,6 @@ public class placeDisplayFragment extends Fragment {
 
 
 
-        //https://maps.googleapis.com/maps/api/directions/json?origin=Bangalore&destination=Hampi&key=AIzaSyC6ry2jx3faHKXBn9450iYX8s0HYoYdAtM
 
         gmapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,26 +142,18 @@ public class placeDisplayFragment extends Fragment {
         });
 
 
-    //code for multiple images loading starts
-        TextSliderView textSliderView;
+
+
+
+
+
         String[] imagesArray = new String[25];
         Cursor imageURLCursor = myDBHelper.getAllImagesArrayByID(img_id);
         for (int i=0;imageURLCursor.moveToNext();i++){
             imagesArray[i] = imageURLCursor.getString(1);
         }
-
-        for(int i = 0; i < imageURLCursor.getCount(); i++) {
-            textSliderView = new TextSliderView(getContext());
-            textSliderView
-                    .image(imagesArray[i])
-                    .setScaleType(BaseSliderView.ScaleType.Fit);
-            mDemoSlider.addSlider(textSliderView);
-        }
-        mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
-        mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-        mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-        mDemoSlider.setDuration(7000);
-    //Code for multiple images loading ends
+        Uri uri = Uri.parse(imagesArray[1]);
+        draweeView.setImageURI(uri);
 
 
 
@@ -192,6 +178,20 @@ public class placeDisplayFragment extends Fragment {
             }
         });
 
+
+        favourite_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Snackbar.make(view, placename+" Added to Favourites list", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                myDBHelper = new DatabaseHelper(context);
+                myDBHelper.insertIntoFavourites(img_id);
+
+            }
+
+        });
 
 
         return view;
@@ -245,20 +245,6 @@ public class placeDisplayFragment extends Fragment {
 
     }
 
-
-    float getKms(Double lat1, Double lon1, Double lat2, Double lon2){
-        Location loc1 = new Location("");
-        loc1.setLatitude(lat1);
-        loc1.setLongitude(lon1);
-
-        Location loc2 = new Location("");
-        loc2.setLatitude(lat2);
-        loc2.setLongitude(lon2);
-
-        float distanceInMeters = loc1.distanceTo(loc2);
-        return distanceInMeters/1000;
-
-    }
 
 
 

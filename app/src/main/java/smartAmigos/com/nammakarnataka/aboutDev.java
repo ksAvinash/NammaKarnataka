@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.core.ImagePipeline;
 
 public class aboutDev extends AppCompatActivity {
 
@@ -49,6 +50,10 @@ public class aboutDev extends AppCompatActivity {
         pq1.setTypeface(myFont);
 
 
+
+
+        ImagePipeline imagePipeline = Fresco.getImagePipeline();
+        imagePipeline.clearCaches();
     }
 
 

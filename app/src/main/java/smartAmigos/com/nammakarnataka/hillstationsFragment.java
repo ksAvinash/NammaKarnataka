@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
@@ -131,11 +132,10 @@ public class hillstationsFragment extends Fragment {
             }
             generic_adapter current = hillstations_adapterList.get(position);
 
-            //Code to download image from url and paste.
             Uri uri = Uri.parse(current.getImage()[0]);
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_Image);
             draweeView.setImageURI(uri);
-            //Code ends here.
+
             TextView t_name = (TextView) itemView.findViewById(R.id.item_Title);
             t_name.setText(current.getTitle());
 

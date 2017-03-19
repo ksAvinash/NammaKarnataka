@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#29402b</color>
-    <color name="colorPrimaryDark">#3e5e40</color>
-    <color name="colorAccent">#aed581</color>
+    <color name="colorPrimary">#455a64</color>
+    <color name="colorPrimaryDark">#607d8b</color>
+    <color name="colorAccent">#b0bec5</color>
 
     <!--Positively do not change anything that follows - Charan-->
     <!--color name="black_overlay">#66000000</color-->
@@ -11,4 +11,5 @@
     <color name="orangeText">#FF6765</color>
     <color name="defTextColor">#000000</color>
     <color name="colorBlue">#3949ab</color>
+
 </resources>

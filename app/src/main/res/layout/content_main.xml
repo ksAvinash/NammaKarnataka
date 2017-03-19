@@ -5,7 +5,7 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/appbackground"
+    android:background="@drawable/app_wallpaper"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".MainActivity"
@@ -46,8 +46,6 @@
         android:layout_below="@+id/mainActivitySlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-
 
 
 </RelativeLayout>
