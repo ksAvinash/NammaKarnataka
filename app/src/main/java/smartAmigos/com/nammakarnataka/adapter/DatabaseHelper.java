@@ -114,6 +114,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    public void deleteFromFavourites(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_FAVOURITE, PLACE_ID + "=" + id, null);
+
+    }
+
 
 
 

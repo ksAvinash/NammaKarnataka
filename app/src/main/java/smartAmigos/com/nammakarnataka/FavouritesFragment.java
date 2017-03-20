@@ -2,14 +2,18 @@ package smartAmigos.com.nammakarnataka;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -34,7 +38,7 @@ public class FavouritesFragment extends Fragment {
     ListView list;
     TextView t;
     DatabaseHelper myDBHelper;
-    Cursor Cursor;
+    Cursor cursor, PlaceCursor;
     int id;
 
     public FavouritesFragment() {
@@ -60,8 +64,9 @@ public class FavouritesFragment extends Fragment {
 
         Fresco.initialize(getActivity());
 
+
         myDBHelper = new DatabaseHelper(context);
-        Cursor PlaceCursor = myDBHelper.getAllFavourites();
+        PlaceCursor = myDBHelper.getAllFavourites();
 
         while(PlaceCursor.moveToNext()){
             id = PlaceCursor.getInt(0);
@@ -74,7 +79,7 @@ public class FavouritesFragment extends Fragment {
             }
 
 
-            Cursor cursor = myDBHelper.getPlaceById(id);
+            cursor = myDBHelper.getPlaceById(id);
 
             while(cursor.moveToNext()){
 
@@ -104,19 +109,60 @@ public class FavouritesFragment extends Fragment {
     private void displayList() {
         final ArrayAdapter<generic_adapter> adapter = new myFavouritesListAdapterClass();
         list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                PlaceCursor.moveToPosition(position);
+                int img_id = PlaceCursor.getInt(0);
 
+                Fragment fragment = new placeDisplayFragment(img_id);
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+
+            }
+        });
+
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int pos, long l) {
+
+                AlertDialog.Builder adb = new AlertDialog.Builder(getActivity());
+                adb.setTitle("Delete from favourites ?\n");
+                adb.setCancelable(false);
+                adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        PlaceCursor.moveToPosition(pos);
+                        int img_id = PlaceCursor.getInt(0);
+
+                        myDBHelper = new DatabaseHelper(context);
+                        myDBHelper.deleteFromFavourites(img_id);
+
+                        adapter.remove(adapter.getItem(pos));
+                        adapter.notifyDataSetChanged();
+
+
+                    } });
+                adb.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    } });
+                adb.show();
+
+                return true;
+            }
+        });
     }
 
 
 
 
     public class myFavouritesListAdapterClass extends ArrayAdapter<generic_adapter> {
-
         myFavouritesListAdapterClass() {
             super(context, R.layout.item, favourites_adapterList);
         }
-
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = convertView;
@@ -127,12 +173,9 @@ public class FavouritesFragment extends Fragment {
             }
             generic_adapter current = favourites_adapterList.get(position);
 
-
             Uri uri = Uri.parse(current.getImage()[0]);
-
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_Image);
             draweeView.setImageURI(uri);
-
 
             TextView t_name = (TextView) itemView.findViewById(R.id.item_Title);
             t_name.setText(current.getTitle());
@@ -140,12 +183,13 @@ public class FavouritesFragment extends Fragment {
             TextView t_dist = (TextView) itemView.findViewById(R.id.item_Dist);
             t_dist.setText(current.getDistrict());
 
-
-
-
             return itemView;
         }
-
-
     }
+
+
+
+
+
+
 }

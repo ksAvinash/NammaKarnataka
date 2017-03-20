@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +15,6 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
@@ -59,8 +57,7 @@ public class NotifHandler extends Activity {
 
 
 
-        SimpleDraweeView favourite_icon = (SimpleDraweeView) findViewById(R.id.fav_notification_icon);
-        SimpleDraweeView gallery_icon = (SimpleDraweeView) findViewById(R.id.gallery_notification_icon);
+
 
 
 
@@ -132,31 +129,6 @@ public class NotifHandler extends Activity {
 
             }
         });
-
-
-
-
-
-        favourite_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, place_name+" Added to Favourites list id = "+id, Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-                myDBHelper = new DatabaseHelper(context);
-                myDBHelper.insertIntoFavourites(id);
-            }
-        });
-
-
-        gallery_icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Gallery Fragment call", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
 
 
     }
