@@ -18,7 +18,7 @@
         android:id="@+id/layout_images"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        fresco:placeholderImage="@drawable/loading" />
+         />
 
 
     <LinearLayout

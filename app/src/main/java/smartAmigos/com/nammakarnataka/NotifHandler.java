@@ -15,6 +15,8 @@ import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
@@ -53,7 +55,7 @@ public class NotifHandler extends Activity {
 //                    interstitial.show();
 //                }
 //            }
-//        });
+//         });
 
 
 

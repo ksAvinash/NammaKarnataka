@@ -16,8 +16,7 @@
         android:id="@+id/galleryImage"
         android:layout_below="@+id/tr"
         android:layout_width="match_parent"
-        android:layout_height="275dp"
-        fresco:placeholderImage="@drawable/loading" />
+        android:layout_height="275dp" />
 
     <RelativeLayout
         android:layout_below="@+id/galleryImage"

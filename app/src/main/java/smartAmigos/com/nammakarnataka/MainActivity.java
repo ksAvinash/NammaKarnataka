@@ -32,6 +32,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.pushbots.push.Pushbots;
 
 import org.json.JSONArray;
@@ -46,6 +50,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 
 import smartAmigos.com.nammakarnataka.adapter.DatabaseHelper;
 
@@ -62,6 +67,8 @@ public class MainActivity extends AppCompatActivity
     DatabaseHelper myDBHelper;
     View view;
 
+    SliderLayout mDemoSlider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,8 +80,8 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         pd = new ProgressDialog(this);
 
-        Pushbots.sharedInstance().init(getApplicationContext());
-        Pushbots.sharedInstance().setCustomHandler(customHandler.class);
+        Pushbots.sharedInstance().registerForRemoteNotifications();
+
 
         t = (TextView) findViewById(R.id.listNews);
         fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -87,42 +94,42 @@ public class MainActivity extends AppCompatActivity
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
         }
 
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
-//                final HashMap<String, Integer> file_maps = new HashMap<>();
-//                //Positively do not change any images
-//                file_maps.put("Jog Falls", R.drawable.jog);
-//                file_maps.put("Mysore Palace", R.drawable.mysuru);
-//                file_maps.put("Mullayanagiri", R.drawable.mullayanagiri);
-//                file_maps.put("Dandeli", R.drawable.dandeli1);
-//                file_maps.put("Wonder La",R.drawable.wonderla);
-//
-//                for (String name : file_maps.keySet()) {
-//                    TextSliderView textSliderView = new TextSliderView(getApplicationContext());
-//                    // initialize a SliderLayout
-//                    textSliderView
-//                            .description(name)
-//                            .image(file_maps.get(name))
-//                            .setScaleType(BaseSliderView.ScaleType.Fit);
-//
-//                    //add your extra information
-//                    textSliderView.bundle(new Bundle());
-//                    textSliderView.getBundle()
-//                            .putString("extra", name);
-//
-//                    mDemoSlider.addSlider(textSliderView);
-//                }
-//
-//                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
-//                mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-//                mDemoSlider.setCustomAnimation(new DescriptionAnimation());
-//                mDemoSlider.setDuration(7000);
-//
-//            }
-//        }).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                mDemoSlider = (SliderLayout) findViewById(R.id.mainActivitySlider);
+                final HashMap<String, Integer> file_maps = new HashMap<>();
+                //Positively do not change any images
+                file_maps.put("Jog Falls", R.drawable.jog);
+                file_maps.put("Mysore Palace", R.drawable.mysuru);
+                file_maps.put("Mullayanagiri", R.drawable.mullayanagiri);
+                file_maps.put("Dandeli", R.drawable.dandeli1);
+                file_maps.put("Wonder La",R.drawable.wonderla);
+
+                for (String name : file_maps.keySet()) {
+                    TextSliderView textSliderView = new TextSliderView(getApplicationContext());
+                    // initialize a SliderLayout
+                    textSliderView
+                            .description(name)
+                            .image(file_maps.get(name))
+                            .setScaleType(BaseSliderView.ScaleType.Fit);
+
+                    //add your extra information
+                    textSliderView.bundle(new Bundle());
+                    textSliderView.getBundle()
+                            .putString("extra", name);
+
+                    mDemoSlider.addSlider(textSliderView);
+                }
+
+                mDemoSlider.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
+                mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+                mDemoSlider.setCustomAnimation(new DescriptionAnimation());
+                mDemoSlider.setDuration(7000);
+
+            }
+        }).start();
 
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

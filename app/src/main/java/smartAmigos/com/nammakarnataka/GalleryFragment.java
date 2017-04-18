@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.core.ImagePipeline;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
@@ -72,16 +74,16 @@ public class GalleryFragment extends Fragment {
 
 
        // Call ads
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        interstitial = new InterstitialAd(context);
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                    interstitial.show();
-//            }
-//        });
-         //Finish calling ads
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitial = new InterstitialAd(context);
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                    interstitial.show();
+            }
+        });
+        // Finish calling ads
 
 
 
@@ -210,6 +212,7 @@ public class GalleryFragment extends Fragment {
             imagePipeline.evictFromCache(uri);
 
             SimpleDraweeView mImage = (SimpleDraweeView) convertView.findViewById(R.id.galleryImage);
+            mImage.getHierarchy().setProgressBarImage(new CircleProgressBarDrawable(2));
             mImage.setImageURI(uri);
 
 

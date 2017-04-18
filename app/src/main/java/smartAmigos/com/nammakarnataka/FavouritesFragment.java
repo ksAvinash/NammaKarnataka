@@ -175,6 +175,7 @@ public class FavouritesFragment extends Fragment {
 
             Uri uri = Uri.parse(current.getImage()[0]);
             draweeView = (SimpleDraweeView) itemView.findViewById(R.id.item_Image);
+            draweeView.getHierarchy().setProgressBarImage(new CircleProgressBarDrawable(1));
             draweeView.setImageURI(uri);
 
             TextView t_name = (TextView) itemView.findViewById(R.id.item_Title);
