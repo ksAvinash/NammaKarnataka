@@ -37,7 +37,7 @@ public class NotifHandler extends Activity {
     Context context;
     int id;
     InterstitialAd interstitial;
-    String place_name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,17 +45,17 @@ public class NotifHandler extends Activity {
         context = getApplicationContext();
 
 
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        interstitial = new InterstitialAd(NotifHandler.this);
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                if (interstitial.isLoaded()) {
-//                    interstitial.show();
-//                }
-//            }
-//         });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        interstitial = new InterstitialAd(NotifHandler.this);
+        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+        interstitial.loadAd(adRequest);
+        interstitial.setAdListener(new AdListener() {
+            public void onAdLoaded() {
+                if (interstitial.isLoaded()) {
+                    interstitial.show();
+                }
+            }
+         });
 
 
 
@@ -83,10 +83,12 @@ public class NotifHandler extends Activity {
             JSONObject item = new JSONObject(value);
             JSONArray images = item.getJSONArray("image");
 
-            placename.setText(place_name);
-            place_name = item.getString("name");
+
             Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/placenames.otf" );
             placename.setTypeface(myFont);
+
+            placename.setText(item.getString("name"));
+
 
             description.setText(item.getString("description"));
             district.setText(item.getString("district"));
