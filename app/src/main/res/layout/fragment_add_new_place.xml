@@ -20,6 +20,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:textColor="#ffffff"
                 android:text="Add a place that you wish to see in this app. Details of the place will be processed and added to the category to which it belongs"
                 android:textSize="18sp" />
 

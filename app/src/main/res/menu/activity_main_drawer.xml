@@ -68,6 +68,11 @@
             android:icon="@drawable/fav"
             android:title="FAVOURITES" />
 
+        <item
+            android:id="@+id/nav_visited"
+            android:icon="@drawable/visit"
+            android:title="VISITED" />
+
 
     </group>
 

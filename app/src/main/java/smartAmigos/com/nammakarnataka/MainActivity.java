@@ -516,6 +516,16 @@ public class MainActivity extends AppCompatActivity
                 ft.commit();
                 break;
 
+            case R.id.nav_visited:
+                fragment = new VisitedFragment();
+                ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_main, fragment);
+                ft.addToBackStack(null);
+                ft.commit();
+                break;
+
+
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

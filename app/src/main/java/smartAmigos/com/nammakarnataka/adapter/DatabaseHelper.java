@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.hardware.camera2.params.StreamConfigurationMap;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -15,6 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_PLACES = "nk_places";
     private static final String TABLE_IMAGES = "nk_images";
     private static final String TABLE_FAVOURITE = "nk_fav";
+    private static final String TABLE_VISITED = "nk_visited";
 
 
 
@@ -48,6 +50,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         String create_favourite_table = "create table "+TABLE_FAVOURITE+" ("+PLACE_ID+" integer primary key);";
         db.execSQL(create_favourite_table);
+
+        String create_visited_table = "create table "+TABLE_VISITED+" ("+PLACE_ID+" integer primary key);";
+        db.execSQL(create_visited_table);
+
+
     }
 
     @Override
@@ -55,6 +62,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists "+TABLE_PLACES);
         db.execSQL("drop table if exists "+TABLE_IMAGES);
         db.execSQL("drop table if exists "+TABLE_FAVOURITE);
+        db.execSQL("drop table if exists "+TABLE_VISITED);
+
         onCreate(db);
     }
 
@@ -106,6 +115,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean insertIntoVisited(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PLACE_ID, id);
+        db.insert(TABLE_VISITED, null, contentValues);
+
+        return true;
+    }
+
+
+
+
 
 
     public Cursor getAllFavourites(){
@@ -119,6 +141,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.delete(TABLE_FAVOURITE, PLACE_ID + "=" + id, null);
 
     }
+
+
+    public Cursor getAllVisited(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("select * from "+TABLE_VISITED+" ;",null);
+    }
+
+    public void deleteFromVisited(int id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_VISITED, PLACE_ID + "=" + id, null);
+
+    }
+
+
 
 
 

@@ -83,9 +83,12 @@ public class placeDisplayFragment extends Fragment {
         TextView location_textView = (TextView) view.findViewById(R.id.location_textView);
         TextView season_textView = (TextView) view.findViewById(R.id.season_textView);
         TextView additionalInformation = (TextView) view.findViewById(R.id.additionalInformation);
+
         SimpleDraweeView gallery_icon = (SimpleDraweeView) view.findViewById(R.id.gallery_icon);
         SimpleDraweeView favourite_icon = (SimpleDraweeView) view.findViewById(R.id.fav_icon);
         SimpleDraweeView draweeView = (SimpleDraweeView) view.findViewById(R.id.layout_images);
+        SimpleDraweeView visited_icon = (SimpleDraweeView) view.findViewById(R.id.visited_icon);
+
 
 
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
@@ -178,6 +181,19 @@ public class placeDisplayFragment extends Fragment {
                 ft.replace(R.id.content_main, fragment);
                 ft.addToBackStack(null);
                 ft.commit();
+            }
+        });
+
+
+        visited_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view,"Nice, you have visited "+placename, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                myDBHelper = new DatabaseHelper(context);
+                myDBHelper.insertIntoVisited(img_id);
+
             }
         });
 

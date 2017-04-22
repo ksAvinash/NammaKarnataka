@@ -3,31 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_background"
-    tools:context=".heritageFragment">
+    tools:context=".VisitedFragment">
 
 
     <TextView
-        android:id="@+id/zp1"
+        android:id="@+id/pi1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:padding="12dp"
-        android:text="HERITAGE"
+        android:text="MY PLACES"
         android:textColor="#ffffff"
-        android:textSize="28sp"/>
+        android:textSize="28sp" />
 
 
 
-        <ListView
-            android:divider="@null"
-            android:id="@+id/heritageList"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/zp1" />
+    <ListView
+        android:divider="@null"
+        android:id="@+id/visitedList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/pi1" />
 
 
 
 </RelativeLayout>
-
-
-
