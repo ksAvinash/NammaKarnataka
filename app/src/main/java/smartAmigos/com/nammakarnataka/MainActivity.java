@@ -75,8 +75,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
 
-         view = (View)findViewById(android.R.id.content);
+        view = (View)findViewById(android.R.id.content);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         pd = new ProgressDialog(this);
 
@@ -89,10 +90,6 @@ public class MainActivity extends AppCompatActivity
         Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/Kaushan.otf");
         t.setTypeface(myFont);
 
-
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }
 
         new Thread(new Runnable() {
             @Override
@@ -149,6 +146,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        if(isNetworkConnected()){
+            SharedPreferences preferences = getSharedPreferences("only_once", Context.MODE_PRIVATE);
+            if(preferences.getInt("first", 0) == 0) {
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putInt("first", 1);
+                editor.commit();
+                Toast.makeText(getApplicationContext(), "Please Wait!",Toast.LENGTH_SHORT).show();
+
+                new baseNewsVersion().execute("http://nammakarnataka.net23.net/general/base_version.json");
+
+            }
+        }
+
+
+
+
 
     }
 
@@ -554,13 +570,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-
-
-//    @Override
-//    protected void attachBaseContext(Context newBase) {
-//        super.attachBaseContext(newBase);
-//        MultiDex.install(this);
-//    }
 
 
 

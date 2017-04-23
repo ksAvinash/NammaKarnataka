@@ -105,7 +105,7 @@ public class placeDisplayFragment extends Fragment {
         interstitial.loadAd(adRequest);
         interstitial.setAdListener(new AdListener() {
             public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.85) {
+                if (interstitial.isLoaded()&&Math.random()>0.7) {
                     interstitial.show();
                 }
             }
@@ -225,16 +225,24 @@ public class placeDisplayFragment extends Fragment {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                myDBHelper = new DatabaseHelper(context);
 
-                String name[] = places[position-1].split(" ");
-                Cursor cursor = myDBHelper.getPlaceByString(name[0]);
+                try{
+                    myDBHelper = new DatabaseHelper(context);
 
-                Fragment fragment = new SearchResults(cursor);
-                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
-                ft.addToBackStack(null);
-                ft.replace(R.id.content_main, fragment);
-                ft.commit();
+                    String name[] = places[position-1].split(" ");
+                    Cursor cursor = myDBHelper.getPlaceByString(name[0]);
+
+                    Fragment fragment = new SearchResults(cursor);
+                    FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                    ft.addToBackStack(null);
+                    ft.replace(R.id.content_main, fragment);
+                    ft.commit();
+
+                }catch (Exception e){
+
+                }
+
+
             }
         });
     }
