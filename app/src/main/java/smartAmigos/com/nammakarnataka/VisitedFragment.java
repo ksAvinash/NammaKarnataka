@@ -3,6 +3,7 @@ package smartAmigos.com.nammakarnataka;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -50,11 +52,15 @@ public class VisitedFragment extends Fragment {
     Cursor cursor, PlaceCursor;
     int id;
 
+    Button myProfileButton;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view =  inflater.inflate(R.layout.fragment_visited, container, false);
+
         context = getActivity().getApplicationContext();
+        myProfileButton = (Button) view.findViewById(R.id.myProfileButton);
 
         t = (TextView) view.findViewById(R.id.pi1);
         Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf");
@@ -63,9 +69,8 @@ public class VisitedFragment extends Fragment {
         list = (ListView) view.findViewById(R.id.visitedList);
 
         visited_adapterList.clear();
+
         Fresco.initialize(getActivity());
-
-
         myDBHelper = new DatabaseHelper(context);
         PlaceCursor = myDBHelper.getAllVisited();
 
@@ -100,8 +105,18 @@ public class VisitedFragment extends Fragment {
             }
 
         }
-
         displayList();
+
+
+
+        myProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), myProfile.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         return view;

@@ -26,6 +26,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -157,7 +158,7 @@ public class MainActivity extends AppCompatActivity
                 editor.commit();
                 Toast.makeText(getApplicationContext(), "Please Wait!",Toast.LENGTH_SHORT).show();
 
-                new baseNewsVersion().execute("http://nammakarnataka.net23.net/general/base_version.json");
+                new baseNewsVersion().execute("http://nammakarnataka.000webhostapp.com/general/base_version.json");
 
             }
         }
@@ -215,7 +216,7 @@ public class MainActivity extends AppCompatActivity
                 pd.setMessage("Fetching new places please wait..");
                 pd.setCancelable(false);
                 pd.show();
-                new baseFile().execute("http://nammakarnataka.net23.net/general/base.json");
+                new baseFile().execute("http://nammakarnataka.000webhostapp.com/general/base.json");
             }else {
                 Snackbar.make(view,"All places are upto date", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
@@ -258,7 +259,6 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(final String s) {
             super.onPostExecute(s);
-
 
 
             new Thread(new Runnable() {
@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity
                                         Toast.makeText(getApplicationContext(), "Please wait..", Toast.LENGTH_SHORT).show();
                                         SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
                                         localVersion = preferences.getInt("version", 0);
-                                        new baseNewsVersion().execute("http://nammakarnataka.net23.net/general/base_version.json");
+                                        new baseNewsVersion().execute("http://nammakarnataka.000webhostapp.com/general/base_version.json");
                                     }else {
                                         Toast.makeText(getApplicationContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
                                     }

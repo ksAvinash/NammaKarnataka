@@ -100,7 +100,7 @@ public class GalleryFragment extends Fragment {
 
 
         if(isNetworkConnected()){
-            new galleryImages().execute("http://nammakarnataka.net23.net/BigImages/"+image_id+".json");
+            new galleryImages().execute("http://nammakarnataka.000webhostapp.com/BigImages/"+image_id+".json");
         }else
             Toast.makeText(context,"No Internet Connection!",Toast.LENGTH_SHORT).show();
 

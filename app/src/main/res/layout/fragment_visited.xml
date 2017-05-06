@@ -7,7 +7,6 @@
     tools:context=".VisitedFragment">
 
 
-
     <TextView
         android:id="@+id/pi1"
         android:layout_width="wrap_content"
@@ -19,12 +18,23 @@
         android:textSize="28sp" />
 
 
+
+    <Button
+        android:layout_below="@+id/pi1"
+        android:id="@+id/myProfileButton"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/rounded_button"
+        android:text="View My Profile"
+        android:textColor="@color/colorWhite" />
+
     <ListView
         android:divider="@null"
         android:id="@+id/visitedList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/pi1" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/myProfileButton" />
 
 
 </RelativeLayout>

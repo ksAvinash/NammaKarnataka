@@ -45,17 +45,17 @@ public class NotifHandler extends Activity {
         context = getApplicationContext();
 
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(NotifHandler.this);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()) {
-                    interstitial.show();
-                }
-            }
-         });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitial = new InterstitialAd(NotifHandler.this);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                if (interstitial.isLoaded()) {
+//                    interstitial.show();
+//                }
+//            }
+//         });
 
 
 

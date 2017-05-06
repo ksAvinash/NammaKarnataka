@@ -99,17 +99,17 @@ public class placeDisplayFragment extends Fragment {
         gmapButton = (Button) view.findViewById(R.id.gmapButton);
 
         //Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(getContext());
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.7) {
-                    interstitial.show();
-                }
-            }
-        });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitial = new InterstitialAd(getContext());
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                if (interstitial.isLoaded()&&Math.random()>0.7) {
+//                    interstitial.show();
+//                }
+//            }
+//        });
         //Finish calling ads
 
 
@@ -188,7 +188,7 @@ public class placeDisplayFragment extends Fragment {
         visited_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view,"Nice, you have visited "+placename, Snackbar.LENGTH_LONG)
+                Snackbar.make(view,"Nice, you have visited "+placename, Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
 
                 myDBHelper = new DatabaseHelper(context);
@@ -202,7 +202,7 @@ public class placeDisplayFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Snackbar.make(view, placename+" Added to Favourites list", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, placename+" Added to Favourites list", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show();
 
                 myDBHelper = new DatabaseHelper(context);
@@ -211,6 +211,9 @@ public class placeDisplayFragment extends Fragment {
             }
 
         });
+
+
+
 
 
         return view;
