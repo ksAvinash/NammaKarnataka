@@ -137,10 +137,6 @@ public class myProfile extends AppCompatActivity {
 
 
 
-
-
-
-
     }
 
 

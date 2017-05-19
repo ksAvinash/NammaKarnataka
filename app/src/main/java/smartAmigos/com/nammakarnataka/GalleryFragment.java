@@ -74,16 +74,17 @@ public class GalleryFragment extends Fragment {
 
 
        // Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                    interstitial.show();
-            }
-        });
+//        AdRequest adRequest = new AdRequest.Builder().build();
+//        interstitial = new InterstitialAd(context);
+//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+//        interstitial.loadAd(adRequest);
+//        interstitial.setAdListener(new AdListener() {
+//            public void onAdLoaded() {
+//                    interstitial.show();
+//            }
+//        });
         // Finish calling ads
+
 
 
 
@@ -209,7 +210,7 @@ public class GalleryFragment extends Fragment {
 
             uri = Uri.parse(current.getUrl());
             ImagePipeline imagePipeline = Fresco.getImagePipeline();
-            imagePipeline.evictFromCache(uri);
+//            imagePipeline.evictFromCache(uri);
 
             SimpleDraweeView mImage = (SimpleDraweeView) convertView.findViewById(R.id.galleryImage);
             mImage.getHierarchy().setProgressBarImage(new CircleProgressBarDrawable(2));

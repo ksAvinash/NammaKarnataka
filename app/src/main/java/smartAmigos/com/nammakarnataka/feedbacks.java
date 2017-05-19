@@ -68,7 +68,7 @@ public class feedbacks extends AppCompatActivity {
                     @Override
                     public void onClick(MaterialDialog dialog, DialogAction which) {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:" + "justmailtoavi@gmail.com, gauthamkumar.0414@gmail.com, charanshetty25595@gmail.com,ashwinchandlapur@gmail.com"));
-                        intent.putExtra(Intent.EXTRA_SUBJECT, "Namma Karnataka Feedback");
+                        intent.putExtra(Intent.EXTRA_SUBJECT, "Namma BEngaluru Feedback");
                         startActivity(intent);
 
                     }

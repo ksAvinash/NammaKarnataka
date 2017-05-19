@@ -27,14 +27,13 @@
     />
 
     <pttextview.widget.PTTextView
-
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:id="@+id/tvs"
-        android:text="One State. Many Worlds."
+        android:text="ನಮ್ಮ ನಾಡು ಕರುನಾಡು"
         android:textColor="#ffffff"
         android:textSize="20sp"
         app:textWeight="bold"

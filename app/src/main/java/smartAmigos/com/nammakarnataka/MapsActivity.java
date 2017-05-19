@@ -60,6 +60,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(new MarkerOptions().position(place).title(PlaceCursor.getString(1)+" Temple").icon(BitmapDescriptorFactory.fromResource(R.drawable.om)));
         }
 
+
+
         PlaceCursor = myDBHelper.getAllDams();
         while (PlaceCursor.moveToNext()){
             LatLng place = new LatLng(PlaceCursor.getDouble(7), PlaceCursor.getDouble(8));

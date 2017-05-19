@@ -165,8 +165,6 @@ public class MainActivity extends AppCompatActivity
 
 
 
-
-
     }
 
 
@@ -176,6 +174,9 @@ public class MainActivity extends AppCompatActivity
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null;
     }
+
+
+
 
     public class baseNewsVersion extends AsyncTask<String, String, String> {
         HttpURLConnection connection;
@@ -266,6 +267,9 @@ public class MainActivity extends AppCompatActivity
                 public void run() {
 
                     try {
+
+
+
                         JSONObject parent = new JSONObject(s);
                         JSONArray items = parent.getJSONArray("list");
 
@@ -290,6 +294,8 @@ public class MainActivity extends AppCompatActivity
                                 myDBHelper.insertIntoPlace(child.getInt("id"), child.getString("name"), child.getString("description"), child.getString("district"), child.getString("bestSeason"), child.getString("additionalInformation"), child.getString("nearByPlaces"), child.getDouble("latitude"), child.getDouble("longitude"), child.getString("category"));
 
                             }
+
+
 
                             SharedPreferences preferences = getSharedPreferences("base_version", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = preferences.edit();
@@ -569,9 +575,6 @@ public class MainActivity extends AppCompatActivity
             }
         }
     }
-
-
-
 
 }
 

@@ -191,9 +191,4 @@ public class FavouritesFragment extends Fragment {
         }
     }
 
-
-
-
-
-
 }

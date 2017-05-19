@@ -40,6 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
         String create_place_table = "create table "+TABLE_PLACES+" ("+PLACE_ID+" integer primary key , "+PLACE_NAME+"  text, "+PLACE_DESCRIPTION+" text, "+PLACE_DISTRICT+" text, "+PLACE_BESTSEASON+" text, "+PLACE_ADDITIONALINFO+" text, " +
                 PLACE_NEARBYPLACES+" text, "+PLACE_LATITUDE+" double, "+PLACE_LONGITUDE+" double, "+PLACE_CATEGORY+" text );";
         db.execSQL(create_place_table);
@@ -159,10 +161,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
+
+
     public Cursor getAllTemples(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select * from "+TABLE_PLACES+" where "+PLACE_CATEGORY+" = 'temple' ;",null);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Cursor getAllBeaches(){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select * from "+TABLE_PLACES+" where "+PLACE_CATEGORY+" = 'beach' ;",null);
@@ -201,10 +222,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+
+
+
     public Cursor getPlaceByDistrict(String dist){
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select * from "+TABLE_PLACES+" where "+PLACE_DISTRICT+" = '"+dist+"' ;",null);
     }
+
+
+
+
     public Cursor getPlaceById(int id)
     {
         SQLiteDatabase db = this.getWritableDatabase();

@@ -78,6 +78,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
+                android:textColor="#ffffff"
                 android:layout_marginLeft="24dp"
                 android:text="GALLERY"
                 />
@@ -105,6 +106,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="20dp"
+                android:textColor="#ffffff"
+
                 android:text="FAVOURITE"
                 />
 
@@ -132,6 +135,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="28dp"
+                android:textColor="#ffffff"
+
                 android:text="VISITED"
                 />
 
