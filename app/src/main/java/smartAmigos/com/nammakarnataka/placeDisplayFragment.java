@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
@@ -59,9 +60,7 @@ public class placeDisplayFragment extends Fragment {
 
     private List<nearby_places_adapter> nearby_adapterList = new ArrayList<>();
 
-
-
-
+    AdView NKBannerAds, NKBannerAds2;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -78,6 +77,7 @@ public class placeDisplayFragment extends Fragment {
 
 
 
+
         final TextView place_textView = (TextView) view.findViewById(R.id.place_textView);
         TextView description_textView = (TextView) view.findViewById(R.id.description_textView);
         TextView location_textView = (TextView) view.findViewById(R.id.location_textView);
@@ -90,25 +90,25 @@ public class placeDisplayFragment extends Fragment {
         SimpleDraweeView visited_icon = (SimpleDraweeView) view.findViewById(R.id.visited_icon);
 
 
-
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
-        place_textView.setTypeface(myFont);
         context = getActivity().getApplicationContext();
 
 
         gmapButton = (Button) view.findViewById(R.id.gmapButton);
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(getContext());
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.7) {
-                    interstitial.show();
+        if(Math.random() > 0.95){
+            AdRequest adRequest = new AdRequest.Builder().build();
+            interstitial = new InterstitialAd(context);
+            interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+            interstitial.loadAd(adRequest);
+            interstitial.setAdListener(new AdListener() {
+                public void onAdLoaded() {
+                    if (interstitial.isLoaded()) {
+                        interstitial.show();
+                    }
                 }
-            }
-        });
+            });
+        }
+
 
 
 

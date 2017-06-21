@@ -18,6 +18,9 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
@@ -48,7 +51,7 @@ public class trekkingFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    AdView NKBannerAds;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -56,12 +59,22 @@ public class trekkingFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_trekking, container, false);
         context = getActivity().getApplicationContext();
 
-        t = (TextView) view.findViewById(R.id.pp1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf");
-        t.setTypeface(myFont);
 
         list = (ListView) view.findViewById(R.id.trekkingList);
 
+        if(Math.random() > 0.95){
+            AdRequest adRequest = new AdRequest.Builder().build();
+            interstitial = new InterstitialAd(context);
+            interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+            interstitial.loadAd(adRequest);
+            interstitial.setAdListener(new AdListener() {
+                public void onAdLoaded() {
+                    if (interstitial.isLoaded()) {
+                        interstitial.show();
+                    }
+                }
+            });
+        }
 
 
         trekking_adapterList.clear();

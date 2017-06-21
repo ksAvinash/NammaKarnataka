@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,12 +8,11 @@
     android:background="@drawable/app_background"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
-
     tools:showIn="@layout/activity_about_dev">
 
 
 
-    <TextView
+    <smartAmigos.com.nammakarnataka.myTextView
         android:id="@+id/pq1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

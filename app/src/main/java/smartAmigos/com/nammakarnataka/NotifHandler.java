@@ -17,6 +17,7 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 import org.json.JSONArray;
@@ -37,7 +38,6 @@ public class NotifHandler extends Activity {
     Context context;
     int id;
     InterstitialAd interstitial;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,9 +60,6 @@ public class NotifHandler extends Activity {
 
 
 
-
-
-
         placename = (TextView) findViewById(R.id.noti_placename);
         description = (TextView) findViewById(R.id.noti_description);
         district = (TextView) findViewById(R.id.noti_district);
@@ -72,23 +69,17 @@ public class NotifHandler extends Activity {
         image = (SliderLayout) findViewById(R.id.noti_images);
         nearby = (TextView) findViewById(R.id.noti_nearby);
 
-        try {
 
+        try {
             Bundle extras = getIntent().getExtras();
             String value = extras.getString("data");
-
 
             Log.d("NOTIFICATION DATA",value);
 
             JSONObject item = new JSONObject(value);
             JSONArray images = item.getJSONArray("image");
 
-
-            Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/placenames.otf" );
-            placename.setTypeface(myFont);
-
             placename.setText(item.getString("name"));
-
 
             description.setText(item.getString("description"));
             district.setText(item.getString("district"));
@@ -96,11 +87,11 @@ public class NotifHandler extends Activity {
             additionalInformation.setText(item.getString("additionalInformation"));
             nearby.setText(item.getString("nearByPlaces"));
 
+
             latitude = item.getDouble("latitude");
             longitude = item.getDouble("longitude");
 
             id = item.getInt("id");
-
             int i=0;
             while(images.getString(i) != null){
                 textSliderView = new TextSliderView(getApplicationContext());
@@ -110,12 +101,10 @@ public class NotifHandler extends Activity {
                 image.addSlider(textSliderView);
                 i++;
             }
-
             image.setPresetTransformer(SliderLayout.Transformer.ZoomOutSlide);
             image.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
             image.setCustomAnimation(new DescriptionAnimation());
             image.setDuration(60000);
-
 
         }catch (Exception e){
 

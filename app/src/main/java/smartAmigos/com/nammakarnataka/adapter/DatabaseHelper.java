@@ -19,7 +19,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_VISITED = "nk_visited";
 
 
-
     private static final String PLACE_ID = "id";
     private static final String PLACE_NAME = "name";
     private static final String PLACE_DESCRIPTION = "description";
@@ -42,18 +41,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
 
-        String create_place_table = "create table "+TABLE_PLACES+" ("+PLACE_ID+" integer primary key , "+PLACE_NAME+"  text, "+PLACE_DESCRIPTION+" text, "+PLACE_DISTRICT+" text, "+PLACE_BESTSEASON+" text, "+PLACE_ADDITIONALINFO+" text, " +
-                PLACE_NEARBYPLACES+" text, "+PLACE_LATITUDE+" double, "+PLACE_LONGITUDE+" double, "+PLACE_CATEGORY+" text );";
+        String create_place_table =
+                "create table "+TABLE_PLACES+" ("+PLACE_ID+" integer primary key , "
+                        +PLACE_NAME+"  text, "+PLACE_DESCRIPTION+" text, "+
+                        PLACE_DISTRICT+" text, "
+                        +PLACE_BESTSEASON+" text, "+PLACE_ADDITIONALINFO+" text, "
+                        + PLACE_NEARBYPLACES+" text, "+PLACE_LATITUDE+" double, "
+                        +PLACE_LONGITUDE+" double, "+PLACE_CATEGORY+" text );";
+
+
+
         db.execSQL(create_place_table);
 
-        String create_images_table = "create table "+TABLE_IMAGES+" ( "+PLACE_ID+" integer, "+IMAGE_URL+" text );";
+        String create_images_table = "create table "
+                +TABLE_IMAGES+" ( "+PLACE_ID+" integer, "+IMAGE_URL+" text );";
         db.execSQL(create_images_table);
 
 
-        String create_favourite_table = "create table "+TABLE_FAVOURITE+" ("+PLACE_ID+" integer primary key);";
+        String create_favourite_table = "create table "
+                +TABLE_FAVOURITE+" ("+PLACE_ID+" integer primary key);";
         db.execSQL(create_favourite_table);
 
-        String create_visited_table = "create table "+TABLE_VISITED+" ("+PLACE_ID+" integer primary key);";
+        String create_visited_table = "create table "
+                +TABLE_VISITED+" ("+PLACE_ID+" integer primary key);";
         db.execSQL(create_visited_table);
 
 
@@ -75,7 +85,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onUpgrade(db,0,1);
     }
 
-    public boolean insertIntoPlace(int id, String name, String description, String district, String bestseason, String additionalInfo, String nearbyPlaces, double latitude, double longitude, String category){
+    public boolean insertIntoPlace(int id, String name, String description,
+                                   String district, String bestseason,
+                                   String additionalInfo,
+                                   String nearbyPlaces,
+                                   double latitude,
+                                   double longitude,
+                                   String category){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 

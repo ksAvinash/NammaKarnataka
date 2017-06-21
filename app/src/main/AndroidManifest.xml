@@ -32,7 +32,6 @@
 
         <service android:name="com.pushbots.push.GCMIntentService" />
 
-        <activity android:name=".feedbacks" />
         <activity android:name=".NotifHandler" />
         <activity
             android:name=".aboutDev"

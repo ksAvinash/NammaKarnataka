@@ -6,7 +6,7 @@
     tools:context=".districtFragment">
 
 
-    <TextView
+    <smartAmigos.com.nammakarnataka.myTextView
         android:id="@+id/xtt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +24,16 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/xtt" />
 
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/NKbannerAds"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9681985190789334/7802420608"
+        android:layout_alignParentBottom="true"
+        />
 
 </RelativeLayout>
 

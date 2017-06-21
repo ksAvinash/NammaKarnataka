@@ -12,12 +12,20 @@
     tools:showIn="@layout/app_bar_main">
 
 
-
+    <smartAmigos.com.nammakarnataka.myTextView
+        android:layout_marginBottom="22dp"
+        android:layout_above="@+id/mainActivitySlider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="FEATURED PLACES"
+        android:textColor="#ffffff"
+        android:textSize="26sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#29402b"
+        android:layout_height="18dp"
+        android:background="#5d4037"
         android:id="@+id/start_slider"
         android:layout_above="@+id/mainActivitySlider"
         android:orientation="vertical" />
@@ -33,19 +41,21 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#29402b"
+        android:layout_height="18dp"
+        android:background="#5d4037"
         android:layout_below="@+id/mainActivitySlider"
         />
 
 
-    <TextView
-        android:padding="35dp"
-        android:textSize="20sp"
-        android:id="@+id/listNews"
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/NKbannerAds"
+        android:layout_width="fill_parent"
+        android:layout_marginTop="19dp"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9681985190789334/7802420608"
         android:layout_below="@+id/mainActivitySlider"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
+        />
 
 </RelativeLayout>

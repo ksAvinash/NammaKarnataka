@@ -10,7 +10,7 @@
     tools:context=".myProfile"
     tools:showIn="@layout/activity_my_profile">
 
-    <TextView
+    <smartAmigos.com.nammakarnataka.myTextView
         android:id="@+id/profileTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,220 +27,214 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:padding="8dp"
-            android:orientation="horizontal"
+        <RelativeLayout
+            android:padding="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="POINTS"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:layout_centerVertical="true"
+                android:textColor="#ffffff"
+                android:textSize="28sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profilePoints"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:layout_marginLeft="150dp"
+                android:textColor="#a7ffeb"
+                android:textSize="40sp" />
 
-        </LinearLayout>
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:padding="8dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Temples"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:textColor="#757575"
+                android:textSize="20sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profileTemples"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
                 android:textColor="#d50000"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:layout_marginLeft="170dp"
+                android:textSize="20sp" />
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:padding="8dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Hillstations"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:textColor="#757575"
+                android:textSize="20sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profileHillstations"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="170dp"
                 android:textColor="#d50000"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:textSize="20sp" />
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:padding="8dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Waterfalls"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:textColor="#757575"
+                android:textSize="20sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profileWaterfalls"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="170dp"
                 android:textColor="#d50000"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:textSize="20sp" />
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:padding="8dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Dams"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:textColor="#757575"
+                android:textSize="20sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profileDams"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="170dp"
                 android:textColor="#d50000"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:textSize="20sp" />
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:padding="8dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Trekkings"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:textColor="#757575"
+                android:textSize="20sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profileTrekking"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="170dp"
                 android:textColor="#d50000"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:textSize="20sp" />
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:padding="8dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Beaches"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:textColor="#757575"
+                android:textSize="20sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profileBeaches"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="170dp"
                 android:textColor="#d50000"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:textSize="20sp" />
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:padding="8dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Heritage"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:textColor="#757575"
+                android:textSize="20sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profileHeritage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="170dp"
                 android:textColor="#d50000"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:textSize="20sp" />
+        </RelativeLayout>
 
 
-        <LinearLayout
+        <RelativeLayout
             android:padding="8dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:text="Others"
-                android:textColor="#d50000"
-                android:textSize="18sp" />
+                android:textColor="#757575"
+                android:textSize="20sp" />
 
-            <TextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:id="@+id/profileOthers"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="170dp"
                 android:textColor="#d50000"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:textSize="20sp" />
+        </RelativeLayout>
 
     </LinearLayout>
 

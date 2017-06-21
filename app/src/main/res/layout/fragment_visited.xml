@@ -3,11 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/app_background"
-    tools:context=".VisitedFragment">
+    tools:context=".VisitedFragment"
+    >
 
 
-    <TextView
+    <smartAmigos.com.nammakarnataka.myTextView
         android:id="@+id/pi1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,23 +21,32 @@
         android:textSize="28sp" />
 
 
-
-    <Button
-        android:layout_below="@+id/pi1"
-        android:id="@+id/myProfileButton"
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/rounded_button"
-        android:text="View My Profile"
-        android:textColor="@color/colorWhite" />
+        <com.facebook.drawee.view.SimpleDraweeView
+            fresco:roundAsCircle="true"
+            fresco:roundingBorderColor="#ffffff"
+            fresco:roundingBorderWidth="2dp"
+            android:id="@+id/myProfileButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            app:placeholderImage="@drawable/visited"
+            />
 
     <ListView
         android:divider="@null"
         android:id="@+id/visitedList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/myProfileButton" />
+        android:layout_below="@+id/NKbannerAds" />
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/NKbannerAds"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9681985190789334/7802420608"
+        android:layout_below="@+id/myProfileButton"
+        />
 
 </RelativeLayout>

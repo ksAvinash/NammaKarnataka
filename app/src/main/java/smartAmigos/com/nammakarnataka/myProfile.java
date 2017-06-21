@@ -12,6 +12,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import smartAmigos.com.nammakarnataka.adapter.DatabaseHelper;
 
 public class myProfile extends AppCompatActivity {
@@ -22,7 +25,6 @@ public class myProfile extends AppCompatActivity {
     Context context;
     RelativeLayout layout;
     TextView profilePoints, profileTitle,profileTemples, profileHillstations,profileWaterfalls,profileDams,profileTrekking,profileBeaches,profileHeritage,profileOthers;
-
     int templesCount, hillstationsCount, waterfallsCount, damsCount, trekkingCount, beachesCount, heritageCount, otherCount, pointsCount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +57,6 @@ public class myProfile extends AppCompatActivity {
         profileHeritage = (TextView) findViewById(R.id.profileHeritage);
         profileOthers = (TextView) findViewById(R.id.profileOthers);
 
-
-
-        Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/placenames.otf" );
-        profileTitle.setTypeface(myFont);
 
         myDBHelper = new DatabaseHelper(context);
         Cursor cursor = myDBHelper.getAllVisited();

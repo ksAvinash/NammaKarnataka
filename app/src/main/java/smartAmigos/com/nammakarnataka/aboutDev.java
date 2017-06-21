@@ -21,12 +21,13 @@ public class aboutDev extends AppCompatActivity {
         Fresco.initialize(this);
 
         setContentView(R.layout.activity_about_dev);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,14 +43,6 @@ public class aboutDev extends AppCompatActivity {
                 finish();
             }
         });
-
-        TextView pq1 = (TextView)findViewById(R.id.pq1);
-
-
-        Typeface myFont = Typeface.createFromAsset(this.getAssets(), "fonts/placenames.otf" );
-        pq1.setTypeface(myFont);
-
-
 
 
         ImagePipeline imagePipeline = Fresco.getImagePipeline();

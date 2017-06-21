@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@drawable/app_background"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/app_background"
+
     android:fillViewport="true">
 
     <TableLayout
@@ -45,7 +40,7 @@
         app:cardBackgroundColor="@color/colorWhite"
         app:cardElevation="4dp">
 
-        <TextView
+        <smartAmigos.com.nammakarnataka.myTextView
             android:padding="10dp"
             android:layout_height="wrap_content"
             android:id="@+id/noti_placename"
@@ -62,20 +57,16 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/colorWhite"
         app:cardElevation="4dp">
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <pttextview.widget.PTTextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -87,15 +78,11 @@
 
             <View style="@style/Divider" />
 
-            <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <smartAmigos.com.nammakarnataka.readingFont
                 android:id="@+id/noti_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:padding="6dp"
-                android:textColor="@color/defTextColor"
+                android:layout_margin="6dp"
                 android:textSize="16sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -103,8 +90,6 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/colorWhite"
         app:cardElevation="4dp">
@@ -114,7 +99,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <pttextview.widget.PTTextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -125,25 +110,19 @@
                 android:textSize="18sp" />
 
             <View style="@style/Divider" />
-
-            <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <smartAmigos.com.nammakarnataka.readingFont
                 android:id="@+id/noti_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:padding="6dp"
-                android:textSize="16sp"
-                android:textColor="@color/defTextColor" />
+                android:layout_margin="6dp"
+                android:textSize="16sp" />
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/colorWhite"
         app:cardElevation="4dp">
@@ -153,7 +132,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <pttextview.widget.PTTextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -164,25 +143,20 @@
                 android:textSize="18sp" />
 
             <View style="@style/Divider" />
-
-            <pttextview.widget.PTTextView xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <smartAmigos.com.nammakarnataka.readingFont
                 android:id="@+id/noti_beastseason"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:padding="6dp"
-                android:textSize="16sp"
-                android:textColor="@color/defTextColor" />
+                android:layout_margin="6dp"
+                android:textSize="16sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
+
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/colorWhite"
         app:cardElevation="4dp">
@@ -192,7 +166,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <pttextview.widget.PTTextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -204,17 +178,13 @@
 
             <View style="@style/Divider" />
 
-            <pttextview.widget.PTTextView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+
+            <smartAmigos.com.nammakarnataka.readingFont
                 android:id="@+id/noti_additionalInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:padding="6dp"
-                android:textSize="16sp"
-                android:textColor="@color/defTextColor" />
+                android:layout_margin="6dp"
+                android:textSize="16sp" />
 
 
         </LinearLayout>
@@ -224,8 +194,6 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/colorWhite"
         app:cardElevation="4dp">
@@ -235,7 +203,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <pttextview.widget.PTTextView
+            <smartAmigos.com.nammakarnataka.myTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="5dp"
@@ -247,18 +215,12 @@
 
             <View style="@style/Divider" />
 
-            <pttextview.widget.PTTextView
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
+            <smartAmigos.com.nammakarnataka.readingFont
                 android:id="@+id/noti_nearby"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
-                android:layout_marginRight="4dp"
-                android:padding="6dp"
-                android:textSize="16sp"
-                android:textColor="@color/defTextColor" />
-
+                android:layout_margin="6dp"
+                android:textSize="16sp" />
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
@@ -267,24 +229,20 @@
         android:layout_width="match_parent"
         android:layout_height="40dp" />
 
-            <Button
-                android:id="@+id/noti_gmapButton"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/rounded_button"
-                android:text="@string/view_on_maps"
-                android:textColor="@color/colorWhite" />
+        <Button
+            android:id="@+id/noti_gmapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/rounded_button"
+            android:text="@string/view_on_maps" />
 
-            <android.support.v4.widget.Space
-                android:layout_width="match_parent"
-                android:layout_height="40dp" />
-
-
+        <android.support.v4.widget.Space
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
 
 
     </TableLayout>
 
     </ScrollView>
-</LinearLayout>

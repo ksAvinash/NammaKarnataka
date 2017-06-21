@@ -6,7 +6,7 @@
     android:background="@drawable/app_background"
     tools:context="smartAmigos.com.nammakarnataka.SearchResults">
 
-    <TextView
+    <smartAmigos.com.nammakarnataka.myTextView
         android:id="@+id/tr1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -22,5 +22,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/tr1" />
+
 
 </RelativeLayout>

@@ -21,6 +21,10 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +45,9 @@ public class hillstationsFragment extends Fragment {
 
     DatabaseHelper myDBHelper;
     Cursor PlaceCursor;
+    AdView NKBannerAds;
+    InterstitialAd interstitial;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,15 +56,22 @@ public class hillstationsFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_hillstations, container, false);
         context = getActivity().getApplicationContext();
 
-        t = (TextView) view.findViewById(R.id.r1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
-        t.setTypeface(myFont);
-
-        list = (ListView) view.findViewById(R.id.hillstationsList);
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        if(Math.random() > 0.95){
+            AdRequest adRequest = new AdRequest.Builder().build();
+            interstitial = new InterstitialAd(context);
+            interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+            interstitial.loadAd(adRequest);
+            interstitial.setAdListener(new AdListener() {
+                public void onAdLoaded() {
+                    if (interstitial.isLoaded()) {
+                        interstitial.show();
+                    }
+                }
+            });
         }
 
+
+        list = (ListView) view.findViewById(R.id.hillstationsList);
 
         Fresco.initialize(getActivity());
 

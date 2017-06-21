@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#455a64</color>
-    <color name="colorPrimaryDark">#607d8b</color>
-    <color name="colorAccent">#b0bec5</color>
+    <color name="colorPrimary">#f9a825</color>
+    <color name="colorPrimaryDark">#ff7043</color>
+    <color name="colorAccent">#ffb74d</color>
 
-    <!--Positively do not change anything that follows - Charan-->
-    <!--color name="black_overlay">#66000000</color-->
+
+
+
     <color name="dark_grey">#DFDFDF</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="orangeText">#FF6765</color>

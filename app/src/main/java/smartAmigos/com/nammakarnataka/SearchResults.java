@@ -24,6 +24,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
@@ -52,13 +53,15 @@ public class SearchResults extends Fragment {
     TextView t;
     DatabaseHelper myDBHelper;
 
+
+
     @SuppressLint("ValidFragment")
     public SearchResults(Cursor PlaceCursor) {
         this.PlaceCursor = PlaceCursor;
     }
 
 
-
+    AdView NKBannerAds;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,16 +69,24 @@ public class SearchResults extends Fragment {
         view = inflater.inflate(R.layout.fragment_search, container, false);
         context = getActivity().getApplicationContext();
 
+        if(Math.random() > 0.95){
+            AdRequest adRequest = new AdRequest.Builder().build();
+            interstitial = new InterstitialAd(context);
+            interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+            interstitial.loadAd(adRequest);
+            interstitial.setAdListener(new AdListener() {
+                public void onAdLoaded() {
+                    if (interstitial.isLoaded()) {
+                        interstitial.show();
+                    }
+                }
+            });
+        }
 
-        t = (TextView) view.findViewById(R.id.tr1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Kaushan.otf" );
-        t.setTypeface(myFont);
 
 
         list = (ListView) view.findViewById(R.id.searchList);
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }
+
         Fresco.initialize(getActivity());
 
         myDBHelper = new DatabaseHelper(context);
@@ -136,7 +147,6 @@ public class SearchResults extends Fragment {
             super(context, R.layout.item, search_adapterList);
         }
 
-
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View itemView = convertView;
@@ -161,6 +171,7 @@ public class SearchResults extends Fragment {
 
             return itemView;
         }
+
 
 
     }

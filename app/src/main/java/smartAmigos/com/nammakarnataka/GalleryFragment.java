@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,35 +73,31 @@ public class GalleryFragment extends Fragment {
 
         list = (ListView) view.findViewById(R.id.galleryList);
 
-
-       // Call ads
-//        AdRequest adRequest = new AdRequest.Builder().build();
-//        interstitial = new InterstitialAd(context);
-//        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-//        interstitial.loadAd(adRequest);
-//        interstitial.setAdListener(new AdListener() {
-//            public void onAdLoaded() {
-//                    interstitial.show();
-//            }
-//        });
-        // Finish calling ads
-
-
-
-
-        Toast.makeText(context, "You can mail us photos of places you've visited, We will add it to the Gallery\nmail: justmailtoavi@gmail.com",Toast.LENGTH_LONG).show();
-
-        //set the place name and font
         TextView gallery_name = (TextView)view.findViewById(R.id.gallery_name);
         gallery_name.setText(placename);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
-        gallery_name.setTypeface(myFont);
 
 
         gallery_adapterList.clear();
 
-
         if(isNetworkConnected()){
+            Toast.makeText(getActivity(), "Click on the ads to support Developers\n\nAn ad appears in 7 seconds",Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    AdRequest adreq = new AdRequest.Builder().build();
+                    interstitial = new InterstitialAd(getActivity());
+                    interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+                    interstitial.loadAd(adreq);
+                    interstitial.setAdListener(new AdListener() {
+                        public void onAdLoaded() {
+
+                            if (interstitial.isLoaded()) {
+                                interstitial.show();
+                            }
+                        }
+                    });
+                }
+            }, 5000);
             new galleryImages().execute("http://nammakarnataka.000webhostapp.com/BigImages/"+image_id+".json");
         }else
             Toast.makeText(context,"No Internet Connection!",Toast.LENGTH_SHORT).show();

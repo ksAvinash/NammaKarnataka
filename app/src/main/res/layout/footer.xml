@@ -18,9 +18,20 @@
         android:text="@string/view_on_maps"
         android:textColor="@color/colorWhite" />
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/NKbannerAds2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-9681985190789334/7802420608"
+        android:layout_alignParentBottom="true"
+        />
     <android.support.v4.widget.Space
         android:layout_width="match_parent"
         android:layout_height="40dp" />
+
+
 
 
 </LinearLayout>

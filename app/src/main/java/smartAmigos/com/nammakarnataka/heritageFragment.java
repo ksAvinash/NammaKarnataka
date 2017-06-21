@@ -21,6 +21,10 @@ import android.widget.TextView;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +47,10 @@ public class heritageFragment extends Fragment {
     ListView list;
     DatabaseHelper myDBHelper;
     Cursor PlaceCursor;
-
+    AdView NKBannerAds;
     private List<generic_adapter> heritage_adapterList = new ArrayList<>();
+    InterstitialAd interstitial;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,19 +59,24 @@ public class heritageFragment extends Fragment {
         view  = inflater.inflate(R.layout.fragment_heritage, container, false);
         context = getActivity().getApplicationContext();
 
+        if(Math.random() > 0.95){
+            AdRequest adRequest = new AdRequest.Builder().build();
+            interstitial = new InterstitialAd(context);
+            interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+            interstitial.loadAd(adRequest);
+            interstitial.setAdListener(new AdListener() {
+                public void onAdLoaded() {
+                    if (interstitial.isLoaded()) {
+                        interstitial.show();
+                    }
+                }
+            });
+        }
 
-        t = (TextView) view.findViewById(R.id.zp1);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf");
-        t.setTypeface(myFont);
 
 
         list = (ListView) view.findViewById(R.id.heritageList);
 
-
-
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-        }
 
         Fresco.initialize(getActivity());
 

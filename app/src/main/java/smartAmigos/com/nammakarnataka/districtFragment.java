@@ -18,6 +18,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +44,8 @@ public class districtFragment extends Fragment {
 
     static SimpleDraweeView draweeView;
     private List<districts_adapter> dist_adapterList = new ArrayList<>();
-
-
+    InterstitialAd interstitial;
+    AdView NKBannerAds;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,16 +53,23 @@ public class districtFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_district, container, false);
         context = getActivity().getApplicationContext();
 
-        t = (TextView) view.findViewById(R.id.xtt);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
-        t.setTypeface(myFont);
-
-        list = (ListView) view.findViewById(R.id.districtsList);
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        if(Math.random() > 0.95){
+            AdRequest adRequest = new AdRequest.Builder().build();
+            interstitial = new InterstitialAd(context);
+            interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+            interstitial.loadAd(adRequest);
+            interstitial.setAdListener(new AdListener() {
+                public void onAdLoaded() {
+                    if (interstitial.isLoaded()) {
+                        interstitial.show();
+                    }
+                }
+            });
         }
 
 
+
+        list = (ListView) view.findViewById(R.id.districtsList);
 
         dist_adapterList.clear();
 

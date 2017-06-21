@@ -24,6 +24,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class distDisplayFragment extends Fragment {
 
     public distDisplayFragment(){}
 
-
+    AdView NKBannerAds;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -66,28 +67,22 @@ public class distDisplayFragment extends Fragment {
         context = getActivity().getApplicationContext();
 
 
-       // Call ads
-        AdRequest adRequest = new AdRequest.Builder().build();
-        interstitial = new InterstitialAd(context);
-        interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
-        interstitial.loadAd(adRequest);
-        interstitial.setAdListener(new AdListener() {
-            public void onAdLoaded() {
-                if (interstitial.isLoaded()&&Math.random()>0.8) {
-                    interstitial.show();
+        if(Math.random() > 0.95){
+            AdRequest adRequest = new AdRequest.Builder().build();
+            interstitial = new InterstitialAd(context);
+            interstitial.setAdUnitId(getString(R.string.admob_interstitial_id));
+            interstitial.loadAd(adRequest);
+            interstitial.setAdListener(new AdListener() {
+                public void onAdLoaded() {
+                    if (interstitial.isLoaded()) {
+                        interstitial.show();
+                    }
                 }
-            }
-        });
-       // Finish calling ads
-
-        TextView current_dist = (TextView)view.findViewById(R.id.current_dist);
-        Typeface myFont = Typeface.createFromAsset(getActivity().getAssets(), "fonts/placenames.otf" );
-        current_dist.setTypeface(myFont);
-        current_dist.setText(district.toUpperCase());
-
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(getActivity(), new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            });
         }
+
+
+        current_dist.setText(district.toUpperCase());
 
         Fresco.initialize(getActivity());
         district_specific_adapterList.clear();
