@@ -128,7 +128,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if(isNetworkConnected())
-            Toast.makeText(this, "Click on the ads to support Developers\n\nAn ad appears in 7 seconds",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "An ad appears in 5 seconds",Toast.LENGTH_SHORT).show();
 
 
         new Handler().postDelayed(new Runnable() {
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
             }
-        }, 5000);
+        }, 3000);
     }
 
 
